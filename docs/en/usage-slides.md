@@ -2,13 +2,13 @@
 
 ## Building widget
 
-When building a widget, all the slides configuring as an array of field `\romkaChev\yii2\swiper\Swiper::$items`.
+When building a widget, all the slides configuring as an array of field `\renschs\yii2\swiper\Swiper::$items`.
 
 Example:
 
 ```PHP
 <?php
-use \romkaChev\yii2\swiper\Swiper;
+use \renschs\yii2\swiper\Swiper;
 
 Swiper::widget([
     'items'      => [
@@ -29,7 +29,7 @@ Swiper::widget([
 ## Setting slide
 ### Content
 
-> Note: When you create a slide without content, the field `\romkaChev\yii2\swiper\Slide::$content` will have a value `null`
+> Note: When you create a slide without content, the field `\renschs\yii2\swiper\Slide::$content` will have a value `null`
 
 ### Aliases
 
@@ -40,7 +40,7 @@ Also, the slide can be configured in any way similar to the setting`\yii\helpers
 
 By default, the background can be specified in two ways:
 
-* Through alias `\romkaChev\yii2\swiper\Slide::BACKGROUND` - in this case
+* Through alias `\renschs\yii2\swiper\Slide::BACKGROUND` - in this case
   You do not need to specify the property background-image. You should only give the image link.
 * Through the option `style` of html settings directly
 
@@ -48,7 +48,7 @@ Example:
 
 ```PHP
 <?php
-use \romkaChev\yii2\swiper\Swiper;
+use \renschs\yii2\swiper\Swiper;
 
 Swiper::widget([
     'items'      => [
@@ -73,14 +73,14 @@ Swiper::widget([
 
 By default, the `hash` can be specified in two ways:
 
-* Through alias `\romkaChev\yii2\swiper\Slide::HASH`
-* Through `\romkaChev\yii2\swiper\Slide::$options['data']['hash']` directly
+* Through alias `\renschs\yii2\swiper\Slide::HASH`
+* Through `\renschs\yii2\swiper\Slide::$options['data']['hash']` directly
 
 Example:
 
 ```PHP
 <?php
-use \romkaChev\yii2\swiper\Swiper;
+use \renschs\yii2\swiper\Swiper;
 
 Swiper::widget([
     'items'      => [
@@ -106,13 +106,13 @@ Swiper::widget([
 ### Common setting
 
 Slide can be freely configured similarly `[[\yii\helpers\BaseHtml::tag]]`.
-All options specified in `\romkaChev\yii2\swiper\Slide::$options` They will be transferred in the tag options.
+All options specified in `\renschs\yii2\swiper\Slide::$options` They will be transferred in the tag options.
 
 Example:
 
 ```PHP
 <?php
-use \romkaChev\yii2\swiper\Swiper;
+use \renschs\yii2\swiper\Swiper;
 
 Swiper::widget([
     'items'      => [
@@ -144,9 +144,9 @@ Swiper::widget([
  */
 ```
 
-### Setting objects `\romkaChev\yii2\swiper\Slide`
+### Setting objects `\renschs\yii2\swiper\Slide`
 
-When transferring to the widget as slide object instance of `\romkaChev\yii2\swiper\Slide`
+When transferring to the widget as slide object instance of `\renschs\yii2\swiper\Slide`
 **will not** be produced setting the slide, since it implies that it is already fully configured.
 
 At the same time with it **will not** be made as follows:
@@ -159,8 +159,8 @@ Example:
 
 ```PHP
 <?php
-use \romkaChev\yii2\swiper\Swiper;
-use \romkaChev\yii2\swiper\Slide;
+use \renschs\yii2\swiper\Swiper;
+use \renschs\yii2\swiper\Slide;
 
 echo Swiper::widget( [
   'items'       => [
@@ -177,7 +177,7 @@ echo Swiper::widget( [
   ],
   /**
    * In this example, the group options will not be applied to the slide,
-   * because it is of type '\romkaChev\yii2\swiper\Slide'
+   * because it is of type '\renschs\yii2\swiper\Slide'
    */
   'itemOptions' => [
     'options' => [

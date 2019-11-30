@@ -1,9 +1,9 @@
 # Алиасы
 
-Для работы с классами `\romkaChev\yii2\swiper\Swiper` и `\romkaChev\yii2\swiper\Slide` были приготовлены алиасы
+Для работы с классами `\renschs\yii2\swiper\Swiper` и `\renschs\yii2\swiper\Slide` были приготовлены алиасы
 для быстрого и удобного указания наиболее часто используемых опций.
 
-### \romkaChev\yii2\swiper\Swiper
+### \renschs\yii2\swiper\Swiper
 
 | Алиас         | Константа               | Что заменяет                                                      |
 |---------------|-------------------------|-------------------------------------------------------------------|
@@ -17,7 +17,7 @@
 
 ```PHP
 <?php
-use romkaChev\yii2\swiper\Swiper;
+use renschs\yii2\swiper\Swiper;
 
 // С помощью алиасов
 echo Swiper::widget( [
@@ -70,7 +70,7 @@ echo Swiper::widget( [
 ] );
 ```
 
-### \romkaChev\yii2\swiper\Slide
+### \renschs\yii2\swiper\Slide
 
 | Алиас        | Константа    | Что заменяет                                             |
 |--------------|--------------|----------------------------------------------------------|
@@ -81,7 +81,7 @@ echo Swiper::widget( [
 
 ```PHP
 <?php
-use romkaChev\yii2\swiper\Swiper;
+use renschs\yii2\swiper\Swiper;
 
 // С помощью алиасов
 $slide = new Slide( [
@@ -113,7 +113,7 @@ $slide = new Slide([
 
 ```PHP
 <?php
-use \romkaChev\yii2\swiper\Slide;
+use \renschs\yii2\swiper\Slide;
 
 $slide = new Slide([
   'background' => 'http://placehold.it/800x600',
@@ -132,7 +132,7 @@ echo $slide->options['data']['hash']; // slide01
 
 ```PHP
 <?php
-use \romkaChev\yii2\swiper\Slide;
+use \renschs\yii2\swiper\Slide;
 
 $slide = new Slide([
   'options' => [

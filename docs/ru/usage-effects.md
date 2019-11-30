@@ -15,7 +15,7 @@ Swiper предоставляет по-умолчанию 4 вида эффек�
 
 ```PHP
 <?php
-use \romkaChev\yii2\swiper\Swiper;
+use \renschs\yii2\swiper\Swiper;
 
 /**
  * Неправильно.
@@ -56,7 +56,7 @@ Swiper::widget( [
 
 ```PHP
 <?php
-use \romkaChev\yii2\swiper\Swiper;
+use \renschs\yii2\swiper\Swiper;
 
 Swiper::widget( [
   'items'         => [
@@ -93,7 +93,7 @@ Swiper::widget( [
 
 ```PHP
 <?php
-use \romkaChev\yii2\swiper\Swiper;
+use \renschs\yii2\swiper\Swiper;
 
 Swiper::widget( [
   'items'         => [
@@ -135,7 +135,7 @@ Swiper::widget( [
 
 ```PHP
 <?php
-use \romkaChev\yii2\swiper\Swiper;
+use \renschs\yii2\swiper\Swiper;
 
 Swiper::widget( [
   'items'         => [

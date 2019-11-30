@@ -1,14 +1,15 @@
 <?php
-namespace romkaChev\yii2\swiper\tests\unit\swiper\assets;
+
+namespace renschs\yii2\swiper\tests\unit\swiper\assets;
 
 
-use romkaChev\yii2\swiper\assets\SwiperAsset;
-use romkaChev\yii2\swiper\tests\unit\BaseTestCase;
+use renschs\yii2\swiper\assets\SwiperAsset;
+use renschs\yii2\swiper\tests\unit\BaseTestCase;
 
-class SwiperAssetBaseTest extends BaseTestCase
+class SwiperAssetTest extends BaseTestCase
 {
     public function testMain()
     {
-        SwiperAsset::register( \Yii::$app->getView() );
+        $this->assertInstanceOf(SwiperAsset::class, SwiperAsset::register(\Yii::$app->getView()));
     }
 }

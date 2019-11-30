@@ -1,15 +1,15 @@
 # Пагинация
 
-Для подключения в слайдер пагинации необходимо объявить поведение `pagination` в поле `\romkaChev\yii2\swiper\Swiper::$behaviours`, иначе пагинация не будет отрендерена.
+Для подключения в слайдер пагинации необходимо объявить поведение `pagination` в поле `\renschs\yii2\swiper\Swiper::$behaviours`, иначе пагинация не будет отрендерена.
 
 > Заметьте: чтобы пагинация была кликабельной, необходимо указать `paginationClickable = true` 
-  в поле `\romkaChev\yii2\swiper\Swiper::$pluginOptions`
+  в поле `\renschs\yii2\swiper\Swiper::$pluginOptions`
 
 Пример:
 
 ```PHP
 <?php
-use romkaChev\yii2\swiper\Swiper;
+use renschs\yii2\swiper\Swiper;
 
 echo Swiper::widget( [
   'items'         => [
@@ -43,13 +43,13 @@ echo Swiper::widget( [
 
 ## Настройка пагинации
 
-Настройка пагинации происходит через поле `\romkaChev\yii2\swiper\Swiper::$paginationOptions`. Настройка аналогична `\yii\helpers\BaseHtml::tag`
+Настройка пагинации происходит через поле `\renschs\yii2\swiper\Swiper::$paginationOptions`. Настройка аналогична `\yii\helpers\BaseHtml::tag`
 
 Пример:
 
 ```PHP
 <?php
-use romkaChev\yii2\swiper\Swiper;
+use renschs\yii2\swiper\Swiper;
 
 echo Swiper::widget( [
   'items'         => [

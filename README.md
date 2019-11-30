@@ -13,13 +13,13 @@ You can get this extension through [Composer](https://getcomposer.org/download/)
 Either run in terminal
  
 ```Shell
-$ php composer.phar require "romka-chev/yii2-swiper" "*"
+$ php composer.phar require "renschs/yii2-swiper" "*"
 ```
  
 or add
  
 ```JSON
-"romka-chev/yii2-swiper" : "*"
+"renschs/yii2-swiper" : "*"
 ```
  
 to the *require* section of your application's ```composer.json``` file.
@@ -32,7 +32,7 @@ to the *require* section of your application's ```composer.json``` file.
 /**
  * @var \yii\web\View $this
  */
-use romkaChev\yii2\swiper\Swiper;
+use renschs\yii2\swiper\Swiper;
 
 echo Swiper::widget( [
   'items'         => [
@@ -62,8 +62,22 @@ echo Swiper::widget( [
  
 ```
 
+
+## Tests 
+
+You can execute unit tests from root dir with command: 
+
+```
+
+composer run-script unit-test
+
+
+```
+
+
+
 ## Issues
 
-If some problems occurred, you can create [issue](https://github.com/romka-chev/yii2-swiper/issues).
+If some problems occurred, you can create [issue](https://github.com/renschs/yii2-swiper/issues).
 
 Thank you for attention.

@@ -2,13 +2,13 @@
 
 ## Построение виджета
 
-При построении виджета все слайды указываются как массив в поле `\romkaChev\yii2\swiper\Swiper::$items`.
+При построении виджета все слайды указываются как массив в поле `\renschs\yii2\swiper\Swiper::$items`.
 
 Пример:
 
 ```PHP
 <?php
-use \romkaChev\yii2\swiper\Swiper;
+use \renschs\yii2\swiper\Swiper;
 
 Swiper::widget([
     'items'      => [
@@ -29,7 +29,7 @@ Swiper::widget([
 ## Настройка слайда
 ### Контент
 
-> Заметка: При создании слайда без контента, поле `\romkaChev\yii2\swiper\Slide::$content` будет иметь значение `null`
+> Заметка: При создании слайда без контента, поле `\renschs\yii2\swiper\Slide::$content` будет иметь значение `null`
 
 ### Алиасы
 
@@ -40,7 +40,7 @@ Swiper::widget([
 
 Стандартно фон может быть задан двумя способами:
 
-* Через алиас `\romkaChev\yii2\swiper\Slide::BACKGROUND` - в данном случае 
+* Через алиас `\renschs\yii2\swiper\Slide::BACKGROUND` - в данном случае 
   не нужно указывать свойство background-image. Достаточно только ссылки на изображение
 * Через опцию `style` html-настроек тега напрямую
 
@@ -48,7 +48,7 @@ Swiper::widget([
 
 ```PHP
 <?php
-use \romkaChev\yii2\swiper\Swiper;
+use \renschs\yii2\swiper\Swiper;
 
 Swiper::widget([
     'items'      => [
@@ -73,14 +73,14 @@ Swiper::widget([
 
 Стандартно `hash` может быть задан двумя способами:
 
-* Через алиас `\romkaChev\yii2\swiper\Slide::HASH`
-* Через `\romkaChev\yii2\swiper\Slide::$options['data']['hash']` напрямую
+* Через алиас `\renschs\yii2\swiper\Slide::HASH`
+* Через `\renschs\yii2\swiper\Slide::$options['data']['hash']` напрямую
 
 Пример:
 
 ```PHP
 <?php
-use \romkaChev\yii2\swiper\Swiper;
+use \renschs\yii2\swiper\Swiper;
 
 Swiper::widget([
     'items'      => [
@@ -106,13 +106,13 @@ Swiper::widget([
 ### Общая настройка
 
 Слайд может быть свободно настроен аналогично `[[\yii\helpers\BaseHtml::tag]]`.
-Все опции, указанные в `\romkaChev\yii2\swiper\Slide::$options` будут переданы в опции тега.
+Все опции, указанные в `\renschs\yii2\swiper\Slide::$options` будут переданы в опции тега.
 
 Пример:
 
 ```PHP
 <?php
-use \romkaChev\yii2\swiper\Swiper;
+use \renschs\yii2\swiper\Swiper;
 
 Swiper::widget([
     'items'      => [
@@ -144,9 +144,9 @@ Swiper::widget([
  */
 ```
 
-### Настройка объектов `\romkaChev\yii2\swiper\Slide`
+### Настройка объектов `\renschs\yii2\swiper\Slide`
 
-При передаче в виджет в качестве слайда экземпляра объекта `\romkaChev\yii2\swiper\Slide`
+При передаче в виджет в качестве слайда экземпляра объекта `\renschs\yii2\swiper\Slide`
 **не будет** произведена настройка слайда, так как подразумевается, что он уже полностью настроен.
 
 При этом с ним **не будут** произведены следующие операции: 
@@ -159,8 +159,8 @@ Swiper::widget([
 
 ```PHP
 <?php
-use romkaChev\yii2\swiper\Swiper;
-use \romkaChev\yii2\swiper\Slide;
+use renschs\yii2\swiper\Swiper;
+use \renschs\yii2\swiper\Slide;
 
 echo Swiper::widget( [
   'items'       => [
@@ -177,7 +177,7 @@ echo Swiper::widget( [
   ],
   /**
    * В данном примере групповые опции не будут применены к слайду, 
-   * так как он имеет тип '\romkaChev\yii2\swiper\Slide'
+   * так как он имеет тип '\renschs\yii2\swiper\Slide'
    */
   'itemOptions' => [
     'options' => [

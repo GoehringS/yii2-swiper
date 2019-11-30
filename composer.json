@@ -1,6 +1,6 @@
 {
-  "name": "romka-chev/yii2-swiper",
-  "description": "Yii2 extension for Swiper slider",
+  "name": "renschs/yii2-swiper",
+  "description": "Yii2 extension for Swiper slider; Php 7.3 ready;",
   "keywords": [
     "yii",
     "yii2",
@@ -12,28 +12,30 @@
   "license": "MIT",
   "authors": [
     {
-      "name": "Kulikov Roman",
-      "email": "flinnraider@yandex.ru"
+      "name": "Sven Rensch",
+      "email": "s.rensch87@web.de"
     }
   ],
   "require": {
-    "php": ">=5.4.0",
-    "fxp/composer-asset-plugin": ">=1.0.0",
+    "php": ">=7.3",
     "yiisoft/yii2": "2.0.*@dev",
-    "bower-asset/swiper": ">=v3.0.4"
+    "bower-asset/swiper": ">=5"
   },
   "require-dev": {
-    "phpunit/phpunit": "4.8.x-dev"
+    "phpunit/phpunit": "^8.0"
   },
   "autoload": {
     "psr-4": {
-      "romkaChev\\yii2\\swiper\\": ""
+      "renschs\\yii2\\swiper\\": ""
     }
   },
-  "extra": {
-    "asset-installer-paths": {
-      "npm-asset-library": "vendor/npm",
-      "bower-asset-library": "vendor/bower"
+  "scripts": {
+    "unit-test": "vendor/bin/phpunit --colors"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
     }
-  }
+  ]
 }

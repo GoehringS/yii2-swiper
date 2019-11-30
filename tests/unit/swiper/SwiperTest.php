@@ -1,157 +1,159 @@
 <?php
-namespace romkaChev\yii2\swiper\tests\unit\swiper;
+
+namespace renschs\yii2\swiper\tests\unit\swiper;
 
 
-use romkaChev\yii2\swiper\Slide;
-use romkaChev\yii2\swiper\Swiper;
-use romkaChev\yii2\swiper\tests\unit\BaseTestCase;
+use renschs\yii2\swiper\Slide;
+use renschs\yii2\swiper\Swiper;
+use renschs\yii2\swiper\tests\unit\BaseTestCase;
+use TypeError;
 
 class SwiperTest extends BaseTestCase
 {
 
     public function testInvalidBehaviour()
     {
-        $this->setExpectedException( '\InvalidArgumentException', 'Unknown behaviour badBehaviour' );
+        $this->expectException('\InvalidArgumentException', 'Unknown behaviour badBehaviour');
 
-        new Swiper( [
+        new Swiper([
             'behaviours' => [
                 Swiper::BEHAVIOUR_PAGINATION,
                 'badBehaviour'
             ]
-        ] );
+        ]);
     }
 
     public function testConstructItemsViaStrings()
     {
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items' => [
                 'slide 01',
                 'slide 02',
                 'slide 03',
             ]
-        ] );
+        ]);
 
         foreach ($swiper->items as $item) {
-            $this->assertInstanceOf( Slide::className(), $item );
+            $this->assertInstanceOf(Slide::className(), $item);
         }
     }
 
     public function testConstructItemsViaArrays()
     {
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items' => [
-                [ 'content' => 'slide 01' ],
-                [ 'content' => 'slide 02' ],
-                [ 'content' => 'slide 03' ],
+                ['content' => 'slide 01'],
+                ['content' => 'slide 02'],
+                ['content' => 'slide 03'],
             ]
-        ] );
+        ]);
 
         foreach ($swiper->items as $item) {
-            $this->assertInstanceOf( Slide::className(), $item );
+            $this->assertInstanceOf(Slide::className(), $item);
         }
     }
 
     public function testConstructItemsViaObjects()
     {
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items' => [
-                new Slide( 'slide 01' ),
-                new Slide( 'slide 02' ),
-                new Slide( 'slide 03' ),
+                new Slide('slide 01'),
+                new Slide('slide 02'),
+                new Slide('slide 03'),
             ]
-        ] );
+        ]);
 
         foreach ($swiper->items as $item) {
-            $this->assertInstanceOf( Slide::className(), $item );
+            $this->assertInstanceOf(Slide::className(), $item);
         }
     }
 
     public function testConstructItemsComplex()
     {
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items' => [
                 'slide 01',
-                [ 'content' => 'slide 02' ],
-                new Slide( 'slide 03' ),
+                ['content' => 'slide 02'],
+                new Slide('slide 03'),
             ]
-        ] );
+        ]);
 
         foreach ($swiper->items as $item) {
-            $this->assertInstanceOf( Slide::className(), $item );
+            $this->assertInstanceOf(Slide::className(), $item);
         }
     }
 
     public function testInvalidItemsInjectionFailed()
     {
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items' => [
                 'slide 01',
-                [ 'content' => 'slide 02' ],
-                new Slide( 'slide 03' ),
+                ['content' => 'slide 02'],
+                new Slide('slide 03'),
             ]
-        ] );
+        ]);
 
         $swiper->items[] = 'badValue';
-        $swiper->items[] = [ 'content' => 'slide 02' ];
+        $swiper->items[] = ['content' => 'slide 02'];
 
-        $this->setExpectedException( 'yii\base\ErrorException', 'must be an instance of romkaChev\yii2\swiper\Slide' );
+        $this->expectException(TypeError::class, 'must be an instance of renschs\yii2\swiper\Slide');
 
         $swiper->run();
     }
 
     public function testValidItemInjectionSuccessed()
     {
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items' => [
                 'slide 01',
-                [ 'content' => 'slide 02' ],
-                new Slide( 'slide 03' ),
+                ['content' => 'slide 02'],
+                new Slide('slide 03'),
             ]
-        ] );
+        ]);
 
-        $swiper->items[] = new Slide( 'slide 04' );
+        $swiper->items[] = new Slide('slide 04');
 
-        $swiper->run();
+        $this->assertNotEmpty($swiper->run());
     }
 
     public function testItemsInjectionViaSpecialMethodSuccessed()
     {
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items' => [
                 'slide 01',
-                [ 'content' => 'slide 02' ],
-                new Slide( 'slide 03' ),
+                ['content' => 'slide 02'],
+                new Slide('slide 03'),
             ]
-        ] );
+        ]);
 
-        $swiper->addItem( 'slide 04' );
-        $swiper->addItem( [ 'content' => 'slide 05' ] );
-        $swiper->addItem( new Slide( 'slide 03' ) );
+        $swiper->addItem('slide 04');
+        $swiper->addItem(['content' => 'slide 05']);
+        $swiper->addItem(new Slide('slide 03'));
 
-        $swiper->run();
+        $this->assertNotEmpty($swiper->run());
     }
 
     public function testBatchItemsInjectionViaSpecialMethodSuccessed()
     {
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items' => [
                 'slide 01',
-                [ 'content' => 'slide 02' ],
-                new Slide( 'slide 03' ),
+                ['content' => 'slide 02'],
+                new Slide('slide 03'),
             ]
-        ] );
+        ]);
 
-        $swiper->addItems( [
+        $swiper->addItems([
             'slide 04',
-            [ 'content' => 'slide 05' ],
-            new Slide( 'slide 03' )
-        ] );
+            ['content' => 'slide 05'],
+            new Slide('slide 03')
+        ]);
 
-        $swiper->run();
+        $this->assertNotEmpty($swiper->run());
     }
     public function testContainerOptions()
     {
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items'            => [
                 'slide 01',
                 'slide 02',
@@ -164,23 +166,23 @@ class SwiperTest extends BaseTestCase
                     'id' => 'custom-data-id'
                 ]
             ]
-        ] );
+        ]);
 
-        $this->assertEquals( 'custom-id', $swiper->containerOptions['id'] );
-        $this->assertEquals( 'custom-id-wrapper', $swiper->wrapperOptions['id'] );
-        $this->assertEquals( 'custom-id-pagination', $swiper->paginationOptions['id'] );
-        $this->assertEquals( 'custom-id-scrollbar', $swiper->scrollbarOptions['id'] );
-        $this->assertEquals( 'custom-id-button-next', $swiper->nextButtonOptions['id'] );
-        $this->assertEquals( 'custom-id-button-prev', $swiper->prevButtonOptions['id'] );
-        $this->assertEquals( 'custom-id-parallax', $swiper->parallaxOptions['id'] );
+        $this->assertEquals('custom-id', $swiper->containerOptions['id']);
+        $this->assertEquals('custom-id-wrapper', $swiper->wrapperOptions['id']);
+        $this->assertEquals('custom-id-pagination', $swiper->paginationOptions['id']);
+        $this->assertEquals('custom-id-scrollbar', $swiper->scrollbarOptions['id']);
+        $this->assertEquals('custom-id-button-next', $swiper->nextButtonOptions['id']);
+        $this->assertEquals('custom-id-button-prev', $swiper->prevButtonOptions['id']);
+        $this->assertEquals('custom-id-parallax', $swiper->parallaxOptions['id']);
 
-        $this->assertEquals( 'custom-class custom-another-class swiper-container', $swiper->containerOptions['class'] );
-        $this->assertEquals( 'custom-data-id', $swiper->containerOptions['data']['id'] );
+        $this->assertEquals('custom-class custom-another-class swiper-container', $swiper->containerOptions['class']);
+        $this->assertEquals('custom-data-id', $swiper->containerOptions['data']['id']);
     }
 
     public function testWrapperOptions()
     {
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items'          => [
                 'slide 01',
                 'slide 02',
@@ -193,16 +195,16 @@ class SwiperTest extends BaseTestCase
                     'id' => 'custom-data-wrapper-id'
                 ]
             ]
-        ] );
+        ]);
 
-        $this->assertEquals( 'custom-wrapper-id', $swiper->wrapperOptions['id'] );
-        $this->assertEquals( 'custom-wrapper-class custom-another-wrapper-class swiper-wrapper', $swiper->wrapperOptions['class'] );
-        $this->assertEquals( 'custom-data-wrapper-id', $swiper->wrapperOptions['data']['id'] );
+        $this->assertEquals('custom-wrapper-id', $swiper->wrapperOptions['id']);
+        $this->assertEquals('custom-wrapper-class custom-another-wrapper-class swiper-wrapper', $swiper->wrapperOptions['class']);
+        $this->assertEquals('custom-data-wrapper-id', $swiper->wrapperOptions['data']['id']);
     }
 
     public function testPaginationOptions()
     {
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items'             => [
                 'slide 01',
                 'slide 02',
@@ -215,16 +217,16 @@ class SwiperTest extends BaseTestCase
                     'id' => 'custom-data-pagination-id'
                 ]
             ]
-        ] );
+        ]);
 
-        $this->assertEquals( 'custom-pagination-id', $swiper->paginationOptions['id'] );
-        $this->assertEquals( 'custom-pagination-class custom-another-pagination-class swiper-pagination', $swiper->paginationOptions['class'] );
-        $this->assertEquals( 'custom-data-pagination-id', $swiper->paginationOptions['data']['id'] );
+        $this->assertEquals('custom-pagination-id', $swiper->paginationOptions['id']);
+        $this->assertEquals('custom-pagination-class custom-another-pagination-class swiper-pagination', $swiper->paginationOptions['class']);
+        $this->assertEquals('custom-data-pagination-id', $swiper->paginationOptions['data']['id']);
     }
 
     public function testScrollbarOptions()
     {
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items'            => [
                 'slide 01',
                 'slide 02',
@@ -237,16 +239,16 @@ class SwiperTest extends BaseTestCase
                     'id' => 'custom-data-scrollbar-id'
                 ]
             ]
-        ] );
+        ]);
 
-        $this->assertEquals( 'custom-scrollbar-id', $swiper->scrollbarOptions['id'] );
-        $this->assertEquals( 'custom-scrollbar-class custom-another-scrollbar-class swiper-scrollbar', $swiper->scrollbarOptions['class'] );
-        $this->assertEquals( 'custom-data-scrollbar-id', $swiper->scrollbarOptions['data']['id'] );
+        $this->assertEquals('custom-scrollbar-id', $swiper->scrollbarOptions['id']);
+        $this->assertEquals('custom-scrollbar-class custom-another-scrollbar-class swiper-scrollbar', $swiper->scrollbarOptions['class']);
+        $this->assertEquals('custom-data-scrollbar-id', $swiper->scrollbarOptions['data']['id']);
     }
 
     public function testNextButtonOptions()
     {
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items'             => [
                 'slide 01',
                 'slide 02',
@@ -259,16 +261,16 @@ class SwiperTest extends BaseTestCase
                     'id' => 'custom-data-next-button-id'
                 ]
             ]
-        ] );
+        ]);
 
-        $this->assertEquals( 'custom-next-button-id', $swiper->nextButtonOptions['id'] );
-        $this->assertEquals( 'custom-next-button-class custom-another-next-button-class swiper-button-next', $swiper->nextButtonOptions['class'] );
-        $this->assertEquals( 'custom-data-next-button-id', $swiper->nextButtonOptions['data']['id'] );
+        $this->assertEquals('custom-next-button-id', $swiper->nextButtonOptions['id']);
+        $this->assertEquals('custom-next-button-class custom-another-next-button-class swiper-button-next', $swiper->nextButtonOptions['class']);
+        $this->assertEquals('custom-data-next-button-id', $swiper->nextButtonOptions['data']['id']);
     }
 
     public function testPrevButtonOptions()
     {
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items'             => [
                 'slide 01',
                 'slide 02',
@@ -281,16 +283,16 @@ class SwiperTest extends BaseTestCase
                     'id' => 'custom-data-prev-button-id'
                 ]
             ]
-        ] );
+        ]);
 
-        $this->assertEquals( 'custom-prev-button-id', $swiper->prevButtonOptions['id'] );
-        $this->assertEquals( 'custom-prev-button-class custom-another-prev-button-class swiper-button-prev', $swiper->prevButtonOptions['class'] );
-        $this->assertEquals( 'custom-data-prev-button-id', $swiper->prevButtonOptions['data']['id'] );
+        $this->assertEquals('custom-prev-button-id', $swiper->prevButtonOptions['id']);
+        $this->assertEquals('custom-prev-button-class custom-another-prev-button-class swiper-button-prev', $swiper->prevButtonOptions['class']);
+        $this->assertEquals('custom-data-prev-button-id', $swiper->prevButtonOptions['data']['id']);
     }
 
     public function testParallaxBackgroundMatching()
     {
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items'           => [
                 'slide 01',
             ],
@@ -301,12 +303,12 @@ class SwiperTest extends BaseTestCase
                     'swiper-parallax-duration' => '750',
                 ]
             ]
-        ] );
+        ]);
 
-        $this->assertEquals( 'http://lorempixel.com/900/600/nightlife/2/', $swiper->parallaxOptions['background'] );
+        $this->assertEquals('http://lorempixel.com/900/600/nightlife/2/', $swiper->parallaxOptions['background']);
 
 
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items'           => [
                 'slide 01',
             ],
@@ -317,14 +319,14 @@ class SwiperTest extends BaseTestCase
                     'swiper-parallax-duration' => '750',
                 ]
             ]
-        ] );
+        ]);
 
-        $this->assertEquals( 'http://lorempixel.com/900/600/nightlife/2/', $swiper->parallaxOptions['background'] );
+        $this->assertEquals('http://lorempixel.com/900/600/nightlife/2/', $swiper->parallaxOptions['background']);
     }
 
     public function testParallaxOptionsViaShorthands()
     {
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items'           => [
                 'slide 01',
                 'slide 02',
@@ -342,28 +344,28 @@ class SwiperTest extends BaseTestCase
                     'id' => 'custom-data-parallax-id'
                 ]
             ]
-        ] );
+        ]);
 
-        $this->assertEquals( 'http://lorempixel.com/900/600/nightlife/2/', $swiper->parallaxOptions['background'] );
-        $this->assertEquals( '23%', $swiper->parallaxOptions['transition'] );
-        $this->assertEquals( '10%', $swiper->parallaxOptions['transitionX'] );
-        $this->assertEquals( '15%', $swiper->parallaxOptions['transitionY'] );
-        $this->assertEquals( '750', $swiper->parallaxOptions['duration'] );
+        $this->assertEquals('http://lorempixel.com/900/600/nightlife/2/', $swiper->parallaxOptions['background']);
+        $this->assertEquals('23%', $swiper->parallaxOptions['transition']);
+        $this->assertEquals('10%', $swiper->parallaxOptions['transitionX']);
+        $this->assertEquals('15%', $swiper->parallaxOptions['transitionY']);
+        $this->assertEquals('750', $swiper->parallaxOptions['duration']);
 
-        $this->assertEquals( 'background-image:url(http://lorempixel.com/900/600/nightlife/2/)', $swiper->parallaxOptions['style'] );
-        $this->assertEquals( '23%', $swiper->parallaxOptions['data']['swiper-parallax'] );
-        $this->assertEquals( '10%', $swiper->parallaxOptions['data']['swiper-parallax-x'] );
-        $this->assertEquals( '15%', $swiper->parallaxOptions['data']['swiper-parallax-y'] );
-        $this->assertEquals( '750', $swiper->parallaxOptions['data']['swiper-parallax-duration'] );
+        $this->assertEquals('background-image:url(http://lorempixel.com/900/600/nightlife/2/)', $swiper->parallaxOptions['style']);
+        $this->assertEquals('23%', $swiper->parallaxOptions['data']['swiper-parallax']);
+        $this->assertEquals('10%', $swiper->parallaxOptions['data']['swiper-parallax-x']);
+        $this->assertEquals('15%', $swiper->parallaxOptions['data']['swiper-parallax-y']);
+        $this->assertEquals('750', $swiper->parallaxOptions['data']['swiper-parallax-duration']);
 
-        $this->assertEquals( 'custom-parallax-id', $swiper->parallaxOptions['id'] );
-        $this->assertEquals( 'custom-parallax-class custom-another-parallax-class parallax-bg', $swiper->parallaxOptions['class'] );
-        $this->assertEquals( 'custom-data-parallax-id', $swiper->parallaxOptions['data']['id'] );
+        $this->assertEquals('custom-parallax-id', $swiper->parallaxOptions['id']);
+        $this->assertEquals('custom-parallax-class custom-another-parallax-class parallax-bg', $swiper->parallaxOptions['class']);
+        $this->assertEquals('custom-data-parallax-id', $swiper->parallaxOptions['data']['id']);
     }
 
     public function testParallaxOptionsViaDirectAttributes()
     {
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items'           => [
                 'slide 01',
                 'slide 02',
@@ -381,28 +383,28 @@ class SwiperTest extends BaseTestCase
                 'id'    => 'custom-parallax-id',
                 'class' => 'custom-parallax-class custom-another-parallax-class',
             ]
-        ] );
+        ]);
 
-        $this->assertEquals( 'http://lorempixel.com/900/600/nightlife/2/', $swiper->parallaxOptions['background'] );
-        $this->assertEquals( '23%', $swiper->parallaxOptions['transition'] );
-        $this->assertEquals( '10%', $swiper->parallaxOptions['transitionX'] );
-        $this->assertEquals( '15%', $swiper->parallaxOptions['transitionY'] );
-        $this->assertEquals( '750', $swiper->parallaxOptions['duration'] );
+        $this->assertEquals('http://lorempixel.com/900/600/nightlife/2/', $swiper->parallaxOptions['background']);
+        $this->assertEquals('23%', $swiper->parallaxOptions['transition']);
+        $this->assertEquals('10%', $swiper->parallaxOptions['transitionX']);
+        $this->assertEquals('15%', $swiper->parallaxOptions['transitionY']);
+        $this->assertEquals('750', $swiper->parallaxOptions['duration']);
 
-        $this->assertEquals( 'color: #ffffff; background-image:url(http://lorempixel.com/900/600/nightlife/2/);', $swiper->parallaxOptions['style'] );
-        $this->assertEquals( '23%', $swiper->parallaxOptions['data']['swiper-parallax'] );
-        $this->assertEquals( '10%', $swiper->parallaxOptions['data']['swiper-parallax-x'] );
-        $this->assertEquals( '15%', $swiper->parallaxOptions['data']['swiper-parallax-y'] );
-        $this->assertEquals( '750', $swiper->parallaxOptions['data']['swiper-parallax-duration'] );
+        $this->assertEquals('color: #ffffff; background-image:url(http://lorempixel.com/900/600/nightlife/2/);', $swiper->parallaxOptions['style']);
+        $this->assertEquals('23%', $swiper->parallaxOptions['data']['swiper-parallax']);
+        $this->assertEquals('10%', $swiper->parallaxOptions['data']['swiper-parallax-x']);
+        $this->assertEquals('15%', $swiper->parallaxOptions['data']['swiper-parallax-y']);
+        $this->assertEquals('750', $swiper->parallaxOptions['data']['swiper-parallax-duration']);
 
-        $this->assertEquals( 'custom-parallax-id', $swiper->parallaxOptions['id'] );
-        $this->assertEquals( 'custom-parallax-class custom-another-parallax-class parallax-bg', $swiper->parallaxOptions['class'] );
-        $this->assertEquals( 'custom-data-parallax-id', $swiper->parallaxOptions['data']['id'] );
+        $this->assertEquals('custom-parallax-id', $swiper->parallaxOptions['id']);
+        $this->assertEquals('custom-parallax-class custom-another-parallax-class parallax-bg', $swiper->parallaxOptions['class']);
+        $this->assertEquals('custom-data-parallax-id', $swiper->parallaxOptions['data']['id']);
     }
 
     public function testParallaxOptionsViaShorthandsHaveMorePriorityThanViaDirectAttributes()
     {
-        $swiper = new Swiper( [
+        $swiper = new Swiper([
             'items'           => [
                 'slide 01',
                 'slide 02',
@@ -425,21 +427,21 @@ class SwiperTest extends BaseTestCase
                 'id'                          => 'custom-parallax-id',
                 'class'                       => 'custom-parallax-class custom-another-parallax-class',
             ]
-        ] );
+        ]);
 
-        $this->assertEquals( 'http://lorempixel.com/900/600/nightlife/5/', $swiper->parallaxOptions['background'] );
-        $this->assertEquals( '20%', $swiper->parallaxOptions['transition'] );
-        $this->assertEquals( '20%', $swiper->parallaxOptions['transitionX'] );
-        $this->assertEquals( '20%', $swiper->parallaxOptions['transitionY'] );
-        $this->assertEquals( '500', $swiper->parallaxOptions['duration'] );
+        $this->assertEquals('http://lorempixel.com/900/600/nightlife/5/', $swiper->parallaxOptions['background']);
+        $this->assertEquals('20%', $swiper->parallaxOptions['transition']);
+        $this->assertEquals('20%', $swiper->parallaxOptions['transitionX']);
+        $this->assertEquals('20%', $swiper->parallaxOptions['transitionY']);
+        $this->assertEquals('500', $swiper->parallaxOptions['duration']);
 
-        $this->assertEquals( 'color: #ffffff; background-image:url(http://lorempixel.com/900/600/nightlife/2/); background-image:url(http://lorempixel.com/900/600/nightlife/5/)',
-            $swiper->parallaxOptions['style'] );
-        $this->assertEquals( '20%', $swiper->parallaxOptions['data']['swiper-parallax'] );
-        $this->assertEquals( '20%', $swiper->parallaxOptions['data']['swiper-parallax-x'] );
-        $this->assertEquals( '20%', $swiper->parallaxOptions['data']['swiper-parallax-y'] );
-        $this->assertEquals( '500', $swiper->parallaxOptions['data']['swiper-parallax-duration'] );
-
+        $this->assertEquals(
+            'color: #ffffff; background-image:url(http://lorempixel.com/900/600/nightlife/2/); background-image:url(http://lorempixel.com/900/600/nightlife/5/)',
+            $swiper->parallaxOptions['style']
+        );
+        $this->assertEquals('20%', $swiper->parallaxOptions['data']['swiper-parallax']);
+        $this->assertEquals('20%', $swiper->parallaxOptions['data']['swiper-parallax-x']);
+        $this->assertEquals('20%', $swiper->parallaxOptions['data']['swiper-parallax-y']);
+        $this->assertEquals('500', $swiper->parallaxOptions['data']['swiper-parallax-duration']);
     }
-
 }
