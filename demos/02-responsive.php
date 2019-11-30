@@ -1,10 +1,12 @@
 <?php
+
 /**
  * @var \yii\web\View $this
  */
+
 use renschs\yii2\swiper\Swiper;
 
-echo Swiper::widget( [
+echo Swiper::widget([
     'items'         => [
         'Slide 1',
         'Slide 2',
@@ -21,6 +23,8 @@ echo Swiper::widget( [
         Swiper::BEHAVIOUR_PAGINATION
     ],
     'pluginOptions' => [
-        Swiper::OPTION_PAGINATION_CLICKABLE => true
+        Swiper::OPTION_PAGINATION => [
+            Swiper::OPTION_PAGINATION_CLICKABLE => true,
+        ],
     ]
-] );
+]);

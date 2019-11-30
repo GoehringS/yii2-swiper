@@ -23,7 +23,9 @@ echo Swiper::widget( [
         Swiper::BEHAVIOUR_PREV_BUTTON
     ],
     'pluginOptions' => [
-        Swiper::OPTION_PAGINATION_CLICKABLE            => true,
+        Swiper::OPTION_PAGINATION => [
+            Swiper::OPTION_PAGINATION_CLICKABLE => true,
+        ],
         Swiper::OPTION_SPACE_BETWEEN                   => 30,
         Swiper::OPTION_CENTERED_SLIDES                 => true,
         Swiper::OPTION_AUTOPLAY                        => 2500,

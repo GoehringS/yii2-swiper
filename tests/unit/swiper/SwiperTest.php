@@ -172,8 +172,8 @@ class SwiperTest extends BaseTestCase
         $this->assertEquals('custom-id-wrapper', $swiper->wrapperOptions['id']);
         $this->assertEquals('custom-id-pagination', $swiper->paginationOptions['id']);
         $this->assertEquals('custom-id-scrollbar', $swiper->scrollbarOptions['id']);
-        $this->assertEquals('custom-id-button-next', $swiper->nextButtonOptions['id']);
-        $this->assertEquals('custom-id-button-prev', $swiper->prevButtonOptions['id']);
+        $this->assertEquals('custom-id-swiper-button-next', $swiper->nextButtonOptions['id']);
+        $this->assertEquals('custom-id-swiper-button-prev', $swiper->prevButtonOptions['id']);
         $this->assertEquals('custom-id-parallax', $swiper->parallaxOptions['id']);
 
         $this->assertEquals('custom-class custom-another-class swiper-container', $swiper->containerOptions['class']);

@@ -27,7 +27,9 @@ echo Swiper::widget( [
         Swiper::OPTION_SCROLLBAR_HIDE       => true,
         Swiper::OPTION_SLIDES_PER_VIEW      => Swiper::SLIDES_PER_VIEW_AUTO,
         Swiper::OPTION_CENTERED_SLIDES      => true,
-        Swiper::OPTION_PAGINATION_CLICKABLE => true,
+        Swiper::OPTION_PAGINATION => [
+            Swiper::OPTION_PAGINATION_CLICKABLE => true,
+        ],
         Swiper::OPTION_SPACE_BETWEEN        => 30,
         Swiper::OPTION_GRAB_CURSOR          => true
     ]

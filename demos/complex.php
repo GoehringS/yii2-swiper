@@ -97,7 +97,9 @@ echo Swiper::widget( [
                     'class' => 'swiper-pagination-white'
                 ],
                 'pluginOptions'     => [
-                    Swiper::OPTION_PAGINATION_CLICKABLE => true,
+                    Swiper::OPTION_PAGINATION => [
+                        Swiper::OPTION_PAGINATION_CLICKABLE => true,
+                    ],
                     Swiper::OPTION_PARALLAX             => true,
                     Swiper::OPTION_KEYBOARD_CONTROL     => true
                 ]
@@ -143,7 +145,9 @@ echo Swiper::widget( [
                     'class' => 'swiper-pagination-white'
                 ],
                 'pluginOptions'     => [
-                    Swiper::OPTION_PAGINATION_CLICKABLE => true,
+                    Swiper::OPTION_PAGINATION => [
+                        Swiper::OPTION_PAGINATION_CLICKABLE => true,
+                    ],
                     Swiper::OPTION_PARALLAX             => true,
                     Swiper::OPTION_KEYBOARD_CONTROL     => true
                 ]
@@ -168,7 +172,9 @@ echo Swiper::widget( [
     'pluginOptions'     => [
         Swiper::OPTION_LOOP                   => true,
         Swiper::OPTION_HASHNAV                => true,
-        Swiper::OPTION_PAGINATION_CLICKABLE   => true,
+        Swiper::OPTION_PAGINATION => [
+            Swiper::OPTION_PAGINATION_CLICKABLE => true,
+        ],
         Swiper::OPTION_SPACE_BETWEEN          => 50,
         Swiper::OPTION_ON_INIT                => new JsExpression( 'function(){console.log("Swiper::OPTION_ON_INIT")}' ),
         Swiper::OPTION_ON_SLIDE_CHANGE_START  => new JsExpression( 'function(){console.log("Swiper::OPTION_ON_SLIDE_CHANGE_START")}' ),
