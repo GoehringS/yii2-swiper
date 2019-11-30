@@ -1,5 +1,5 @@
 <?php
-namespace romkaChev\yii2\swiper\helpers;
+namespace renschs\yii2\swiper\helpers;
 
 
 use yii\helpers\ArrayHelper;
@@ -7,7 +7,7 @@ use yii\helpers\ArrayHelper;
 /**
  * Class SwiperCssHelper
  *
- * @package romkaChev\yii2\swiper\helpers
+ * @package renschs\yii2\swiper\helpers
  */
 class SwiperCssHelper
 {

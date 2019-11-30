@@ -1,8 +1,12 @@
 <?php
-namespace romkaChev\yii2\swiper;
 
-use romkaChev\yii2\swiper\assets\SwiperAsset;
-use romkaChev\yii2\swiper\helpers\SwiperCssHelper;
+declare(strict_types=1);
+
+
+namespace renschs\yii2\swiper;
+
+use renschs\yii2\swiper\assets\SwiperAsset;
+use renschs\yii2\swiper\helpers\SwiperCssHelper;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -15,7 +19,7 @@ use yii\web\JsExpression;
  *
  * @link    http://www.idangero.us/swiper/
  *
- * @package romkaChev\yii2\swiper
+ * @package renschs\yii2\swiper
  */
 class Swiper extends Widget
 {
@@ -23,51 +27,51 @@ class Swiper extends Widget
     /**
      * @var string[]|mixed[]|Slide[] Contains information about slides
      *                               If you want to add some items in runtime,
-     *                               you should use [[\romkaChev\yii2\swiper\Swiper::addItem]]
+     *                               you should use [[\renschs\yii2\swiper\Swiper::addItem]]
      *                               instead of direct items pushing.
      *
-     * @see \romkaChev\yii2\swiper\Slide
-     * @see \romkaChev\yii2\swiper\Swiper::$itemOptions
-     * @see \romkaChev\yii2\swiper\Swiper::addItem
-     * @see \romkaChev\yii2\swiper\Swiper::renderItem
+     * @see \renschs\yii2\swiper\Slide
+     * @see \renschs\yii2\swiper\Swiper::$itemOptions
+     * @see \renschs\yii2\swiper\Swiper::addItem
+     * @see \renschs\yii2\swiper\Swiper::renderItem
      */
-    public $items = [ ];
+    public $items = [];
 
     /**
-     * @var mixed[] options, which first will be merged with [[\romkaChev\yii2\swiper\Slide::$options]]
+     * @var mixed[] options, which first will be merged with [[\renschs\yii2\swiper\Slide::$options]]
      *              for each slide, and then applied in [[\yii\helpers\Html::tag]] for rendering.
      *
-     * @see \romkaChev\yii2\swiper\Swiper::normalizeOptions
-     * @see \romkaChev\yii2\swiper\Swiper::renderItem
+     * @see \renschs\yii2\swiper\Swiper::normalizeOptions
+     * @see \renschs\yii2\swiper\Swiper::renderItem
      *
-     * @see \romkaChev\yii2\swiper\Slide::$options
+     * @see \renschs\yii2\swiper\Slide::$options
      */
-    public $itemOptions = [ ];
+    public $itemOptions = [];
 
     /**
      * @var mixed[] Options which will be applied in [[\yii\helpers\Html::tag]].
      *              If you pass the [[id]] property, it will replace auto-generated
      *              value with custom.
      *
-     * @see \romkaChev\yii2\swiper\Swiper::run
+     * @see \renschs\yii2\swiper\Swiper::run
      */
-    public $containerOptions = [ ];
+    public $containerOptions = [];
 
     /**
      * @var mixed[] Options which will be applied in [[\yii\helpers\Html::tag]].
      *
-     * @see \romkaChev\yii2\swiper\Swiper::renderWrapper
+     * @see \renschs\yii2\swiper\Swiper::renderWrapper
      */
-    public $wrapperOptions = [ ];
+    public $wrapperOptions = [];
 
     /**
      * @var mixed[] The key-value storage of plugin options
      *              which will be converted to JSON and
      *              applied in Swiper plugin construction
      *
-     * @see \romkaChev\yii2\swiper\Swiper::registerClientScript
+     * @see \renschs\yii2\swiper\Swiper::registerClientScript
      */
-    public $pluginOptions = [ ];
+    public $pluginOptions = [];
 
 
     /**
@@ -77,7 +81,7 @@ class Swiper extends Widget
      *               you should declare them here
      *
      *               ~~~
-     *               \romkaChev\yii2\swiper\Swiper::widget([
+     *               \renschs\yii2\swiper\Swiper::widget([
      *                  'items'      => ['slide01', 'slide02'],
      *                  'behaviours' => [
      *                      'pagination',
@@ -88,21 +92,21 @@ class Swiper extends Widget
      *               ~~~
      *
      *               Also you can use named constants such as:
-     *               - [[\romkaChev\yii2\swiper\Swiper::BEHAVIOUR_PAGINATION]]
-     *               - [[\romkaChev\yii2\swiper\Swiper::BEHAVIOUR_SCROLLBAR]]
-     *               - [[\romkaChev\yii2\swiper\Swiper::BEHAVIOUR_NEXT_BUTTON]]
-     *               - [[\romkaChev\yii2\swiper\Swiper::BEHAVIOUR_PREV_BUTTON]]
-     *               - [[\romkaChev\yii2\swiper\Swiper::BEHAVIOUR_RTL]]
-     *               - [[\romkaChev\yii2\swiper\Swiper::BEHAVIOUR_PARALLAX]]
+     *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_PAGINATION]]
+     *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_SCROLLBAR]]
+     *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_NEXT_BUTTON]]
+     *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_PREV_BUTTON]]
+     *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_RTL]]
+     *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_PARALLAX]]
      *
-     * @see \romkaChev\yii2\swiper\Swiper::BEHAVIOUR_PAGINATION
-     * @see \romkaChev\yii2\swiper\Swiper::BEHAVIOUR_SCROLLBAR
-     * @see \romkaChev\yii2\swiper\Swiper::BEHAVIOUR_NEXT_BUTTON
-     * @see \romkaChev\yii2\swiper\Swiper::BEHAVIOUR_PREV_BUTTON
-     * @see \romkaChev\yii2\swiper\Swiper::BEHAVIOUR_RTL
-     * @see \romkaChev\yii2\swiper\Swiper::BEHAVIOUR_PARALLAX
+     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_PAGINATION
+     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_SCROLLBAR
+     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_NEXT_BUTTON
+     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_PREV_BUTTON
+     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_RTL
+     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_PARALLAX
      */
-    public $behaviours = [ ];
+    public $behaviours = [];
 
     /**
      * @var string[]
@@ -118,38 +122,38 @@ class Swiper extends Widget
 
 
     /**
-     * Named alias for [[\romkaChev\yii2\swiper\Swiper::$behaviours]] parallax item
+     * Named alias for [[\renschs\yii2\swiper\Swiper::$behaviours]] parallax item
      *
-     * @see \romkaChev\yii2\swiper\Swiper::PARALLAX_BACKGROUND
-     * @see \romkaChev\yii2\swiper\Swiper::PARALLAX_TRANSITION
-     * @see \romkaChev\yii2\swiper\Swiper::PARALLAX_TRANSITION_X
-     * @see \romkaChev\yii2\swiper\Swiper::PARALLAX_TRANSITION_Y
-     * @see \romkaChev\yii2\swiper\Swiper::PARALLAX_DURATION
+     * @see \renschs\yii2\swiper\Swiper::PARALLAX_BACKGROUND
+     * @see \renschs\yii2\swiper\Swiper::PARALLAX_TRANSITION
+     * @see \renschs\yii2\swiper\Swiper::PARALLAX_TRANSITION_X
+     * @see \renschs\yii2\swiper\Swiper::PARALLAX_TRANSITION_Y
+     * @see \renschs\yii2\swiper\Swiper::PARALLAX_DURATION
      *
-     * @see \romkaChev\yii2\swiper\Swiper::$behaviours
-     * @see \romkaChev\yii2\swiper\Swiper::$parallaxOptions
+     * @see \renschs\yii2\swiper\Swiper::$behaviours
+     * @see \renschs\yii2\swiper\Swiper::$parallaxOptions
      *
-     * @see \romkaChev\yii2\swiper\Swiper::renderBehaviourParallax
+     * @see \renschs\yii2\swiper\Swiper::renderBehaviourParallax
      */
     const BEHAVIOUR_PARALLAX = 'parallax';
     /**
-     * @see \romkaChev\yii2\swiper\Swiper::renderBehaviourParallax
+     * @see \renschs\yii2\swiper\Swiper::renderBehaviourParallax
      */
     const PARALLAX_BACKGROUND = 'background';
     /**
-     * @see \romkaChev\yii2\swiper\Swiper::renderBehaviourParallax
+     * @see \renschs\yii2\swiper\Swiper::renderBehaviourParallax
      */
     const PARALLAX_TRANSITION = 'transition';
     /**
-     * @see \romkaChev\yii2\swiper\Swiper::renderBehaviourParallax
+     * @see \renschs\yii2\swiper\Swiper::renderBehaviourParallax
      */
     const PARALLAX_TRANSITION_X = 'transitionX';
     /**
-     * @see \romkaChev\yii2\swiper\Swiper::renderBehaviourParallax
+     * @see \renschs\yii2\swiper\Swiper::renderBehaviourParallax
      */
     const PARALLAX_TRANSITION_Y = 'transitionY';
     /**
-     * @see \romkaChev\yii2\swiper\Swiper::renderBehaviourParallax
+     * @see \renschs\yii2\swiper\Swiper::renderBehaviourParallax
      */
     const PARALLAX_DURATION = 'duration';
     /**
@@ -158,7 +162,7 @@ class Swiper extends Widget
      *
      *               For example:
      *               ~~~
-     *               \romkaChev\yii2\swiper\Swiper::widget([
+     *               \renschs\yii2\swiper\Swiper::widget([
      *                  'items'           => ['slide01', 'slide02'],
      *                  'parallaxOptions' => [
      *                      'background'  => 'http://lorempixel.com/1920/1080/nature/1/',
@@ -170,24 +174,24 @@ class Swiper extends Widget
      *
      * @link http://www.idangero.us/swiper/api/ - Parallax section at the bottom
      *
-     * @see  \romkaChev\yii2\swiper\Swiper::PARALLAX_BACKGROUND
-     * @see  \romkaChev\yii2\swiper\Swiper::PARALLAX_TRANSITION
-     * @see  \romkaChev\yii2\swiper\Swiper::PARALLAX_TRANSITION_X
-     * @see  \romkaChev\yii2\swiper\Swiper::PARALLAX_TRANSITION_Y
-     * @see  \romkaChev\yii2\swiper\Swiper::PARALLAX_DURATION
+     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_BACKGROUND
+     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_TRANSITION
+     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_TRANSITION_X
+     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_TRANSITION_Y
+     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_DURATION
      *
-     * @see  \romkaChev\yii2\swiper\Swiper::renderBehaviourParallax
+     * @see  \renschs\yii2\swiper\Swiper::renderBehaviourParallax
      */
-    public $parallaxOptions = [ ];
+    public $parallaxOptions = [];
 
 
     /**
-     * Named alias for [[\romkaChev\yii2\swiper\Swiper::$behaviours]] pagination item
+     * Named alias for [[\renschs\yii2\swiper\Swiper::$behaviours]] pagination item
      *
-     * @see \romkaChev\yii2\swiper\Swiper::$behaviours
-     * @see \romkaChev\yii2\swiper\Swiper::$paginationOptions
+     * @see \renschs\yii2\swiper\Swiper::$behaviours
+     * @see \renschs\yii2\swiper\Swiper::$paginationOptions
      *
-     * @see \romkaChev\yii2\swiper\Swiper::renderBehaviourPagination
+     * @see \renschs\yii2\swiper\Swiper::renderBehaviourPagination
      */
     const BEHAVIOUR_PAGINATION = 'pagination';
     /**
@@ -195,7 +199,7 @@ class Swiper extends Widget
      *              tag rendering in [[\yii\helpers\Html::tag]]
      *
      *              ~~~
-     *               \romkaChev\yii2\swiper\Swiper::widget([
+     *               \renschs\yii2\swiper\Swiper::widget([
      *                  'items'             => ['slide01', 'slide02'],
      *                  'paginationOptions' => [
      *                      'class' => 'swiper-pagination-white',
@@ -207,18 +211,18 @@ class Swiper extends Widget
      *               ]);
      *              ~~~
      *
-     * @see \romkaChev\yii2\swiper\Swiper::$scrollbarOptions
+     * @see \renschs\yii2\swiper\Swiper::$scrollbarOptions
      */
-    public $paginationOptions = [ ];
+    public $paginationOptions = [];
 
 
     /**
-     * Named alias for [[\romkaChev\yii2\swiper\Swiper::$behaviours]] scrollbar item
+     * Named alias for [[\renschs\yii2\swiper\Swiper::$behaviours]] scrollbar item
      *
-     * @see \romkaChev\yii2\swiper\Swiper::$behaviours
-     * @see \romkaChev\yii2\swiper\Swiper::$scrollbarOptions
+     * @see \renschs\yii2\swiper\Swiper::$behaviours
+     * @see \renschs\yii2\swiper\Swiper::$scrollbarOptions
      *
-     * @see \romkaChev\yii2\swiper\Swiper::renderBehaviourScrollbar
+     * @see \renschs\yii2\swiper\Swiper::renderBehaviourScrollbar
      */
     const BEHAVIOUR_SCROLLBAR = 'scrollbar';
     /**
@@ -226,7 +230,7 @@ class Swiper extends Widget
      *              tag rendering in [[\yii\helpers\Html::tag]]
      *
      *              ~~~
-     *               \romkaChev\yii2\swiper\Swiper::widget([
+     *               \renschs\yii2\swiper\Swiper::widget([
      *                  'items'            => ['slide01', 'slide02'],
      *                  'scrollbarOptions' => [
      *                      'class' => 'my-custom-scrollbar-class',
@@ -238,18 +242,18 @@ class Swiper extends Widget
      *               ]);
      *              ~~~
      *
-     * @see \romkaChev\yii2\swiper\Swiper::$paginationOptions
+     * @see \renschs\yii2\swiper\Swiper::$paginationOptions
      */
-    public $scrollbarOptions = [ ];
+    public $scrollbarOptions = [];
 
 
     /**
-     * Named alias for [[\romkaChev\yii2\swiper\Swiper::$behaviours]] nextButton item
+     * Named alias for [[\renschs\yii2\swiper\Swiper::$behaviours]] nextButton item
      *
-     * @see \romkaChev\yii2\swiper\Swiper::$behaviours
-     * @see \romkaChev\yii2\swiper\Swiper::$nextButtonOptions
+     * @see \renschs\yii2\swiper\Swiper::$behaviours
+     * @see \renschs\yii2\swiper\Swiper::$nextButtonOptions
      *
-     * @see \romkaChev\yii2\swiper\Swiper::renderBehaviourNextButton
+     * @see \renschs\yii2\swiper\Swiper::renderBehaviourNextButton
      */
     const BEHAVIOUR_NEXT_BUTTON = 'nextButton';
     /**
@@ -257,7 +261,7 @@ class Swiper extends Widget
      *              tag rendering in [[\yii\helpers\Html::tag]]
      *
      *              ~~~
-     *               \romkaChev\yii2\swiper\Swiper::widget([
+     *               \renschs\yii2\swiper\Swiper::widget([
      *                  'items'             => ['slide01', 'slide02'],
      *                  'nextButtonOptions' => [
      *                      'class' => 'my-custom-next-button-class',
@@ -269,18 +273,18 @@ class Swiper extends Widget
      *               ]);
      *              ~~~
      *
-     * @see \romkaChev\yii2\swiper\Swiper::$prevButtonOptions
+     * @see \renschs\yii2\swiper\Swiper::$prevButtonOptions
      */
-    public $nextButtonOptions = [ ];
+    public $nextButtonOptions = [];
 
 
     /**
-     * Named alias for [[\romkaChev\yii2\swiper\Swiper::$behaviours]] prevButton item
+     * Named alias for [[\renschs\yii2\swiper\Swiper::$behaviours]] prevButton item
      *
-     * @see \romkaChev\yii2\swiper\Swiper::$behaviours
-     * @see \romkaChev\yii2\swiper\Swiper::$prevButtonOptions
+     * @see \renschs\yii2\swiper\Swiper::$behaviours
+     * @see \renschs\yii2\swiper\Swiper::$prevButtonOptions
      *
-     * @see \romkaChev\yii2\swiper\Swiper::renderBehaviourPrevButton
+     * @see \renschs\yii2\swiper\Swiper::renderBehaviourPrevButton
      */
     const BEHAVIOUR_PREV_BUTTON = 'prevButton';
     /**
@@ -288,7 +292,7 @@ class Swiper extends Widget
      *              tag rendering in [[\yii\helpers\Html::tag]]
      *
      *              ~~~
-     *               \romkaChev\yii2\swiper\Swiper::widget([
+     *               \renschs\yii2\swiper\Swiper::widget([
      *                  'items'             => ['slide01', 'slide02'],
      *                  'nextButtonOptions' => [
      *                      'class' => 'my-custom-prev-button-class',
@@ -300,37 +304,37 @@ class Swiper extends Widget
      *               ]);
      *              ~~~
      *
-     * @see \romkaChev\yii2\swiper\Swiper::$nextButtonOptions
+     * @see \renschs\yii2\swiper\Swiper::$nextButtonOptions
      */
-    public $prevButtonOptions = [ ];
+    public $prevButtonOptions = [];
 
 
     /**
-     * Named alias for [[\romkaChev\yii2\swiper\Swiper::$behaviours]] rtl item
+     * Named alias for [[\renschs\yii2\swiper\Swiper::$behaviours]] rtl item
      *
-     * @see \romkaChev\yii2\swiper\Swiper::$behaviours
+     * @see \renschs\yii2\swiper\Swiper::$behaviours
      *
-     * @see \romkaChev\yii2\swiper\Swiper::setBehaviourRtl
+     * @see \renschs\yii2\swiper\Swiper::setBehaviourRtl
      */
     const BEHAVIOUR_RTL = 'rtl';
 
 
     /**
-     * This function is batch-wrapper of \romkaChev\yii2\swiper\Swiper::addItem
+     * This function is batch-wrapper of \renschs\yii2\swiper\Swiper::addItem
      *
      * @param string[]|mixed[][]|Slide[] $items batch of items
      *                                          to be added into slider
      *
-     * @see \romkaChev\yii2\swiper\Swiper::addItem
-     * @see \romkaChev\yii2\swiper\Swiper::$items
-     * @see \romkaChev\yii2\swiper\Slide
+     * @see \renschs\yii2\swiper\Swiper::addItem
+     * @see \renschs\yii2\swiper\Swiper::$items
+     * @see \renschs\yii2\swiper\Slide
      *
      * @return Swiper
      */
-    public function addItems( array $items = [ ] )
+    public function addItems(array $items = [])
     {
         foreach ($items as $item) {
-            $this->addItem( $item );
+            $this->addItem($item);
         }
 
         return $this;
@@ -341,20 +345,20 @@ class Swiper extends Widget
      * you should use this instead of direct items pushing to collection,
      * because it supports configuring slides from strings and arrays.
      *
-     * Also it merges [[\romkaChev\yii2\swiper\Swiper::$itemOptions]]
+     * Also it merges [[\renschs\yii2\swiper\Swiper::$itemOptions]]
      * with concrete item options.
      *
      * @param string|mixed[]|Slide $item The content, or configuration,
-     *                                   or [[\romkaChev\yii2\swiper\Slide]] itself.
+     *                                   or [[\renschs\yii2\swiper\Slide]] itself.
      *
-     * @see \romkaChev\yii2\swiper\Swiper::$items
-     * @see \romkaChev\yii2\swiper\Slide
+     * @see \renschs\yii2\swiper\Swiper::$items
+     * @see \renschs\yii2\swiper\Slide
      *
      * @return Swiper
      */
-    public function addItem( $item = [ ] )
+    public function addItem($item = [])
     {
-        $this->items[] = $this->normalizeItem( $item, count( $this->items ) );
+        $this->items[] = $this->normalizeItem($item, count($this->items));
 
         return $this;
     }
@@ -378,8 +382,8 @@ class Swiper extends Widget
         $this->registerClientScript();
 
         $containerOptions  = $this->containerOptions;
-        $containerTag      = ArrayHelper::remove( $containerOptions, 'tag', 'div' );
-        $renderedContainer = Html::tag( $containerTag, implode( PHP_EOL, $contentPieces ), $containerOptions );
+        $containerTag      = ArrayHelper::remove($containerOptions, 'tag', 'div');
+        $renderedContainer = Html::tag($containerTag, implode(PHP_EOL, $contentPieces), $containerOptions);
 
         return $renderedContainer;
     }
@@ -388,10 +392,10 @@ class Swiper extends Widget
      * This function check if there is wrong behaviours
      * and call normalizing of items and every options
      *
-     * @see \romkaChev\yii2\swiper\Swiper::checkBehaviours
+     * @see \renschs\yii2\swiper\Swiper::checkBehaviours
      *
-     * @see \romkaChev\yii2\swiper\Swiper::normalizeOptions
-     * @see \romkaChev\yii2\swiper\Swiper::normalizeItems
+     * @see \renschs\yii2\swiper\Swiper::normalizeOptions
+     * @see \renschs\yii2\swiper\Swiper::normalizeItems
      */
     public function init()
     {
@@ -405,18 +409,18 @@ class Swiper extends Widget
      * This function sets default values to options of widget
      * such as [[id]] and [[class]]
      *
-     * @see \romkaChev\yii2\swiper\Swiper::$containerOptions
-     * @see \romkaChev\yii2\swiper\Swiper::$wrapperOptions
-     * @see \romkaChev\yii2\swiper\Swiper::$paginationOptions
-     * @see \romkaChev\yii2\swiper\Swiper::$scrollbarOptions
-     * @see \romkaChev\yii2\swiper\Swiper::$nextButtonOptions
-     * @see \romkaChev\yii2\swiper\Swiper::$prevButtonOptions
-     * @see \romkaChev\yii2\swiper\Swiper::$parallaxOptions
-     * @see \romkaChev\yii2\swiper\Swiper::$itemOptions
+     * @see \renschs\yii2\swiper\Swiper::$containerOptions
+     * @see \renschs\yii2\swiper\Swiper::$wrapperOptions
+     * @see \renschs\yii2\swiper\Swiper::$paginationOptions
+     * @see \renschs\yii2\swiper\Swiper::$scrollbarOptions
+     * @see \renschs\yii2\swiper\Swiper::$nextButtonOptions
+     * @see \renschs\yii2\swiper\Swiper::$prevButtonOptions
+     * @see \renschs\yii2\swiper\Swiper::$parallaxOptions
+     * @see \renschs\yii2\swiper\Swiper::$itemOptions
      */
     protected function normalizeOptions()
     {
-        $id = ArrayHelper::getValue( $this->containerOptions, 'id', $this->getId() );
+        $id = ArrayHelper::getValue($this->containerOptions, 'id', $this->getId());
 
         //@formatter:off
 
@@ -450,54 +454,52 @@ class Swiper extends Widget
          * Parallax options, specified via shorthands, have more priority
          * than directly specified options
          */
-        $this->parallaxOptions['data']['swiper-parallax']          = ArrayHelper::getValue( $this->parallaxOptions, self::PARALLAX_TRANSITION,   ArrayHelper::getValue( $this->parallaxOptions['data'], 'swiper-parallax',          null) );
-        $this->parallaxOptions['data']['swiper-parallax-x']        = ArrayHelper::getValue( $this->parallaxOptions, self::PARALLAX_TRANSITION_X, ArrayHelper::getValue( $this->parallaxOptions['data'], 'swiper-parallax-x',        null) );
-        $this->parallaxOptions['data']['swiper-parallax-y']        = ArrayHelper::getValue( $this->parallaxOptions, self::PARALLAX_TRANSITION_Y, ArrayHelper::getValue( $this->parallaxOptions['data'], 'swiper-parallax-y',        null) );
-        $this->parallaxOptions['data']['swiper-parallax-duration'] = ArrayHelper::getValue( $this->parallaxOptions, self::PARALLAX_DURATION,     ArrayHelper::getValue( $this->parallaxOptions['data'], 'swiper-parallax-duration', null) );
+        $this->parallaxOptions['data']['swiper-parallax']          = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_TRANSITION,   ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax',          null));
+        $this->parallaxOptions['data']['swiper-parallax-x']        = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_TRANSITION_X, ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax-x',        null));
+        $this->parallaxOptions['data']['swiper-parallax-y']        = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_TRANSITION_Y, ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax-y',        null));
+        $this->parallaxOptions['data']['swiper-parallax-duration'] = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_DURATION,     ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax-duration', null));
 
-        $this->parallaxOptions[self::PARALLAX_TRANSITION]          = ArrayHelper::getValue( $this->parallaxOptions, self::PARALLAX_TRANSITION,   ArrayHelper::getValue( $this->parallaxOptions['data'], 'swiper-parallax',          null) );
-        $this->parallaxOptions[self::PARALLAX_TRANSITION_X]        = ArrayHelper::getValue( $this->parallaxOptions, self::PARALLAX_TRANSITION_X, ArrayHelper::getValue( $this->parallaxOptions['data'], 'swiper-parallax-x',        null) );
-        $this->parallaxOptions[self::PARALLAX_TRANSITION_Y]        = ArrayHelper::getValue( $this->parallaxOptions, self::PARALLAX_TRANSITION_Y, ArrayHelper::getValue( $this->parallaxOptions['data'], 'swiper-parallax-y',        null) );
-        $this->parallaxOptions[self::PARALLAX_DURATION]            = ArrayHelper::getValue( $this->parallaxOptions, self::PARALLAX_DURATION,     ArrayHelper::getValue( $this->parallaxOptions['data'], 'swiper-parallax-duration', null) );
+        $this->parallaxOptions[self::PARALLAX_TRANSITION]          = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_TRANSITION,   ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax',          null));
+        $this->parallaxOptions[self::PARALLAX_TRANSITION_X]        = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_TRANSITION_X, ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax-x',        null));
+        $this->parallaxOptions[self::PARALLAX_TRANSITION_Y]        = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_TRANSITION_Y, ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax-y',        null));
+        $this->parallaxOptions[self::PARALLAX_DURATION]            = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_DURATION,     ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax-duration', null));
 
-        $this->parallaxOptions['data'] = array_filter( $this->parallaxOptions['data'] );
+        $this->parallaxOptions['data'] = array_filter($this->parallaxOptions['data']);
 
         //@formatter:on
 
-        if (ArrayHelper::getValue( $this->parallaxOptions, self::PARALLAX_BACKGROUND )) {
+        if (ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_BACKGROUND)) {
 
             $this->parallaxOptions['style'] = SwiperCssHelper::mergeStyleAndBackground(
-                ArrayHelper::getValue( $this->parallaxOptions, self::PARALLAX_BACKGROUND, '' ),
-                ArrayHelper::getValue( $this->parallaxOptions, 'style', '' )
+                ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_BACKGROUND, ''),
+                ArrayHelper::getValue($this->parallaxOptions, 'style', '')
             );
-
-        } elseif (ArrayHelper::getValue( $this->parallaxOptions, 'style' )) {
+        } elseif (ArrayHelper::getValue($this->parallaxOptions, 'style')) {
 
             $this->parallaxOptions[self::PARALLAX_BACKGROUND] = SwiperCssHelper::getBackgroundUrl(
                 $this->parallaxOptions['style']
             );
-
         }
     }
 
     /**
-     * This function converts non-[[\romkaChev\yii2\swiper\Slide]] items
-     * to [[\romkaChev\yii2\swiper\Slide]] respectively
+     * This function converts non-[[\renschs\yii2\swiper\Slide]] items
+     * to [[\renschs\yii2\swiper\Slide]] respectively
      *
-     * Then it merges [[\romkaChev\yii2\swiper\Swiper::$itemOptions]] with
+     * Then it merges [[\renschs\yii2\swiper\Swiper::$itemOptions]] with
      * concrete item options
      *
      */
     protected function normalizeItems()
     {
         foreach ($this->items as $index => $item) {
-            $this->items[$index] = $this->normalizeItem( $item, $index );
+            $this->items[$index] = $this->normalizeItem($item, $index);
         }
     }
 
     /**
-     * This function converts non-[[\romkaChev\yii2\swiper\Slide]] item
-     * to [[\romkaChev\yii2\swiper\Slide]], merging batch options,
+     * This function converts non-[[\renschs\yii2\swiper\Slide]] item
+     * to [[\renschs\yii2\swiper\Slide]], merging batch options,
      * automatically sets id and class and so on...
      *
      * @param string|mixed[]|Slide $item
@@ -505,10 +507,10 @@ class Swiper extends Widget
      *
      * @return Slide
      */
-    protected function normalizeItem( $item, $index )
+    protected function normalizeItem($item, $index)
     {
         /**
-         * If concrete \romkaChev\yii2\swiper\Slide given
+         * If concrete \renschs\yii2\swiper\Slide given
          * then it is meant to be fully custom-configured
          * and it will not be managed there.
          */
@@ -516,8 +518,8 @@ class Swiper extends Widget
             return $item;
         }
 
-        $item = is_string( $item )
-            ? [ 'content' => $item ]
+        $item = is_string($item)
+            ? ['content' => $item]
             : $item;
 
         $itemOptions = $this->itemOptions;
@@ -525,23 +527,23 @@ class Swiper extends Widget
         /**
          * Id must be unique and batch value cannot be applied
          */
-        ArrayHelper::remove( $itemOptions['options'], 'id' );
+        ArrayHelper::remove($itemOptions['options'], 'id');
         /**
          * Hash must be unique too
          */
-        ArrayHelper::remove( $itemOptions, 'hash' );
-        ArrayHelper::remove( $itemOptions['options']['data'], 'hash' );
+        ArrayHelper::remove($itemOptions, 'hash');
+        ArrayHelper::remove($itemOptions['options']['data'], 'hash');
 
-        $item['options'] = ArrayHelper::getValue( $item, 'options', [ ] );
+        $item['options'] = ArrayHelper::getValue($item, 'options', []);
 
-        $itemClass                = ArrayHelper::getValue( $item['options'], 'class', '' );
-        $item['options']['id']    = ArrayHelper::getValue( $item['options'], 'id', "{$this->containerOptions['id']}-slide-{$index}" );
-        $item['options']['class'] = trim( ArrayHelper::getValue( $itemOptions['options'], 'class', '' ) . " {$itemClass}", ' ' );
+        $itemClass                = ArrayHelper::getValue($item['options'], 'class', '');
+        $item['options']['id']    = ArrayHelper::getValue($item['options'], 'id', "{$this->containerOptions['id']}-slide-{$index}");
+        $item['options']['class'] = trim(ArrayHelper::getValue($itemOptions['options'], 'class', '') . " {$itemClass}", ' ');
 
 
-        $item = array_replace_recursive( $itemOptions, $item );
+        $item = array_replace_recursive($itemOptions, $item);
 
-        return new Slide( $item );
+        return new Slide($item);
     }
 
     /**
@@ -553,8 +555,8 @@ class Swiper extends Widget
     protected function checkBehaviours()
     {
         foreach ($this->behaviours as $behaviour) {
-            if ( ! in_array( $behaviour, $this->availableBehaviours )) {
-                throw new \InvalidArgumentException( "Unknown behaviour {$behaviour}" );
+            if (!in_array($behaviour, $this->availableBehaviours)) {
+                throw new \InvalidArgumentException("Unknown behaviour {$behaviour}");
             }
         }
     }
@@ -569,32 +571,32 @@ class Swiper extends Widget
      *
      * @link http://www.idangero.us/swiper/api/ - Parallax section at the bottom
      *
-     * @see  \romkaChev\yii2\swiper\Swiper::PARALLAX_BACKGROUND
-     * @see  \romkaChev\yii2\swiper\Swiper::PARALLAX_TRANSITION
-     * @see  \romkaChev\yii2\swiper\Swiper::PARALLAX_TRANSITION_X
-     * @see  \romkaChev\yii2\swiper\Swiper::PARALLAX_TRANSITION_Y
-     * @see  \romkaChev\yii2\swiper\Swiper::PARALLAX_DURATION
+     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_BACKGROUND
+     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_TRANSITION
+     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_TRANSITION_X
+     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_TRANSITION_Y
+     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_DURATION
      *
-     * @see  \romkaChev\yii2\swiper\Swiper::$parallaxOptions
+     * @see  \renschs\yii2\swiper\Swiper::$parallaxOptions
      *
      * @return string
      */
     protected function renderBehaviourParallax()
     {
-        if ( ! in_array( self::BEHAVIOUR_PARALLAX, $this->behaviours )) {
+        if (!in_array(self::BEHAVIOUR_PARALLAX, $this->behaviours)) {
             return '';
         }
 
         $parallaxOptions = $this->parallaxOptions;
-        $parallaxTag     = ArrayHelper::remove( $parallaxOptions, 'tag', 'div' );
+        $parallaxTag     = ArrayHelper::remove($parallaxOptions, 'tag', 'div');
 
-        ArrayHelper::remove( $parallaxOptions, self::PARALLAX_BACKGROUND );
-        ArrayHelper::remove( $parallaxOptions, self::PARALLAX_TRANSITION );
-        ArrayHelper::remove( $parallaxOptions, self::PARALLAX_TRANSITION_X );
-        ArrayHelper::remove( $parallaxOptions, self::PARALLAX_TRANSITION_Y );
-        ArrayHelper::remove( $parallaxOptions, self::PARALLAX_DURATION );
+        ArrayHelper::remove($parallaxOptions, self::PARALLAX_BACKGROUND);
+        ArrayHelper::remove($parallaxOptions, self::PARALLAX_TRANSITION);
+        ArrayHelper::remove($parallaxOptions, self::PARALLAX_TRANSITION_X);
+        ArrayHelper::remove($parallaxOptions, self::PARALLAX_TRANSITION_Y);
+        ArrayHelper::remove($parallaxOptions, self::PARALLAX_DURATION);
 
-        return Html::tag( $parallaxTag, '', $parallaxOptions );
+        return Html::tag($parallaxTag, '', $parallaxOptions);
     }
 
     /**
@@ -605,24 +607,24 @@ class Swiper extends Widget
      *
      * Also you can find some examples in [[~/yii2-swiper/demos]] folder
      *
-     * @see \romkaChev\yii2\swiper\Swiper::BEHAVIOUR_PAGINATION
-     * @see \romkaChev\yii2\swiper\Swiper::$paginationOptions
+     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_PAGINATION
+     * @see \renschs\yii2\swiper\Swiper::$paginationOptions
      *
-     * @see \romkaChev\yii2\swiper\Swiper::renderBehaviourScrollbar
+     * @see \renschs\yii2\swiper\Swiper::renderBehaviourScrollbar
      *
      * @return string
      */
     protected function renderBehaviourPagination()
     {
-        if (in_array( self::BEHAVIOUR_PAGINATION, $this->behaviours )) {
+        if (in_array(self::BEHAVIOUR_PAGINATION, $this->behaviours)) {
             $paginationOptions = $this->paginationOptions;
-            $paginationTag     = ArrayHelper::remove( $paginationOptions, 'tag', 'div' );
+            $paginationTag     = ArrayHelper::remove($paginationOptions, 'tag', 'div');
 
-            if ( ! isset( $this->pluginOptions[self::OPTION_PAGINATION] )) {
+            if (!isset($this->pluginOptions[self::OPTION_PAGINATION])) {
                 $this->pluginOptions[self::OPTION_PAGINATION] = "#" . $paginationOptions["id"];
             }
 
-            return Html::tag( $paginationTag, '', $paginationOptions );
+            return Html::tag($paginationTag, '', $paginationOptions);
         }
 
         return '';
@@ -636,25 +638,25 @@ class Swiper extends Widget
      *
      * Also you can find some examples in [[~/yii2-swiper/demos]] folder
      *
-     * @see \romkaChev\yii2\swiper\Swiper::BEHAVIOUR_SCROLLBAR
-     * @see \romkaChev\yii2\swiper\Swiper::$scrollbarOptions
+     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_SCROLLBAR
+     * @see \renschs\yii2\swiper\Swiper::$scrollbarOptions
      *
-     * @see \romkaChev\yii2\swiper\Swiper::renderBehaviourPagination
+     * @see \renschs\yii2\swiper\Swiper::renderBehaviourPagination
      *
      * @return string
      */
     protected function renderBehaviourScrollbar()
     {
 
-        if (in_array( self::BEHAVIOUR_SCROLLBAR, $this->behaviours )) {
+        if (in_array(self::BEHAVIOUR_SCROLLBAR, $this->behaviours)) {
             $scrollbarOptions = $this->scrollbarOptions;
-            $scrollbarTag     = ArrayHelper::remove( $scrollbarOptions, 'tag', 'div' );
+            $scrollbarTag     = ArrayHelper::remove($scrollbarOptions, 'tag', 'div');
 
-            if ( ! isset( $this->pluginOptions[self::OPTION_SCROLLBAR] )) {
+            if (!isset($this->pluginOptions[self::OPTION_SCROLLBAR])) {
                 $this->pluginOptions[self::OPTION_SCROLLBAR] = "#" . $scrollbarOptions["id"];
             }
 
-            return Html::tag( $scrollbarTag, '', $scrollbarOptions );
+            return Html::tag($scrollbarTag, '', $scrollbarOptions);
         }
 
         return '';
@@ -668,25 +670,25 @@ class Swiper extends Widget
      *
      * Also you can find some examples in [[~/yii2-swiper/demos]] folder
      *
-     * @see \romkaChev\yii2\swiper\Swiper::BEHAVIOUR_NEXT_BUTTON
-     * @see \romkaChev\yii2\swiper\Swiper::$nextButtonOptions
+     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_NEXT_BUTTON
+     * @see \renschs\yii2\swiper\Swiper::$nextButtonOptions
      *
-     * @see \romkaChev\yii2\swiper\Swiper::renderBehaviourPrevButton
+     * @see \renschs\yii2\swiper\Swiper::renderBehaviourPrevButton
      *
      * @return string
      */
     protected function renderBehaviourNextButton()
     {
 
-        if (in_array( self::BEHAVIOUR_NEXT_BUTTON, $this->behaviours )) {
+        if (in_array(self::BEHAVIOUR_NEXT_BUTTON, $this->behaviours)) {
             $nextButtonOptions = $this->nextButtonOptions;
-            $nextButtonTag     = ArrayHelper::remove( $nextButtonOptions, 'tag', 'div' );
+            $nextButtonTag     = ArrayHelper::remove($nextButtonOptions, 'tag', 'div');
 
-            if ( ! isset( $this->pluginOptions[self::OPTION_NEXT_BUTTON] )) {
+            if (!isset($this->pluginOptions[self::OPTION_NEXT_BUTTON])) {
                 $this->pluginOptions[self::OPTION_NEXT_BUTTON] = "#" . $nextButtonOptions["id"];
             }
 
-            return Html::tag( $nextButtonTag, '', $nextButtonOptions );
+            return Html::tag($nextButtonTag, '', $nextButtonOptions);
         }
 
         return '';
@@ -700,45 +702,45 @@ class Swiper extends Widget
      *
      * Also you can find some examples in [[~/yii2-swiper/demos]] folder
      *
-     * @see \romkaChev\yii2\swiper\Swiper::BEHAVIOUR_PREV_BUTTON
-     * @see \romkaChev\yii2\swiper\Swiper::$prevButtonOptions
+     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_PREV_BUTTON
+     * @see \renschs\yii2\swiper\Swiper::$prevButtonOptions
      *
-     * @see \romkaChev\yii2\swiper\Swiper::renderBehaviourNextButton
+     * @see \renschs\yii2\swiper\Swiper::renderBehaviourNextButton
      *
      * @return string
      */
     protected function renderBehaviourPrevButton()
     {
 
-        if (in_array( self::BEHAVIOUR_PREV_BUTTON, $this->behaviours )) {
+        if (in_array(self::BEHAVIOUR_PREV_BUTTON, $this->behaviours)) {
             $prevButtonOptions = $this->prevButtonOptions;
-            $prevButtonTag     = ArrayHelper::remove( $prevButtonOptions, 'tag', 'div' );
+            $prevButtonTag     = ArrayHelper::remove($prevButtonOptions, 'tag', 'div');
 
-            if ( ! isset( $this->pluginOptions[self::OPTION_PREV_BUTTON] )) {
+            if (!isset($this->pluginOptions[self::OPTION_PREV_BUTTON])) {
                 $this->pluginOptions[self::OPTION_PREV_BUTTON] = "#" . $prevButtonOptions["id"];
             }
 
-            return Html::tag( $prevButtonTag, '', $prevButtonOptions );
+            return Html::tag($prevButtonTag, '', $prevButtonOptions);
         }
 
         return '';
     }
 
     /**
-     * This function adds [[dir=rtl]] tag option to [[\romkaChev\yii2\swiper\Swiper::$containerOptions]]
+     * This function adds [[dir=rtl]] tag option to [[\renschs\yii2\swiper\Swiper::$containerOptions]]
      *
      * More information about rtl you can find
      * in official site of plugin - http://www.idangero.us/swiper/api/
      *
      * Also you can find some examples in [[~/yii2-swiper/demos]] folder
      *
-     * @see \romkaChev\yii2\swiper\Swiper::BEHAVIOUR_RTL
+     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_RTL
      *
      * @return Swiper
      */
     protected function setBehaviourRtl()
     {
-        if (in_array( self::BEHAVIOUR_RTL, $this->behaviours )) {
+        if (in_array(self::BEHAVIOUR_RTL, $this->behaviours)) {
             $this->containerOptions["dir"] = 'rtl';
         }
 
@@ -749,73 +751,75 @@ class Swiper extends Widget
      * This function renders the wrapper tag of swiper,
      * which contains slides
      *
-     * @see \romkaChev\yii2\swiper\Swiper::$wrapperOptions
-     * @see \romkaChev\yii2\swiper\Swiper::renderItems
+     * @see \renschs\yii2\swiper\Swiper::$wrapperOptions
+     * @see \renschs\yii2\swiper\Swiper::renderItems
      *
      * @return string
      */
     protected function renderWrapper()
     {
-        $renderedItems = $this->renderItems( $this->items );
+        $renderedItems = $this->renderItems($this->items);
 
         $wrapperOptions  = $this->wrapperOptions;
-        $wrapperTag      = ArrayHelper::remove( $wrapperOptions, 'tag', 'div' );
-        $renderedWrapper = Html::tag( $wrapperTag, PHP_EOL . $renderedItems . PHP_EOL, $wrapperOptions );
+        $wrapperTag      = ArrayHelper::remove($wrapperOptions, 'tag', 'div');
+        $renderedWrapper = Html::tag($wrapperTag, PHP_EOL . $renderedItems . PHP_EOL, $wrapperOptions);
 
         return PHP_EOL . $renderedWrapper . PHP_EOL;
     }
 
     /**
-     * This function just calls [[\romkaChev\yii2\swiper\Swiper::renderItem]]
-     * for each [[\romkaChev\yii2\swiper\Swiper::$items]] and returns
+     * This function just calls [[\renschs\yii2\swiper\Swiper::renderItem]]
+     * for each [[\renschs\yii2\swiper\Swiper::$items]] and returns
      * formatter result
      *
      * @param Slide[] $items
      *
      * @return string
      */
-    protected function renderItems( array $items )
+    protected function renderItems(array $items)
     {
-        $renderedItems = [ ];
+        $renderedItems = [];
         foreach ($items as $index => $item) {
-            $renderedItems[] = $this->renderItem( $item );
+            $renderedItems[] = $this->renderItem($item);
         }
 
-        return implode( PHP_EOL, $renderedItems );
+        return implode(PHP_EOL, $renderedItems);
     }
 
     /**
      * @param Slide $slide
      *
-     * @see \romkaChev\yii2\swiper\Swiper::$items
-     * @see \romkaChev\yii2\swiper\Swiper::$itemOptions
+     * @see \renschs\yii2\swiper\Swiper::$items
+     * @see \renschs\yii2\swiper\Swiper::$itemOptions
      *
      * @return string
      */
-    protected function renderItem( Slide $slide )
+    protected function renderItem(Slide $slide)
     {
         $options = $slide->options;
-        $tag     = ArrayHelper::remove( $options, 'tag', 'div' );
+        $tag     = ArrayHelper::remove($options, 'tag', 'div');
 
-        return Html::tag( $tag, $slide->content, $options );
+        return Html::tag($tag, $slide->content, $options);
     }
 
     /**
      * Registers the initializer of Swiper plugin
      *
-     * @see \romkaChev\yii2\swiper\Swiper::$pluginOptions
+     * @see \renschs\yii2\swiper\Swiper::$pluginOptions
      * @return Swiper
      */
     protected function registerClientScript()
     {
         $view = $this->getView();
-        SwiperAsset::register( $view );
+        SwiperAsset::register($view);
 
         $id            = $this->containerOptions['id'];
-        $pluginOptions = Json::encode( $this->pluginOptions );
-        $variableName  = 'swiper' . Inflector::id2camel( $this->containerOptions['id'] );
+        $pluginOptions = Json::encode($this->pluginOptions);
+        $variableName  = 'swiper' . Inflector::id2camel($this->containerOptions['id']);
 
-        $view->registerJs( new JsExpression( <<<JS
+        $view->registerJs(
+            new JsExpression(
+                <<<JS
         //noinspection JSUnnecessarySemicolon
         ;var {$variableName} = new Swiper('#{$id}', {$pluginOptions});
 JS
@@ -958,69 +962,69 @@ JS
 
     /**
      * Named alias for [[direction]] option
-     * in [[\romkaChev\yii2\swiper\Swiper::$pluginOptions]]
+     * in [[\renschs\yii2\swiper\Swiper::$pluginOptions]]
      *
-     * @see \romkaChev\yii2\swiper\Swiper::OPTION_DIRECTION
-     * @see \romkaChev\yii2\swiper\Swiper::$pluginOptions
+     * @see \renschs\yii2\swiper\Swiper::OPTION_DIRECTION
+     * @see \renschs\yii2\swiper\Swiper::$pluginOptions
      */
     const DIRECTION_HORIZONTAL = 'horizontal';
     /**
      * Named alias for [[direction]] option
-     * in [[\romkaChev\yii2\swiper\Swiper::$pluginOptions]]
+     * in [[\renschs\yii2\swiper\Swiper::$pluginOptions]]
      *
-     * @see \romkaChev\yii2\swiper\Swiper::OPTION_DIRECTION
-     * @see \romkaChev\yii2\swiper\Swiper::$pluginOptions
+     * @see \renschs\yii2\swiper\Swiper::OPTION_DIRECTION
+     * @see \renschs\yii2\swiper\Swiper::$pluginOptions
      */
     const DIRECTION_VERTICAL = 'vertical';
 
     /**
      * Named alias for [[effect]] option
-     * in [[\romkaChev\yii2\swiper\Swiper::$pluginOptions]]
+     * in [[\renschs\yii2\swiper\Swiper::$pluginOptions]]
      *
-     * @see \romkaChev\yii2\swiper\Swiper::OPTION_EFFECT
-     * @see \romkaChev\yii2\swiper\Swiper::$pluginOptions
+     * @see \renschs\yii2\swiper\Swiper::OPTION_EFFECT
+     * @see \renschs\yii2\swiper\Swiper::$pluginOptions
      */
     const EFFECT_FADE = 'fade';
     /**
      * Named alias for [[effect]] option
-     * in [[\romkaChev\yii2\swiper\Swiper::$pluginOptions]]
+     * in [[\renschs\yii2\swiper\Swiper::$pluginOptions]]
      *
-     * @see \romkaChev\yii2\swiper\Swiper::OPTION_EFFECT
-     * @see \romkaChev\yii2\swiper\Swiper::$pluginOptions
+     * @see \renschs\yii2\swiper\Swiper::OPTION_EFFECT
+     * @see \renschs\yii2\swiper\Swiper::$pluginOptions
      */
     const EFFECT_CUBE = 'cube';
     /**
      * Named alias for [[effect]] option
-     * in [[\romkaChev\yii2\swiper\Swiper::$pluginOptions]]
+     * in [[\renschs\yii2\swiper\Swiper::$pluginOptions]]
      *
-     * @see \romkaChev\yii2\swiper\Swiper::OPTION_EFFECT
-     * @see \romkaChev\yii2\swiper\Swiper::$pluginOptions
+     * @see \renschs\yii2\swiper\Swiper::OPTION_EFFECT
+     * @see \renschs\yii2\swiper\Swiper::$pluginOptions
      */
     const EFFECT_COVERFLOW = 'coverflow';
 
     /**
      * Named alias for [[slidesPerView]] option
-     * in [[\romkaChev\yii2\swiper\Swiper::$pluginOptions]]
+     * in [[\renschs\yii2\swiper\Swiper::$pluginOptions]]
      *
-     * @see \romkaChev\yii2\swiper\Swiper::OPTION_SLIDES_PER_VIEW
-     * @see \romkaChev\yii2\swiper\Swiper::$pluginOptions
+     * @see \renschs\yii2\swiper\Swiper::OPTION_SLIDES_PER_VIEW
+     * @see \renschs\yii2\swiper\Swiper::$pluginOptions
      */
     const SLIDES_PER_VIEW_AUTO = 'auto';
 
     /**
      * Named alias for [[slidesPerColumnFill]] option
-     * in [[\romkaChev\yii2\swiper\Swiper::$pluginOptions]]
+     * in [[\renschs\yii2\swiper\Swiper::$pluginOptions]]
      *
-     * @see \romkaChev\yii2\swiper\Swiper::OPTION_SLIDES_PER_COLUMN_FILL
-     * @see \romkaChev\yii2\swiper\Swiper::$pluginOptions
+     * @see \renschs\yii2\swiper\Swiper::OPTION_SLIDES_PER_COLUMN_FILL
+     * @see \renschs\yii2\swiper\Swiper::$pluginOptions
      */
     const SLIDES_PER_COLUMN_FILL_COLUMN = 'column';
     /**
      * Named alias for [[slidesPerColumnFill]] option
-     * in [[\romkaChev\yii2\swiper\Swiper::$pluginOptions]]
+     * in [[\renschs\yii2\swiper\Swiper::$pluginOptions]]
      *
-     * @see \romkaChev\yii2\swiper\Swiper::OPTION_SLIDES_PER_COLUMN_FILL
-     * @see \romkaChev\yii2\swiper\Swiper::$pluginOptions
+     * @see \renschs\yii2\swiper\Swiper::OPTION_SLIDES_PER_COLUMN_FILL
+     * @see \renschs\yii2\swiper\Swiper::$pluginOptions
      */
     const SLIDES_PER_COLUMN_FILL_ROW = 'row';
 

@@ -1,7 +1,7 @@
 # Documentation of yii2-swiper
 
 > In documentation, when using `Swiper` and `Slide` without namespaces it means,
-  that using `\romkaChev\yii2\swiper\Swiper` and `\romkaChev\yii2\swiper\Slide` respectively
+  that using `\renschs\yii2\swiper\Swiper` and `\renschs\yii2\swiper\Slide` respectively
   
 #### [Widget overview](overview.md)
 

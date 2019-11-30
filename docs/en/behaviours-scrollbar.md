@@ -1,13 +1,13 @@
 # Scrollbar
 
-To connect these buttons you must declare behaviour `scrollbar` in field `\romkaChev\yii2\swiper\Swiper::$behaviours`, 
+To connect these buttons you must declare behaviour `scrollbar` in field `\renschs\yii2\swiper\Swiper::$behaviours`, 
 otherwise scrollbar will not be rendered.
 
 Example:
 
 ```PHP
 <?php
-use romkaChev\yii2\swiper\Swiper;
+use renschs\yii2\swiper\Swiper;
 
 echo Swiper::widget( [
   'items'         => [
@@ -35,14 +35,14 @@ echo Swiper::widget( [
 
 ## Configuring the scrollbar
 
-You can configure scrollbar through the field `\romkaChev\yii2\swiper\Swiper::$scrollbarOptions`. 
+You can configure scrollbar through the field `\renschs\yii2\swiper\Swiper::$scrollbarOptions`. 
 Configuring is similar to `\yii\helpers\BaseHtml::tag`
 
 Example:
 
 ```PHP
 <?php
-use romkaChev\yii2\swiper\Swiper;
+use renschs\yii2\swiper\Swiper;
 
 echo Swiper::widget( [
   'items'         => [

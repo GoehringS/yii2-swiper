@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<phpunit bootstrap="./tests/unit/bootstrap.php"
-         colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         stopOnFailure="false">
+<phpunit bootstrap="./tests/unit/bootstrap.php" colors="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" stopOnFailure="false">
     <filter>
-        <blacklist>
-            <directory suffix=".php">./tests</directory>
-            <directory suffix=".php">./vendor</directory>
-        </blacklist>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./helpers</directory>
+            <file >Slide.php</file>
+            <file >Swiper.php</file>
+            <exclude>
+                <directory suffix=".php">./tests</directory>
+                <directory suffix=".php">./vendor</directory>
+            </exclude>
+        </whitelist>
     </filter>
     <testsuites>
         <testsuite name="Test Suite">

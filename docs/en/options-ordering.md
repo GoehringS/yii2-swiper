@@ -6,7 +6,7 @@ Example:
 
 ```PHP
 <?php
-use romkaChev\yii2\swiper\Swiper;
+use renschs\yii2\swiper\Swiper;
 
 echo Swiper::widget( [
   'items'       => [
@@ -42,7 +42,7 @@ Example:
 
 ```PHP
 <?php
-use \romkaChev\yii2\swiper\Slide;
+use \renschs\yii2\swiper\Slide;
 
 $slide = new Slide([
   'content'    => 'Slide 01',
@@ -64,7 +64,7 @@ Exmaple:
 
 ```PHP
 <?php
-use \romkaChev\yii2\swiper\Slide;
+use \renschs\yii2\swiper\Slide;
 
 $slide = new Slide([
   'content'    => 'Slide 01',

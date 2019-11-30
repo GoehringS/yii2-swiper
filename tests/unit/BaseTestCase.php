@@ -1,12 +1,15 @@
 <?php
-namespace romkaChev\yii2\swiper\tests\unit;
+
+namespace renschs\yii2\swiper\tests\unit;
 
 use yii\console\Application;
+use PHPUnit\Framework\TestCase;
 
-class BaseTestCase extends \PHPUnit_Framework_TestCase
+
+class BaseTestCase extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
-        new Application( require( __DIR__ . '/config.php' ) );
+        new Application(require(__DIR__ . '/config.php'));
     }
 }

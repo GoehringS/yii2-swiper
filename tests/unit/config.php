@@ -1,5 +1,6 @@
 <?php
 
+
 return [
     'id'         => 'testApp',
     'basePath'   => __DIR__,
@@ -8,5 +9,7 @@ return [
         '@web'     => '/',
         '@webroot' => __DIR__ . '/runtime',
         '@vendor'  => __DIR__ . '/../../vendor',
+        '@bower' => '@vendor/bower-asset',
+        '@npm'   => '@vendor/npm-asset',
     ]
 ];
