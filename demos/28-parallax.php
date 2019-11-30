@@ -45,7 +45,9 @@ echo Swiper::widget( [
         'class' => 'swiper-pagination-white'
     ],
     'pluginOptions'   => [
-        Swiper::OPTION_PAGINATION_CLICKABLE => true,
+        Swiper::OPTION_PAGINATION => [
+            Swiper::OPTION_PAGINATION_CLICKABLE => true,
+        ],
         Swiper::OPTION_PARALLAX             => true
     ]
 ] );

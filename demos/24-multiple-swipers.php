@@ -55,7 +55,9 @@ echo Swiper::widget( [
         'class' => 'swiper-pagination2'
     ],
     'pluginOptions'     => [
-        Swiper::OPTION_PAGINATION_CLICKABLE => true,
+        Swiper::OPTION_PAGINATION => [
+            Swiper::OPTION_PAGINATION_CLICKABLE => true,
+        ],
         Swiper::OPTION_SPACE_BETWEEN        => 30,
     ]
 ] );

@@ -29,7 +29,9 @@ echo Swiper::widget( [
         'class' => 'swiper-button-white'
     ],
     'pluginOptions'     => [
-        Swiper::OPTION_PAGINATION_CLICKABLE => true,
+        Swiper::OPTION_PAGINATION => [
+            Swiper::OPTION_PAGINATION_CLICKABLE => true,
+        ],
         'debugger'                          => true
     ]
 ] );

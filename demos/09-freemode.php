@@ -22,7 +22,9 @@ echo Swiper::widget( [
     ],
     'pluginOptions' => [
         Swiper::OPTION_SLIDES_PER_VIEW      => 3,
-        Swiper::OPTION_PAGINATION_CLICKABLE => true,
+        Swiper::OPTION_PAGINATION => [
+            Swiper::OPTION_PAGINATION_CLICKABLE => true,
+        ],
         Swiper::OPTION_SPACE_BETWEEN        => 30,
         Swiper::OPTION_FREE_MODE            => true,
     ]

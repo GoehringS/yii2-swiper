@@ -24,6 +24,8 @@ echo Swiper::widget( [
         Swiper::BEHAVIOUR_RTL
     ],
     'pluginOptions' => [
-        Swiper::OPTION_PAGINATION_CLICKABLE => true,
+        Swiper::OPTION_PAGINATION => [
+            Swiper::OPTION_PAGINATION_CLICKABLE => true,
+        ],
     ]
 ] );

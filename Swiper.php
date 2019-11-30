@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace renschs\yii2\swiper;
 
+use Exception;
 use renschs\yii2\swiper\assets\SwiperAsset;
 use renschs\yii2\swiper\helpers\SwiperCssHelper;
 use yii\base\Widget;
@@ -93,6 +94,7 @@ class Swiper extends Widget
      *
      *               Also you can use named constants such as:
      *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_PAGINATION]]
+     *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_NAVIGATION]]
      *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_SCROLLBAR]]
      *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_NEXT_BUTTON]]
      *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_PREV_BUTTON]]
@@ -100,6 +102,7 @@ class Swiper extends Widget
      *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_PARALLAX]]
      *
      * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_PAGINATION
+     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_NAVIGATION
      * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_SCROLLBAR
      * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_NEXT_BUTTON
      * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_PREV_BUTTON
@@ -113,6 +116,7 @@ class Swiper extends Widget
      */
     protected $availableBehaviours = [
         self::BEHAVIOUR_PAGINATION,
+        self::BEHAVIOUR_NAVIGATION,
         self::BEHAVIOUR_SCROLLBAR,
         self::BEHAVIOUR_NEXT_BUTTON,
         self::BEHAVIOUR_PREV_BUTTON,
@@ -214,6 +218,33 @@ class Swiper extends Widget
      * @see \renschs\yii2\swiper\Swiper::$scrollbarOptions
      */
     public $paginationOptions = [];
+
+    /**
+     * Named alias for [[\renschs\yii2\swiper\Swiper::$behaviours]] pagination item
+     *
+     * @see \renschs\yii2\swiper\Swiper::$behaviours
+     * @see \renschs\yii2\swiper\Swiper::$navigationOptions
+     *
+     * @see \renschs\yii2\swiper\Swiper::renderBehaviourNavigation
+     */
+    const BEHAVIOUR_NAVIGATION = 'navigation';
+    /**
+     * @var mixed[] array of options which will be applied for navigation
+     *              tag rendering in [[\yii\helpers\Html::tag]]
+     *
+     *              ~~~
+     *               \renschs\yii2\swiper\Swiper::widget([
+     *                  'items'             => ['slide01', 'slide02'],
+     *                  'navigationOptions' => [
+     *                      'nextEl' => '#',
+     *                      'prevEl' => '#',
+     *                  ]
+     *               ]);
+     *              ~~~
+     *
+     * @see \renschs\yii2\swiper\Swiper::$scrollbarOptions
+     */
+    public $navigationOptions = [];
 
 
     /**
@@ -371,10 +402,11 @@ class Swiper extends Widget
         $contentPieces = [
             $this->renderBehaviourParallax(),
             $this->renderWrapper(),
-            $this->renderBehaviourPagination(),
+            $this->renderBehaviourNavigation(),
             $this->renderBehaviourScrollbar(),
             $this->renderBehaviourNextButton(),
-            $this->renderBehaviourPrevButton()
+            $this->renderBehaviourPrevButton(),
+            $this->renderBehaviourPagination(),
         ];
 
         $this->setBehaviourRtl();
@@ -440,10 +472,10 @@ class Swiper extends Widget
         $this->scrollbarOptions['id']     = ArrayHelper::getValue($this->scrollbarOptions,  'id', "{$id}-scrollbar");
         $this->scrollbarOptions['class']  = trim(ArrayHelper::getValue($this->scrollbarOptions,  'class', '') . ' swiper-scrollbar', ' ');
 
-        $this->nextButtonOptions['id']    = ArrayHelper::getValue($this->nextButtonOptions, 'id', "{$id}-button-next");
+        $this->nextButtonOptions['id']    = ArrayHelper::getValue($this->nextButtonOptions, 'id', "{$id}-swiper-button-next");
         $this->nextButtonOptions['class'] = trim(ArrayHelper::getValue($this->nextButtonOptions, 'class', '') . ' swiper-button-next', ' ');
 
-        $this->prevButtonOptions['id']    = ArrayHelper::getValue($this->prevButtonOptions, 'id', "{$id}-button-prev");
+        $this->prevButtonOptions['id']    = ArrayHelper::getValue($this->prevButtonOptions, 'id', "{$id}-swiper-button-prev");
         $this->prevButtonOptions['class'] = trim(ArrayHelper::getValue($this->prevButtonOptions, 'class', '') . ' swiper-button-prev', ' ');
 
         $this->parallaxOptions['id']      = ArrayHelper::getValue($this->parallaxOptions,   'id', "{$id}-parallax");
@@ -620,15 +652,66 @@ class Swiper extends Widget
             $paginationOptions = $this->paginationOptions;
             $paginationTag     = ArrayHelper::remove($paginationOptions, 'tag', 'div');
 
-            if (!isset($this->pluginOptions[self::OPTION_PAGINATION])) {
-                $this->pluginOptions[self::OPTION_PAGINATION] = "#" . $paginationOptions["id"];
+            if (!isset($this->pluginOptions[self::OPTION_PAGINATION]['id'])) {
+                $this->pluginOptions[self::OPTION_PAGINATION]["el"] = "#" . $paginationOptions["id"];
             }
+
+            if (!isset($this->pluginOptions[self::OPTION_PAGINATION][self::OPTION_PAGINATION_CLICKABLE])) {
+                $this->pluginOptions[self::OPTION_PAGINATION]["clickable"] = false;
+            } else {
+
+                if(!is_bool($this->pluginOptions[self::OPTION_PAGINATION][self::OPTION_PAGINATION_CLICKABLE])){
+                    throw new Exception('Pagination clickable option must be boolean');
+                }
+
+                $this->pluginOptions[self::OPTION_PAGINATION]["clickable"] = $this->pluginOptions[self::OPTION_PAGINATION][self::OPTION_PAGINATION_CLICKABLE];
+                unset($this->pluginOptions[self::OPTION_PAGINATION][self::OPTION_PAGINATION_CLICKABLE]);
+            }
+
+
+            // print_r($this->pluginOptions);
+            // die();
 
             return Html::tag($paginationTag, '', $paginationOptions);
         }
 
         return '';
     }
+
+    /**
+     * This function renders navigation part of widget
+     *
+     * More information about navigation you can find
+     * in official site of plugin - http://www.idangero.us/swiper/api/
+     *
+     * Also you can find some examples in [[~/yii2-swiper/demos]] folder
+     *
+     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_PAGINATION
+     * @see \renschs\yii2\swiper\Swiper::$prevButtonOptions
+     *
+     * @see \renschs\yii2\swiper\Swiper::renderBehaviourScrollbar
+     *
+     * @return string
+     */
+    protected function renderBehaviourNavigation()
+    {
+        if (in_array(self::BEHAVIOUR_NAVIGATION, $this->behaviours)) {
+            $navigationOptions = $this->navigationOptions;
+            $navigationTag     = ArrayHelper::remove($navigationOptions, 'tag', 'div');
+
+            if (!isset($this->pluginOptions[self::OPTION_NAVIGATION])) {
+                $this->pluginOptions[self::OPTION_NAVIGATION] = [
+                    self::OPTION_NEXT_BUTTON => $this->nextButtonOptions["id"],
+                    self::OPTION_PREV_BUTTON => $this->prevButtonOptions["id"],
+                ];
+            }
+
+            return Html::tag($navigationTag, '', $navigationOptions);
+        }
+
+        return '';
+    }
+
 
     /**
      * This function renders scrollbar part of widget
@@ -680,12 +763,12 @@ class Swiper extends Widget
     protected function renderBehaviourNextButton()
     {
 
-        if (in_array(self::BEHAVIOUR_NEXT_BUTTON, $this->behaviours)) {
+        if (in_array(self::BEHAVIOUR_NAVIGATION, $this->behaviours) && in_array(self::BEHAVIOUR_NEXT_BUTTON, $this->behaviours)) {
             $nextButtonOptions = $this->nextButtonOptions;
             $nextButtonTag     = ArrayHelper::remove($nextButtonOptions, 'tag', 'div');
 
             if (!isset($this->pluginOptions[self::OPTION_NEXT_BUTTON])) {
-                $this->pluginOptions[self::OPTION_NEXT_BUTTON] = "#" . $nextButtonOptions["id"];
+                $this->pluginOptions[self::OPTION_NAVIGATION][self::OPTION_NEXT_BUTTON] = "#" . $nextButtonOptions["id"];
             }
 
             return Html::tag($nextButtonTag, '', $nextButtonOptions);
@@ -712,12 +795,12 @@ class Swiper extends Widget
     protected function renderBehaviourPrevButton()
     {
 
-        if (in_array(self::BEHAVIOUR_PREV_BUTTON, $this->behaviours)) {
+        if (in_array(self::BEHAVIOUR_NAVIGATION, $this->behaviours) && in_array(self::BEHAVIOUR_PREV_BUTTON, $this->behaviours)) {
             $prevButtonOptions = $this->prevButtonOptions;
             $prevButtonTag     = ArrayHelper::remove($prevButtonOptions, 'tag', 'div');
 
             if (!isset($this->pluginOptions[self::OPTION_PREV_BUTTON])) {
-                $this->pluginOptions[self::OPTION_PREV_BUTTON] = "#" . $prevButtonOptions["id"];
+                $this->pluginOptions[self::OPTION_NAVIGATION][self::OPTION_PREV_BUTTON] = "#" . $prevButtonOptions["id"];
             }
 
             return Html::tag($prevButtonTag, '', $prevButtonOptions);
@@ -895,8 +978,9 @@ JS
     const OPTION_PAGINATION_HIDE                  = 'paginationHide';
     const OPTION_PAGINATION_CLICKABLE             = 'paginationClickable';
     const OPTION_PAGINATION_BULLET_RENDER         = 'paginationBulletRender';
-    const OPTION_NEXT_BUTTON                      = 'nextButton';
-    const OPTION_PREV_BUTTON                      = 'prevButton';
+    const OPTION_NAVIGATION                       = 'navigation';
+    const OPTION_NEXT_BUTTON                      = 'nextEl';
+    const OPTION_PREV_BUTTON                      = 'prevEl';
     const OPTION_A11Y                             = 'a11y';
     const OPTION_PREV_SLIDE_MESSAGE               = 'prevSlideMessage';
     const OPTION_NEXT_SLIDE_MESSAGE               = 'nextSlideMessage';

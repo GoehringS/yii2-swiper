@@ -24,7 +24,9 @@ or add
  
 to the *require* section of your application's ```composer.json``` file.
     
-###Usage
+
+## Usage
+
 
 ```PHP
  
@@ -74,7 +76,9 @@ composer run-script unit-test
 
 ```
 
+## Thanks
 
+To https://github.com/romka-chev for given me the opportunity to fork his project and get it working again.
 
 ## Issues
 

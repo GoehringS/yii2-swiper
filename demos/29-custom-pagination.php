@@ -22,7 +22,9 @@ echo Swiper::widget( [
         Swiper::BEHAVIOUR_PAGINATION,
     ],
     'pluginOptions' => [
-        Swiper::OPTION_PAGINATION_CLICKABLE     => true,
+        Swiper::OPTION_PAGINATION => [
+            Swiper::OPTION_PAGINATION_CLICKABLE => true,
+        ],
         Swiper::OPTION_PAGINATION_BULLET_RENDER => new JsExpression( <<<JS
 (function ( index, className ) {
     return '<span class="' + className + '">' + (index + 1) + '</span>';
