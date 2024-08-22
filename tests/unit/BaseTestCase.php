@@ -12,4 +12,12 @@ class BaseTestCase extends TestCase
     {
         new Application(require(__DIR__ . '/config.php'));
     }
+
+    public function tearDown(): void
+    {
+        parent::tearDown();
+
+        restore_error_handler();
+        restore_exception_handler();
+    }
 }

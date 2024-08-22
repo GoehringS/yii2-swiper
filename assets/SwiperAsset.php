@@ -13,7 +13,7 @@ class SwiperAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@bower/swiper/package';
+    public $sourcePath = '@bower/swiper/src';
 
     /**
      * @inheritdoc

@@ -1,6 +1,6 @@
 {
   "name": "renschs/yii2-swiper",
-  "description": "Yii2 extension for Swiper slider; Php 7.3 ready;",
+  "description": "Yii2 extension for Swiper slider; Php 8.2 ready;",
   "keywords": [
     "yii",
     "yii2",
@@ -12,17 +12,17 @@
   "license": "MIT",
   "authors": [
     {
-      "name": "Sven Rensch",
-      "email": "s.rensch87@web.de"
+      "name": "Sven Göhring",
+      "email": "s.goehring87@web.de"
     }
   ],
   "require": {
-    "php": ">=7.3",
+    "php": ">=8.2",
     "yiisoft/yii2": "2.0.*@dev",
-    "bower-asset/swiper": ">=5"
+    "bower-asset/swiper": ">=11"
   },
   "require-dev": {
-    "phpunit/phpunit": "^8.0"
+    "phpunit/phpunit": "^11.0"
   },
   "autoload": {
     "psr-4": {
@@ -37,5 +37,10 @@
       "type": "composer",
       "url": "https://asset-packagist.org"
     }
-  ]
+  ],
+  "config": {
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true
+    }
+  }
 }
