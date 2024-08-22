@@ -5,16 +5,22 @@ on: [push]
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubu
 
     steps:
     - uses: actions/checkout@v1
 
     - name: Validate composer.json and composer.lock
       run: composer validate
+      with:
+        php-version: 8.2
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
+      with:
+        php-version: 8.2
 
     - name: Run test suite
       run: composer run-script unit-test
+      with:
+        php-version: 8.2
