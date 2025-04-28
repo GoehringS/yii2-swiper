@@ -1,10 +1,9 @@
 <?php
 
-namespace renschs\yii2\swiper\tests\unit\swiper\assets;
+namespace ItSolutionsSG\yii2\swiper\tests\unit\swiper\assets;
 
-
-use renschs\yii2\swiper\assets\SwiperAsset;
-use renschs\yii2\swiper\tests\unit\BaseTestCase;
+use ItSolutionsSG\yii2\swiper\assets\SwiperAsset;
+use ItSolutionsSG\yii2\swiper\tests\unit\BaseTestCase;
 
 class SwiperAssetTest extends BaseTestCase
 {

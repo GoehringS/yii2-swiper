@@ -1,12 +1,12 @@
 # Скроллбар
 
-Для подключения в слайдер скроллбара необходимо объявить поведение `scrollbar` в поле `\renschs\yii2\swiper\Swiper::$behaviours`, иначе скроллбар не будет отрендерен.
+Для подключения в слайдер скроллбара необходимо объявить поведение `scrollbar` в поле `\ItSolutionsSG\yii2\swiper\Swiper::$behaviours`, иначе скроллбар не будет отрендерен.
 
 Пример:
 
 ```PHP
 <?php
-use renschs\yii2\swiper\Swiper;
+use ItSolutionsSG\yii2\swiper\Swiper;
 
 echo Swiper::widget( [
   'items'         => [
@@ -34,14 +34,14 @@ echo Swiper::widget( [
 
 ## Настройка скроллбара
 
-Настройка управляющего тега скроллбара происходит через поле `\renschs\yii2\swiper\Swiper::$scrollbarOptions`. 
+Настройка управляющего тега скроллбара происходит через поле `\ItSolutionsSG\yii2\swiper\Swiper::$scrollbarOptions`. 
 Настройка аналогична `\yii\helpers\BaseHtml::tag`
 
 Пример:
 
 ```PHP
 <?php
-use renschs\yii2\swiper\Swiper;
+use ItSolutionsSG\yii2\swiper\Swiper;
 
 echo Swiper::widget( [
   'items'         => [

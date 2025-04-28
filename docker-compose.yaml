@@ -1,0 +1,7 @@
+services:
+  php_runtime:
+    container_name: php_swiper
+    image: php:8.2-alpine3.21
+    volumes:
+      - ./:/usr/src/app:rw
+    working_dir: /usr/src/app

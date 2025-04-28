@@ -1,11 +1,12 @@
 <?php
+
 /**
- * @var \yii\web\View $this
+ * @var yii\web\View $this
  */
-use renschs\yii2\swiper\Swiper;
+use ItSolutionsSG\yii2\swiper\Swiper;
 
-echo Swiper::widget( [
-    'items'             => [
+echo Swiper::widget([
+    'items' => [
         'Slide 1',
         'Slide 2',
         'Slide 3',
@@ -17,23 +18,23 @@ echo Swiper::widget( [
         'Slide 9',
         'Slide 10',
     ],
-    'behaviours'        => [
+    'behaviours' => [
         Swiper::BEHAVIOUR_PAGINATION,
     ],
-    'containerOptions'  => [
-        'class' => 'swiper1'
+    'containerOptions' => [
+        'class' => 'swiper1',
     ],
     'paginationOptions' => [
-        'class' => 'swiper-pagination1'
+        'class' => 'swiper-pagination1',
     ],
-    'pluginOptions'     => [
+    'pluginOptions' => [
         Swiper::OPTION_PAGINATION_CLICKABLE => true,
-        Swiper::OPTION_SPACE_BETWEEN        => 30,
-    ]
-] );
+        Swiper::OPTION_SPACE_BETWEEN => 30,
+    ],
+]);
 
-echo Swiper::widget( [
-    'items'             => [
+echo Swiper::widget([
+    'items' => [
         'Slide 1',
         'Slide 2',
         'Slide 3',
@@ -45,25 +46,25 @@ echo Swiper::widget( [
         'Slide 9',
         'Slide 10',
     ],
-    'behaviours'        => [
+    'behaviours' => [
         Swiper::BEHAVIOUR_PAGINATION,
     ],
-    'containerOptions'  => [
-        'class' => 'swiper2'
+    'containerOptions' => [
+        'class' => 'swiper2',
     ],
     'paginationOptions' => [
-        'class' => 'swiper-pagination2'
+        'class' => 'swiper-pagination2',
     ],
-    'pluginOptions'     => [
+    'pluginOptions' => [
         Swiper::OPTION_PAGINATION => [
             Swiper::OPTION_PAGINATION_CLICKABLE => true,
         ],
-        Swiper::OPTION_SPACE_BETWEEN        => 30,
-    ]
-] );
+        Swiper::OPTION_SPACE_BETWEEN => 30,
+    ],
+]);
 
-echo Swiper::widget( [
-    'items'             => [
+echo Swiper::widget([
+    'items' => [
         'Slide 1',
         'Slide 2',
         'Slide 3',
@@ -75,17 +76,17 @@ echo Swiper::widget( [
         'Slide 9',
         'Slide 10',
     ],
-    'behaviours'        => [
+    'behaviours' => [
         Swiper::BEHAVIOUR_PAGINATION,
     ],
-    'containerOptions'  => [
-        'class' => 'swiper3'
+    'containerOptions' => [
+        'class' => 'swiper3',
     ],
     'paginationOptions' => [
-        'class' => 'swiper-pagination3'
+        'class' => 'swiper-pagination3',
     ],
-    'pluginOptions'     => [
+    'pluginOptions' => [
         Swiper::OPTION_PAGINATION_CLICKABLE => true,
-        Swiper::OPTION_SPACE_BETWEEN        => 30,
-    ]
-] );
+        Swiper::OPTION_SPACE_BETWEEN => 30,
+    ],
+]);

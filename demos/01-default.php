@@ -1,11 +1,12 @@
 <?php
-/**
- * @var \yii\web\View $this
- */
-use renschs\yii2\swiper\Swiper;
 
-echo Swiper::widget( [
-    'items'       => [
+/**
+ * @var yii\web\View $this
+ */
+use ItSolutionsSG\yii2\swiper\Swiper;
+
+echo Swiper::widget([
+    'items' => [
         'Slide 1',
         'Slide 2',
         'Slide 3',
@@ -19,8 +20,8 @@ echo Swiper::widget( [
     ],
     'itemOptions' => [
         'options' => [
-            'tag'   => 'div',
-            'class' => 'my-slide-class'
-        ]
-    ]
-] );
+            'tag' => 'div',
+            'class' => 'my-slide-class',
+        ],
+    ],
+]);

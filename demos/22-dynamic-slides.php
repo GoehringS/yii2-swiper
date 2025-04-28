@@ -1,37 +1,37 @@
 <?php
 /**
- * @var \yii\web\View $this
+ * @var yii\web\View $this
  */
 
-use renschs\yii2\swiper\Swiper;
+use ItSolutionsSG\yii2\swiper\Swiper;
 
-$swiperId = "my-swiper-id";
+$swiperId = 'my-swiper-id';
 
-echo Swiper::widget( [
-    'items'            => [
+echo Swiper::widget([
+    'items' => [
         'Slide 1',
         'Slide 2',
         'Slide 3',
         'Slide 4',
     ],
-    'behaviours'       => [
+    'behaviours' => [
         Swiper::BEHAVIOUR_PAGINATION,
         Swiper::BEHAVIOUR_NEXT_BUTTON,
-        Swiper::BEHAVIOUR_PREV_BUTTON
+        Swiper::BEHAVIOUR_PREV_BUTTON,
     ],
     'containerOptions' => [
-        'id' => $swiperId
+        'id' => $swiperId,
     ],
-    'pluginOptions'    => [
+    'pluginOptions' => [
         Swiper::OPTION_PAGINATION => [
             Swiper::OPTION_PAGINATION_CLICKABLE => true,
         ],
-        Swiper::OPTION_SPACE_BETWEEN                   => 30,
-        Swiper::OPTION_CENTERED_SLIDES                 => true,
-        Swiper::OPTION_AUTOPLAY                        => 2500,
-        Swiper::OPTION_AUTOPLAY_DISABLE_ON_INTERACTION => false
-    ]
-] );
+        Swiper::OPTION_SPACE_BETWEEN => 30,
+        Swiper::OPTION_CENTERED_SLIDES => true,
+        Swiper::OPTION_AUTOPLAY => 2500,
+        Swiper::OPTION_AUTOPLAY_DISABLE_ON_INTERACTION => false,
+    ],
+]);
 ?>
 
     <p class = "append-buttons">
@@ -43,7 +43,7 @@ echo Swiper::widget( [
 
 <?php
 
-$this->registerJs( <<<JS
+$this->registerJs(<<<JS
 var appendNumber = 4;
 var prependNumber = 1;
 

@@ -25,10 +25,10 @@
 
 [Слайды](usage-slides.md) добавляются в виджет непосредственно через `Swiper::$items`. 
 В качестве слайдов можно передавать как просто строки, так и массивы. 
-Также можно передавать экземпляры класса `\renschs\yii2\swiper\Slide`, 
+Также можно передавать экземпляры класса `\ItSolutionsSG\yii2\swiper\Slide`, 
 но при этом виджет [не будет его настраивать](usage-slides.md#%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D0%BE%D0%B2-renschsyii2swiperslide).
 
-> **Важно**! Не используйте класс `\renschs\yii2\swiper\Slide` в качестве слайда, 
+> **Важно**! Не используйте класс `\ItSolutionsSG\yii2\swiper\Slide` в качестве слайда, 
   если вы не уверены, что знаете, зачем это делаете.
 
 Помимо этого, можно производить [групповую настройку](options-slide-batch.md) слайдов.
@@ -37,8 +37,8 @@
 
 ```PHP
 <?php
-use \renschs\yii2\swiper\Swiper;
-use \renschs\yii2\swiper\Slide;
+use \ItSolutionsSG\yii2\swiper\Swiper;
+use \ItSolutionsSG\yii2\swiper\Slide;
 
 echo Swiper::widget( [
   'items'       => [
@@ -63,7 +63,7 @@ echo Swiper::widget( [
 
 ```PHP
 <?php
-use \renschs\yii2\swiper\Slide;
+use \ItSolutionsSG\yii2\swiper\Slide;
 
 $slide = new Slide([
   'background' => 'http://placehold.it/800x600',

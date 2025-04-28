@@ -1,56 +1,54 @@
 <?php
 
-namespace renschs\yii2\swiper\tests\unit\swiper;
+namespace ItSolutionsSG\yii2\swiper\tests\unit\swiper;
 
-
-use renschs\yii2\swiper\Slide;
-use renschs\yii2\swiper\Swiper;
-use renschs\yii2\swiper\tests\unit\BaseTestCase;
+use ItSolutionsSG\yii2\swiper\Slide;
+use ItSolutionsSG\yii2\swiper\Swiper;
+use ItSolutionsSG\yii2\swiper\tests\unit\BaseTestCase;
 
 class ItemTest extends BaseTestCase
 {
-
     public function testBatchOptions()
     {
         $swiper = new Swiper([
-            'items'       => [
+            'items' => [
                 [
-                    'content' => 'Slide 00'
+                    'content' => 'Slide 00',
                 ],
                 [
                     'options' => [
                         'style' => 'background-image(http://placehold.it/500x300&text=01)',
-                        'data'  => [
+                        'data' => [
                             'hash' => 'concrete-hash',
-                            'rel'  => 'concrete-rel'
-                        ]
-                    ]
+                            'rel' => 'concrete-rel',
+                        ],
+                    ],
                 ],
                 [
-                    'hash'       => 'concrete-hash',
+                    'hash' => 'concrete-hash',
                     'background' => 'http://placehold.it/500x300&text=02',
-                    'options'    => [
+                    'options' => [
                         'class' => 'concrete-class',
-                        'id'    => 'concrete-id',
-                        'data'  => [
-                            'rel' => 'concrete-rel'
-                        ]
-                    ]
-                ]
+                        'id' => 'concrete-id',
+                        'data' => [
+                            'rel' => 'concrete-rel',
+                        ],
+                    ],
+                ],
             ],
             'itemOptions' => [
-                'content'    => 'batch-content',
-                'hash'       => 'batch-hash',
+                'content' => 'batch-content',
+                'hash' => 'batch-hash',
                 'background' => 'http://placehold.it/500x300&text=batch',
-                'options'    => [
+                'options' => [
                     'style' => 'color:#fff',
                     'class' => 'batch-class',
-                    'id'    => 'batch-id',
-                    'data'  => [
-                        'rel' => 'batch-rel'
-                    ]
-                ]
-            ]
+                    'id' => 'batch-id',
+                    'data' => [
+                        'rel' => 'batch-rel',
+                    ],
+                ],
+            ],
         ]);
 
         $item00 = $swiper->items[0];
@@ -81,38 +79,37 @@ class ItemTest extends BaseTestCase
         $this->assertEquals('http://placehold.it/500x300&text=02', $item02->background);
         $this->assertEquals('color:#fff; background-image:url(http://placehold.it/500x300&text=02)', $item02->options['style']);
         $this->assertEquals('batch-class swiper-slide concrete-class', $item02->options['class']);
-        $this->assertEquals("concrete-id", $item02->options['id']);
+        $this->assertEquals('concrete-id', $item02->options['id']);
         $this->assertEquals('concrete-rel', $item02->options['data']['rel']);
     }
 
     public function testBatchOptionsWithConcreteClass()
     {
-
         $swiper = new Swiper([
-            'items'       => [
+            'items' => [
                 new Slide([
-                    'hash'       => 'concrete-hash',
+                    'hash' => 'concrete-hash',
                     'background' => 'http://placehold.it/500x300&text=00',
-                    'options'    => [
+                    'options' => [
                         'data' => [
-                            'rel' => 'concrete-rel'
-                        ]
-                    ]
-                ])
+                            'rel' => 'concrete-rel',
+                        ],
+                    ],
+                ]),
             ],
             'itemOptions' => [
-                'content'    => 'batch-content',
-                'hash'       => 'batch-hash',
+                'content' => 'batch-content',
+                'hash' => 'batch-hash',
                 'background' => 'http://placehold.it/500x300&text=batch',
-                'options'    => [
+                'options' => [
                     'style' => 'color:#fff',
                     'class' => 'batch-class',
-                    'id'    => 'batch-id',
-                    'data'  => [
-                        'rel' => 'batch-rel'
-                    ]
-                ]
-            ]
+                    'id' => 'batch-id',
+                    'data' => [
+                        'rel' => 'batch-rel',
+                    ],
+                ],
+            ],
         ]);
 
         $item00 = $swiper->items[0];

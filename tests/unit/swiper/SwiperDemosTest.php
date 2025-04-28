@@ -1,12 +1,11 @@
 <?php
 
-namespace renschs\yii2\swiper\tests\unit\swiper;
+namespace ItSolutionsSG\yii2\swiper\tests\unit\swiper;
 
-use renschs\yii2\swiper\tests\unit\BaseTestCase;
+use ItSolutionsSG\yii2\swiper\tests\unit\BaseTestCase;
 
 class SwiperDemosTest extends BaseTestCase
 {
-
     public function test01Default()
     {
         $this->assertNotEmpty(\Yii::$app->view->renderFile('@demos/01-default.php'));

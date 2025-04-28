@@ -1,13 +1,13 @@
 # Кнопки "предыдущий" и "следующий"
 
-Для того, чтобы подключить эти кнопки, необходимо объявить поведения `prevButton` и `nextButton` в поле `\renschs\yii2\swiper\Swiper::$behaviours`, 
+Для того, чтобы подключить эти кнопки, необходимо объявить поведения `prevButton` и `nextButton` в поле `\ItSolutionsSG\yii2\swiper\Swiper::$behaviours`, 
 иначе кнопки не будут отрендерены.
 
 Пример:
 
 ```PHP
 <?php
-use renschs\yii2\swiper\Swiper;
+use ItSolutionsSG\yii2\swiper\Swiper;
 
 echo Swiper::widget( [
   'items'      => [
@@ -37,14 +37,14 @@ echo Swiper::widget( [
 
 ## Настройка кнопок
 
-Настройка кнопок происходит через поле `\renschs\yii2\swiper\Swiper::$prevButtonOptions` и `\renschs\yii2\swiper\Swiper::$nextButtonOptions`. 
+Настройка кнопок происходит через поле `\ItSolutionsSG\yii2\swiper\Swiper::$prevButtonOptions` и `\ItSolutionsSG\yii2\swiper\Swiper::$nextButtonOptions`. 
 Настройка аналогична `\yii\helpers\BaseHtml::tag`
 
 Пример:
 
 ```PHP
 <?php
-use renschs\yii2\swiper\Swiper;
+use ItSolutionsSG\yii2\swiper\Swiper;
 
 echo Swiper::widget( [
   'items'      => [

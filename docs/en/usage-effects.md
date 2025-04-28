@@ -16,7 +16,7 @@ Example:
 
 ```PHP
 <?php
-use \renschs\yii2\swiper\Swiper;
+use \ItSolutionsSG\yii2\swiper\Swiper;
 
 /**
  * Wrong.
@@ -57,7 +57,7 @@ Swiper::widget( [
 
 ```PHP
 <?php
-use \renschs\yii2\swiper\Swiper;
+use \ItSolutionsSG\yii2\swiper\Swiper;
 
 Swiper::widget( [
   'items'         => [
@@ -94,7 +94,7 @@ Swiper::widget( [
 
 ```PHP
 <?php
-use \renschs\yii2\swiper\Swiper;
+use \ItSolutionsSG\yii2\swiper\Swiper;
 
 Swiper::widget( [
   'items'         => [
@@ -136,7 +136,7 @@ Swiper::widget( [
 
 ```PHP
 <?php
-use \renschs\yii2\swiper\Swiper;
+use \ItSolutionsSG\yii2\swiper\Swiper;
 
 Swiper::widget( [
   'items'         => [

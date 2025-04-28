@@ -1,7 +1,7 @@
 # Отображение справа налево
 
 Для отображения контента справа налево необходимо объявить 
-поведение `rtl` в поле `renschs\yii2\swiper\Swiper::$behaviours`, иначе поведение не будет применено.
+поведение `rtl` в поле `ItSolutionsSG\yii2\swiper\Swiper::$behaviours`, иначе поведение не будет применено.
 
 Данное поведение всего лишь добавляет опцию `'dir' = 'rtl'` в тег-контейнер виджета.
 
@@ -11,7 +11,7 @@
 
 ```PHP
 <?php
-use renschs\yii2\swiper\Swiper;
+use ItSolutionsSG\yii2\swiper\Swiper;
 
 echo Swiper::widget( [
   'items' => [

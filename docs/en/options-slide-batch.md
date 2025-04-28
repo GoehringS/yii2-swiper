@@ -18,7 +18,7 @@ Example of batch options:
 
 ```PHP
 <?php
-use renschs\yii2\swiper\Swiper;
+use ItSolutionsSG\yii2\swiper\Swiper;
 
 echo Swiper::widget( [
   'items'       => [

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace renschs\yii2\swiper;
+namespace ItSolutionsSG\yii2\swiper;
 
-use renschs\yii2\swiper\helpers\SwiperCssHelper;
+use ItSolutionsSG\yii2\swiper\helpers\SwiperCssHelper;
 use yii\base\BaseObject;
 use yii\helpers\ArrayHelper;
 
@@ -12,27 +12,24 @@ use yii\helpers\ArrayHelper;
  * Slide is representation of each slide for Swiper widget.
  * Do not use it directly if you don't really know what
  * you are doing.
- *
- * @package renschs\yii2\swiper
  */
 class Slide extends BaseObject
 {
+    /**
+     * @see \ItSolutionsSG\yii2\swiper\Slide::$content
+     */
+    public const CONTENT = 'content';
+    /**
+     * @see \ItSolutionsSG\yii2\swiper\Slide::$background
+     */
+    public const BACKGROUND = 'background';
+    /**
+     * @see \ItSolutionsSG\yii2\swiper\Slide::$hash
+     */
+    public const HASH = 'hash';
 
     /**
-     * @see \renschs\yii2\swiper\Slide::$content
-     */
-    const CONTENT = 'content';
-    /**
-     * @see \renschs\yii2\swiper\Slide::$background
-     */
-    const BACKGROUND = 'background';
-    /**
-     * @see \renschs\yii2\swiper\Slide::$hash
-     */
-    const HASH = 'hash';
-
-    /**
-     * @var string content part, which will be applied in [[\yii\helpers\Html::tag()]].
+     * @var string content part, which will be applied in [[\yii\helpers\Html::tag()]]
      */
     public $content;
 
@@ -52,42 +49,26 @@ class Slide extends BaseObject
     /**
      * @var mixed[] options, which will be applied in [[\yii\helpers\Html::tag()]]
      *
-     * @see \renschs\yii2\swiper\Slide::$background
-     * @see \renschs\yii2\swiper\Slide::$hash
+     * @see \ItSolutionsSG\yii2\swiper\Slide::$background
+     * @see \ItSolutionsSG\yii2\swiper\Slide::$hash
      */
     public $options = [];
 
     /**
-     * @param string|mixed[] $config the configuration of [[\renschs\yii2\swiper\Slide]]
+     * @param string|mixed[] $config the configuration of [[\ItSolutionsSG\yii2\swiper\Slide]]
      *                               You can create slide just from string
      *                               For example:
      *
      *                               ~~~
-     *                                 $slide = new \renschs\yii2\swiper\Slide('slide content');
+     *                                 $slide = new \ItSolutionsSG\yii2\swiper\Slide('slide content');
      *                               ~~~
      *
-     *
-     *                               Also you can create slide from array or strings and
-     *                               they will be merged into one string
-     *                               For example:
-     *
-     *                               ~~~
-     *                                $slide = new \renschs\yii2\swiper\Slide([
-     *                                    'content' => [
-     *                                        '<h1>Title</h1>',
-     *                                        '<h3>Subtitle</h3>',
-     *                                        '<p>Main content</p>'
-     *                                    ]
-     *                                ]);
-     *                               ~~~
-     *
-     * @see \renschs\yii2\swiper\Slide::$background
-     * @see \renschs\yii2\swiper\Slide::$hash
-     * @see \renschs\yii2\swiper\Slide::$content
+     * @see \ItSolutionsSG\yii2\swiper\Slide::$background
+     * @see \ItSolutionsSG\yii2\swiper\Slide::$hash
+     * @see \ItSolutionsSG\yii2\swiper\Slide::$content
      */
     public function __construct($config = [])
     {
-
         $config = is_string($config)
             ? [self::CONTENT => $config]
             : $config;
@@ -101,9 +82,6 @@ class Slide extends BaseObject
         parent::__construct($config);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function init()
     {
         $this->normalizeOptions();
@@ -111,30 +89,28 @@ class Slide extends BaseObject
 
     /**
      * This function sets default values to
-     * options for further usage
+     * options for further usage.
      */
     protected function normalizeOptions()
     {
-        $this->options['data']  = ArrayHelper::getValue($this->options, 'data', []);
+        $this->options['data'] = ArrayHelper::getValue($this->options, 'data', []);
         $this->options['style'] = ArrayHelper::getValue($this->options, 'style', '');
 
         $this->options['data']['hash'] = $this->hash ?: ArrayHelper::getValue($this->options['data'], 'hash', null);
-        $this->hash                    = $this->hash ?: ArrayHelper::getValue($this->options['data'], 'hash', null);
+        $this->hash = $this->hash ?: ArrayHelper::getValue($this->options['data'], 'hash', null);
 
         if ($this->background) {
-
             $this->options['style'] = SwiperCssHelper::mergeStyleAndBackground(
                 $this->background,
                 ArrayHelper::getValue($this->options, 'style', '')
             );
         } elseif (ArrayHelper::getValue($this->options, 'style')) {
-
             $this->background = SwiperCssHelper::getBackgroundUrl(
                 $this->options['style']
             );
         }
 
-        $this->options         = array_filter($this->options);
+        $this->options = array_filter($this->options);
         $this->options['data'] = array_filter($this->options['data']);
     }
 }

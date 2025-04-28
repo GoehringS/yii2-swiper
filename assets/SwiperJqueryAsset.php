@@ -1,39 +1,25 @@
 <?php
-namespace renschs\yii2\swiper\assets;
+
+namespace ItSolutionsSG\yii2\swiper\assets;
 
 use yii\web\AssetBundle;
 
 /**
- * Class SwiperJqueryAsset
- *
- * @package renschs\yii2\swiper\assets
+ * Class SwiperJqueryAsset.
  */
 class SwiperJqueryAsset extends AssetBundle
 {
-    /**
-     * @inheritdoc
-     */
     public $sourcePath = '@bower/swiper/src';
 
-    /**
-     * @inheritdoc
-     */
     public $js = [
-        'js/swiper.jquery.js'
+        'js/swiper.jquery.js',
     ];
 
-    /**
-     * @inheritdoc
-     */
     public $css = [
         'css/swiper.css',
     ];
 
-    /**
-     * @inheritdoc
-     */
     public $depends = [
         'yii\web\JqueryAsset',
     ];
-
 }

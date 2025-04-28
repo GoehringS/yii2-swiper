@@ -34,7 +34,7 @@ to the *require* section of your application's ```composer.json``` file.
 /**
  * @var \yii\web\View $this
  */
-use renschs\yii2\swiper\Swiper;
+use ItSolutionsSG\yii2\swiper\Swiper;
 
 echo Swiper::widget( [
   'items'         => [

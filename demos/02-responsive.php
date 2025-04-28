@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @var \yii\web\View $this
+ * @var yii\web\View $this
  */
 
-use renschs\yii2\swiper\Swiper;
+use ItSolutionsSG\yii2\swiper\Swiper;
 
 echo Swiper::widget([
-    'items'         => [
+    'items' => [
         'Slide 1',
         'Slide 2',
         'Slide 3',
@@ -19,12 +19,12 @@ echo Swiper::widget([
         'Slide 9',
         'Slide 10',
     ],
-    'behaviours'    => [
-        Swiper::BEHAVIOUR_PAGINATION
+    'behaviours' => [
+        Swiper::BEHAVIOUR_PAGINATION,
     ],
     'pluginOptions' => [
         Swiper::OPTION_PAGINATION => [
             Swiper::OPTION_PAGINATION_CLICKABLE => true,
         ],
-    ]
+    ],
 ]);

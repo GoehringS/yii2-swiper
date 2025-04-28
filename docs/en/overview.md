@@ -25,10 +25,10 @@ So, to display one of these behaviours you must:
 
 [Slides](usage-slides.md) are added to the widget directly through `Swiper::$items`. 
 As the slides can be passed as a string, and arrays.
-You can also pass instances of `\renschs\yii2\swiper\Slide`, 
+You can also pass instances of `\ItSolutionsSG\yii2\swiper\Slide`, 
 but widget [will not configure it](usage-slides.md#%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D0%BE%D0%B2-renschsyii2swiperslide).
 
-> **Important**! Do not use class`\renschs\yii2\swiper\Slide` directly as slide, 
+> **Important**! Do not use class`\ItSolutionsSG\yii2\swiper\Slide` directly as slide, 
   unless you are sure what you are doing.
 
 Also you can make [batch configuration](options-slide-batch.md) of slides.
@@ -37,8 +37,8 @@ Little example:
 
 ```PHP
 <?php
-use \renschs\yii2\swiper\Swiper;
-use \renschs\yii2\swiper\Slide;
+use \ItSolutionsSG\yii2\swiper\Swiper;
+use \ItSolutionsSG\yii2\swiper\Slide;
 
 echo Swiper::widget( [
   'items'       => [
@@ -64,7 +64,7 @@ Example of work with aliases:
 
 ```PHP
 <?php
-use \renschs\yii2\swiper\Slide;
+use \ItSolutionsSG\yii2\swiper\Slide;
 
 $slide = new Slide([
   'background' => 'http://placehold.it/800x600',

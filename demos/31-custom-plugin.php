@@ -1,11 +1,12 @@
 <?php
-/**
- * @var \yii\web\View $this
- */
-use renschs\yii2\swiper\Swiper;
 
-echo Swiper::widget( [
-    'items'             => [
+/**
+ * @var yii\web\View $this
+ */
+use ItSolutionsSG\yii2\swiper\Swiper;
+
+echo Swiper::widget([
+    'items' => [
         'Slide 1',
         'Slide 2',
         'Slide 3',
@@ -17,26 +18,26 @@ echo Swiper::widget( [
         'Slide 9',
         'Slide 10',
     ],
-    'behaviours'        => [
+    'behaviours' => [
         Swiper::BEHAVIOUR_PAGINATION,
         Swiper::BEHAVIOUR_NEXT_BUTTON,
-        Swiper::BEHAVIOUR_PREV_BUTTON
+        Swiper::BEHAVIOUR_PREV_BUTTON,
     ],
     'nextButtonOptions' => [
-        'class' => 'swiper-button-white'
+        'class' => 'swiper-button-white',
     ],
     'prevButtonOptions' => [
-        'class' => 'swiper-button-white'
+        'class' => 'swiper-button-white',
     ],
-    'pluginOptions'     => [
+    'pluginOptions' => [
         Swiper::OPTION_PAGINATION => [
             Swiper::OPTION_PAGINATION_CLICKABLE => true,
         ],
-        'debugger'                          => true
-    ]
-] );
+        'debugger' => true,
+    ],
+]);
 
-$this->registerJs( <<<JS
+$this->registerJs(<<<JS
 //noinspection ReservedWordAsName
 Swiper.prototype.plugins.debugger = function ( swiper, params ) {
     if (! params) {
@@ -81,4 +82,4 @@ Swiper.prototype.plugins.debugger = function ( swiper, params ) {
     };
 };
 JS
-    , $this::POS_END );
+    , $this::POS_END);

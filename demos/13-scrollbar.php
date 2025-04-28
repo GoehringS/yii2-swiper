@@ -1,11 +1,12 @@
 <?php
-/**
- * @var \yii\web\View $this
- */
-use renschs\yii2\swiper\Swiper;
 
-echo Swiper::widget( [
-    'items'            => [
+/**
+ * @var yii\web\View $this
+ */
+use ItSolutionsSG\yii2\swiper\Swiper;
+
+echo Swiper::widget([
+    'items' => [
         'Slide 1',
         'Slide 2',
         'Slide 3',
@@ -17,20 +18,20 @@ echo Swiper::widget( [
         'Slide 9',
         'Slide 10',
     ],
-    'behaviours'       => [
-        Swiper::BEHAVIOUR_SCROLLBAR
+    'behaviours' => [
+        Swiper::BEHAVIOUR_SCROLLBAR,
     ],
     'scrollbarOptions' => [
-        'class' => 'my-custom-scrollbar-class'
+        'class' => 'my-custom-scrollbar-class',
     ],
-    'pluginOptions'    => [
-        Swiper::OPTION_SCROLLBAR_HIDE       => true,
-        Swiper::OPTION_SLIDES_PER_VIEW      => Swiper::SLIDES_PER_VIEW_AUTO,
-        Swiper::OPTION_CENTERED_SLIDES      => true,
+    'pluginOptions' => [
+        Swiper::OPTION_SCROLLBAR_HIDE => true,
+        Swiper::OPTION_SLIDES_PER_VIEW => Swiper::SLIDES_PER_VIEW_AUTO,
+        Swiper::OPTION_CENTERED_SLIDES => true,
         Swiper::OPTION_PAGINATION => [
             Swiper::OPTION_PAGINATION_CLICKABLE => true,
         ],
-        Swiper::OPTION_SPACE_BETWEEN        => 30,
-        Swiper::OPTION_GRAB_CURSOR          => true
-    ]
-] );
+        Swiper::OPTION_SPACE_BETWEEN => 30,
+        Swiper::OPTION_GRAB_CURSOR => true,
+    ],
+]);

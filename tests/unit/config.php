@@ -1,15 +1,14 @@
 <?php
 
-
 return [
-    'id'         => 'testApp',
-    'basePath'   => __DIR__,
-    'vendorPath' => __DIR__ . '/../../vendor',
-    'aliases'    => [
-        '@web'     => '/',
-        '@webroot' => __DIR__ . '/runtime',
-        '@vendor'  => __DIR__ . '/../../vendor',
+    'id' => 'testApp',
+    'basePath' => __DIR__,
+    'vendorPath' => __DIR__.'/../../vendor',
+    'aliases' => [
+        '@web' => '/',
+        '@webroot' => __DIR__.'/runtime',
+        '@vendor' => __DIR__.'/../../vendor',
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
-    ]
+        '@npm' => '@vendor/npm-asset',
+    ],
 ];

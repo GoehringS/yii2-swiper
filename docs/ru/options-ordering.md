@@ -6,7 +6,7 @@
 
 ```PHP
 <?php
-use renschs\yii2\swiper\Swiper;
+use ItSolutionsSG\yii2\swiper\Swiper;
 
 echo Swiper::widget( [
   'items'       => [
@@ -42,7 +42,7 @@ echo Swiper::widget( [
 
 ```PHP
 <?php
-use \renschs\yii2\swiper\Slide;
+use \ItSolutionsSG\yii2\swiper\Slide;
 
 $slide = new Slide([
   'content'    => 'Slide 01',
@@ -64,7 +64,7 @@ echo $slide->options['style']; // color:#fff; background-image(http://placehold.
 
 ```PHP
 <?php
-use \renschs\yii2\swiper\Slide;
+use \ItSolutionsSG\yii2\swiper\Slide;
 
 $slide = new Slide([
   'content'    => 'Slide 01',

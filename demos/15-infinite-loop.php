@@ -1,11 +1,12 @@
 <?php
-/**
- * @var \yii\web\View $this
- */
-use renschs\yii2\swiper\Swiper;
 
-echo Swiper::widget( [
-    'items'         => [
+/**
+ * @var yii\web\View $this
+ */
+use ItSolutionsSG\yii2\swiper\Swiper;
+
+echo Swiper::widget([
+    'items' => [
         'Slide 1',
         'Slide 2',
         'Slide 3',
@@ -17,17 +18,17 @@ echo Swiper::widget( [
         'Slide 9',
         'Slide 10',
     ],
-    'behaviours'    => [
+    'behaviours' => [
         Swiper::BEHAVIOUR_PAGINATION,
         Swiper::BEHAVIOUR_NEXT_BUTTON,
-        Swiper::BEHAVIOUR_PREV_BUTTON
+        Swiper::BEHAVIOUR_PREV_BUTTON,
     ],
     'pluginOptions' => [
-        Swiper::OPTION_SLIDES_PER_VIEW      => 1,
+        Swiper::OPTION_SLIDES_PER_VIEW => 1,
         Swiper::OPTION_PAGINATION => [
             Swiper::OPTION_PAGINATION_CLICKABLE => true,
         ],
-        Swiper::OPTION_SPACE_BETWEEN        => 30,
-        Swiper::OPTION_LOOP                 => true
-    ]
-] );
+        Swiper::OPTION_SPACE_BETWEEN => 30,
+        Swiper::OPTION_LOOP => true,
+    ],
+]);

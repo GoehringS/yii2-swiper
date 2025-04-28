@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-
-namespace renschs\yii2\swiper;
+namespace ItSolutionsSG\yii2\swiper;
 
 use Exception;
-use renschs\yii2\swiper\assets\SwiperAsset;
-use renschs\yii2\swiper\helpers\SwiperCssHelper;
+use ItSolutionsSG\yii2\swiper\assets\SwiperAsset;
+use ItSolutionsSG\yii2\swiper\helpers\SwiperCssHelper;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -16,36 +15,32 @@ use yii\helpers\Json;
 use yii\web\JsExpression;
 
 /**
- * A Swiper widget is adapter to javascript Swiper slider
+ * A Swiper widget is adapter to javascript Swiper slider.
  *
- * @link    http://www.idangero.us/swiper/
- *
- * @package renschs\yii2\swiper
+ * @see    http://www.idangero.us/swiper/
  */
 class Swiper extends Widget
 {
-
     /**
-     * @var string[]|mixed[]|Slide[] Contains information about slides
+     * @var string[]|mixed[]|Slide[] contains information about slides
      *                               If you want to add some items in runtime,
-     *                               you should use [[\renschs\yii2\swiper\Swiper::addItem]]
-     *                               instead of direct items pushing.
+     *                               you should use [[\ItSolutionsSG\yii2\swiper\Swiper::addItem]]
+     *                               instead of direct items pushing
      *
-     * @see \renschs\yii2\swiper\Slide
-     * @see \renschs\yii2\swiper\Swiper::$itemOptions
-     * @see \renschs\yii2\swiper\Swiper::addItem
-     * @see \renschs\yii2\swiper\Swiper::renderItem
+     * @see Slide
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$itemOptions
+     * @see Swiper::addItem
+     * @see Swiper::renderItem
      */
     public $items = [];
 
     /**
-     * @var mixed[] options, which first will be merged with [[\renschs\yii2\swiper\Slide::$options]]
-     *              for each slide, and then applied in [[\yii\helpers\Html::tag]] for rendering.
+     * @var mixed[] options, which first will be merged with [[\ItSolutionsSG\yii2\swiper\Slide::$options]]
+     *              for each slide, and then applied in [[\yii\helpers\Html::tag]] for rendering
      *
-     * @see \renschs\yii2\swiper\Swiper::normalizeOptions
-     * @see \renschs\yii2\swiper\Swiper::renderItem
-     *
-     * @see \renschs\yii2\swiper\Slide::$options
+     * @see Swiper::normalizeOptions
+     * @see Swiper::renderItem
+     * @see \ItSolutionsSG\yii2\swiper\Slide::$options
      */
     public $itemOptions = [];
 
@@ -54,14 +49,14 @@ class Swiper extends Widget
      *              If you pass the [[id]] property, it will replace auto-generated
      *              value with custom.
      *
-     * @see \renschs\yii2\swiper\Swiper::run
+     * @see Swiper::run
      */
     public $containerOptions = [];
 
     /**
-     * @var mixed[] Options which will be applied in [[\yii\helpers\Html::tag]].
+     * @var mixed[] options which will be applied in [[\yii\helpers\Html::tag]]
      *
-     * @see \renschs\yii2\swiper\Swiper::renderWrapper
+     * @see Swiper::renderWrapper
      */
     public $wrapperOptions = [];
 
@@ -70,10 +65,9 @@ class Swiper extends Widget
      *              which will be converted to JSON and
      *              applied in Swiper plugin construction
      *
-     * @see \renschs\yii2\swiper\Swiper::registerClientScript
+     * @see Swiper::registerClientScript
      */
     public $pluginOptions = [];
-
 
     /**
      * @var string[] array of behaviours, which are required.
@@ -82,7 +76,7 @@ class Swiper extends Widget
      *               you should declare them here
      *
      *               ~~~
-     *               \renschs\yii2\swiper\Swiper::widget([
+     *               \ItSolutionsSG\yii2\swiper\Swiper::widget([
      *                  'items'      => ['slide01', 'slide02'],
      *                  'behaviours' => [
      *                      'pagination',
@@ -93,21 +87,21 @@ class Swiper extends Widget
      *               ~~~
      *
      *               Also you can use named constants such as:
-     *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_PAGINATION]]
-     *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_NAVIGATION]]
-     *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_SCROLLBAR]]
-     *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_NEXT_BUTTON]]
-     *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_PREV_BUTTON]]
-     *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_RTL]]
-     *               - [[\renschs\yii2\swiper\Swiper::BEHAVIOUR_PARALLAX]]
+     *               - [[\ItSolutionsSG\yii2\swiper\Swiper::BEHAVIOUR_PAGINATION]]
+     *               - [[\ItSolutionsSG\yii2\swiper\Swiper::BEHAVIOUR_NAVIGATION]]
+     *               - [[\ItSolutionsSG\yii2\swiper\Swiper::BEHAVIOUR_SCROLLBAR]]
+     *               - [[\ItSolutionsSG\yii2\swiper\Swiper::BEHAVIOUR_NEXT_BUTTON]]
+     *               - [[\ItSolutionsSG\yii2\swiper\Swiper::BEHAVIOUR_PREV_BUTTON]]
+     *               - [[\ItSolutionsSG\yii2\swiper\Swiper::BEHAVIOUR_RTL]]
+     *               - [[\ItSolutionsSG\yii2\swiper\Swiper::BEHAVIOUR_PARALLAX]]
      *
-     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_PAGINATION
-     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_NAVIGATION
-     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_SCROLLBAR
-     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_NEXT_BUTTON
-     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_PREV_BUTTON
-     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_RTL
-     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_PARALLAX
+     * @see Swiper::BEHAVIOUR_PAGINATION
+     * @see Swiper::BEHAVIOUR_NAVIGATION
+     * @see Swiper::BEHAVIOUR_SCROLLBAR
+     * @see Swiper::BEHAVIOUR_NEXT_BUTTON
+     * @see Swiper::BEHAVIOUR_PREV_BUTTON
+     * @see Swiper::BEHAVIOUR_RTL
+     * @see Swiper::BEHAVIOUR_PARALLAX
      */
     public $behaviours = [];
 
@@ -121,52 +115,49 @@ class Swiper extends Widget
         self::BEHAVIOUR_NEXT_BUTTON,
         self::BEHAVIOUR_PREV_BUTTON,
         self::BEHAVIOUR_RTL,
-        self::BEHAVIOUR_PARALLAX
+        self::BEHAVIOUR_PARALLAX,
     ];
 
-
     /**
-     * Named alias for [[\renschs\yii2\swiper\Swiper::$behaviours]] parallax item
+     * Named alias for [[\ItSolutionsSG\yii2\swiper\Swiper::$behaviours]] parallax item.
      *
-     * @see \renschs\yii2\swiper\Swiper::PARALLAX_BACKGROUND
-     * @see \renschs\yii2\swiper\Swiper::PARALLAX_TRANSITION
-     * @see \renschs\yii2\swiper\Swiper::PARALLAX_TRANSITION_X
-     * @see \renschs\yii2\swiper\Swiper::PARALLAX_TRANSITION_Y
-     * @see \renschs\yii2\swiper\Swiper::PARALLAX_DURATION
-     *
-     * @see \renschs\yii2\swiper\Swiper::$behaviours
-     * @see \renschs\yii2\swiper\Swiper::$parallaxOptions
-     *
-     * @see \renschs\yii2\swiper\Swiper::renderBehaviourParallax
+     * @see Swiper::PARALLAX_BACKGROUND
+     * @see Swiper::PARALLAX_TRANSITION
+     * @see Swiper::PARALLAX_TRANSITION_X
+     * @see Swiper::PARALLAX_TRANSITION_Y
+     * @see Swiper::PARALLAX_DURATION
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$behaviours
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$parallaxOptions
+     * @see Swiper::renderBehaviourParallax
      */
-    const BEHAVIOUR_PARALLAX = 'parallax';
+    public const BEHAVIOUR_PARALLAX = 'parallax';
     /**
-     * @see \renschs\yii2\swiper\Swiper::renderBehaviourParallax
+     * @see Swiper::renderBehaviourParallax
      */
-    const PARALLAX_BACKGROUND = 'background';
+    public const PARALLAX_BACKGROUND = 'background';
     /**
-     * @see \renschs\yii2\swiper\Swiper::renderBehaviourParallax
+     * @see Swiper::renderBehaviourParallax
      */
-    const PARALLAX_TRANSITION = 'transition';
+    public const PARALLAX_TRANSITION = 'transition';
     /**
-     * @see \renschs\yii2\swiper\Swiper::renderBehaviourParallax
+     * @see Swiper::renderBehaviourParallax
      */
-    const PARALLAX_TRANSITION_X = 'transitionX';
+    public const PARALLAX_TRANSITION_X = 'transitionX';
     /**
-     * @see \renschs\yii2\swiper\Swiper::renderBehaviourParallax
+     * @see Swiper::renderBehaviourParallax
      */
-    const PARALLAX_TRANSITION_Y = 'transitionY';
+    public const PARALLAX_TRANSITION_Y = 'transitionY';
     /**
-     * @see \renschs\yii2\swiper\Swiper::renderBehaviourParallax
+     * @see Swiper::renderBehaviourParallax
      */
-    const PARALLAX_DURATION = 'duration';
+    public const PARALLAX_DURATION = 'duration';
     /**
      * @var string[] array of options which will be applied for nextButton
      *               tag rendering in [[\yii\helpers\Html::tag]]
      *
      *               For example:
      *               ~~~
-     *               \renschs\yii2\swiper\Swiper::widget([
+     *               \ItSolutionsSG\yii2\swiper\Swiper::widget([
      *                  'items'           => ['slide01', 'slide02'],
      *                  'parallaxOptions' => [
      *                      'background'  => 'http://lorempixel.com/1920/1080/nature/1/',
@@ -176,34 +167,30 @@ class Swiper extends Widget
      *               ]);
      *               ~~~
      *
-     * @link http://www.idangero.us/swiper/api/ - Parallax section at the bottom
-     *
-     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_BACKGROUND
-     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_TRANSITION
-     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_TRANSITION_X
-     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_TRANSITION_Y
-     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_DURATION
-     *
-     * @see  \renschs\yii2\swiper\Swiper::renderBehaviourParallax
+     * @see http://www.idangero.us/swiper/api/ - Parallax section at the bottom
+     * @see  Swiper::PARALLAX_BACKGROUND
+     * @see  Swiper::PARALLAX_TRANSITION
+     * @see  Swiper::PARALLAX_TRANSITION_X
+     * @see  Swiper::PARALLAX_TRANSITION_Y
+     * @see  Swiper::PARALLAX_DURATION
+     * @see  Swiper::renderBehaviourParallax
      */
     public $parallaxOptions = [];
 
-
     /**
-     * Named alias for [[\renschs\yii2\swiper\Swiper::$behaviours]] pagination item
+     * Named alias for [[\ItSolutionsSG\yii2\swiper\Swiper::$behaviours]] pagination item.
      *
-     * @see \renschs\yii2\swiper\Swiper::$behaviours
-     * @see \renschs\yii2\swiper\Swiper::$paginationOptions
-     *
-     * @see \renschs\yii2\swiper\Swiper::renderBehaviourPagination
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$behaviours
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$paginationOptions
+     * @see Swiper::renderBehaviourPagination
      */
-    const BEHAVIOUR_PAGINATION = 'pagination';
+    public const BEHAVIOUR_PAGINATION = 'pagination';
     /**
      * @var mixed[] array of options which will be applied for pagination
      *              tag rendering in [[\yii\helpers\Html::tag]]
      *
      *              ~~~
-     *               \renschs\yii2\swiper\Swiper::widget([
+     *               \ItSolutionsSG\yii2\swiper\Swiper::widget([
      *                  'items'             => ['slide01', 'slide02'],
      *                  'paginationOptions' => [
      *                      'class' => 'swiper-pagination-white',
@@ -215,25 +202,24 @@ class Swiper extends Widget
      *               ]);
      *              ~~~
      *
-     * @see \renschs\yii2\swiper\Swiper::$scrollbarOptions
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$scrollbarOptions
      */
     public $paginationOptions = [];
 
     /**
-     * Named alias for [[\renschs\yii2\swiper\Swiper::$behaviours]] pagination item
+     * Named alias for [[\ItSolutionsSG\yii2\swiper\Swiper::$behaviours]] pagination item.
      *
-     * @see \renschs\yii2\swiper\Swiper::$behaviours
-     * @see \renschs\yii2\swiper\Swiper::$navigationOptions
-     *
-     * @see \renschs\yii2\swiper\Swiper::renderBehaviourNavigation
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$behaviours
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$navigationOptions
+     * @see Swiper::renderBehaviourNavigation
      */
-    const BEHAVIOUR_NAVIGATION = 'navigation';
+    public const BEHAVIOUR_NAVIGATION = 'navigation';
     /**
      * @var mixed[] array of options which will be applied for navigation
      *              tag rendering in [[\yii\helpers\Html::tag]]
      *
      *              ~~~
-     *               \renschs\yii2\swiper\Swiper::widget([
+     *               \ItSolutionsSG\yii2\swiper\Swiper::widget([
      *                  'items'             => ['slide01', 'slide02'],
      *                  'navigationOptions' => [
      *                      'nextEl' => '#',
@@ -242,26 +228,24 @@ class Swiper extends Widget
      *               ]);
      *              ~~~
      *
-     * @see \renschs\yii2\swiper\Swiper::$scrollbarOptions
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$scrollbarOptions
      */
     public $navigationOptions = [];
 
-
     /**
-     * Named alias for [[\renschs\yii2\swiper\Swiper::$behaviours]] scrollbar item
+     * Named alias for [[\ItSolutionsSG\yii2\swiper\Swiper::$behaviours]] scrollbar item.
      *
-     * @see \renschs\yii2\swiper\Swiper::$behaviours
-     * @see \renschs\yii2\swiper\Swiper::$scrollbarOptions
-     *
-     * @see \renschs\yii2\swiper\Swiper::renderBehaviourScrollbar
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$behaviours
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$scrollbarOptions
+     * @see Swiper::renderBehaviourScrollbar
      */
-    const BEHAVIOUR_SCROLLBAR = 'scrollbar';
+    public const BEHAVIOUR_SCROLLBAR = 'scrollbar';
     /**
      * @var mixed[] array of options which will be applied for scrollbar
      *              tag rendering in [[\yii\helpers\Html::tag]]
      *
      *              ~~~
-     *               \renschs\yii2\swiper\Swiper::widget([
+     *               \ItSolutionsSG\yii2\swiper\Swiper::widget([
      *                  'items'            => ['slide01', 'slide02'],
      *                  'scrollbarOptions' => [
      *                      'class' => 'my-custom-scrollbar-class',
@@ -273,26 +257,24 @@ class Swiper extends Widget
      *               ]);
      *              ~~~
      *
-     * @see \renschs\yii2\swiper\Swiper::$paginationOptions
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$paginationOptions
      */
     public $scrollbarOptions = [];
 
-
     /**
-     * Named alias for [[\renschs\yii2\swiper\Swiper::$behaviours]] nextButton item
+     * Named alias for [[\ItSolutionsSG\yii2\swiper\Swiper::$behaviours]] nextButton item.
      *
-     * @see \renschs\yii2\swiper\Swiper::$behaviours
-     * @see \renschs\yii2\swiper\Swiper::$nextButtonOptions
-     *
-     * @see \renschs\yii2\swiper\Swiper::renderBehaviourNextButton
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$behaviours
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$nextButtonOptions
+     * @see Swiper::renderBehaviourNextButton
      */
-    const BEHAVIOUR_NEXT_BUTTON = 'nextButton';
+    public const BEHAVIOUR_NEXT_BUTTON = 'nextButton';
     /**
      * @var mixed[] array of options which will be applied for nextButton
      *              tag rendering in [[\yii\helpers\Html::tag]]
      *
      *              ~~~
-     *               \renschs\yii2\swiper\Swiper::widget([
+     *               \ItSolutionsSG\yii2\swiper\Swiper::widget([
      *                  'items'             => ['slide01', 'slide02'],
      *                  'nextButtonOptions' => [
      *                      'class' => 'my-custom-next-button-class',
@@ -304,26 +286,24 @@ class Swiper extends Widget
      *               ]);
      *              ~~~
      *
-     * @see \renschs\yii2\swiper\Swiper::$prevButtonOptions
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$prevButtonOptions
      */
     public $nextButtonOptions = [];
 
-
     /**
-     * Named alias for [[\renschs\yii2\swiper\Swiper::$behaviours]] prevButton item
+     * Named alias for [[\ItSolutionsSG\yii2\swiper\Swiper::$behaviours]] prevButton item.
      *
-     * @see \renschs\yii2\swiper\Swiper::$behaviours
-     * @see \renschs\yii2\swiper\Swiper::$prevButtonOptions
-     *
-     * @see \renschs\yii2\swiper\Swiper::renderBehaviourPrevButton
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$behaviours
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$prevButtonOptions
+     * @see Swiper::renderBehaviourPrevButton
      */
-    const BEHAVIOUR_PREV_BUTTON = 'prevButton';
+    public const BEHAVIOUR_PREV_BUTTON = 'prevButton';
     /**
      * @var mixed[] array of options which will be applied for prevButton
      *              tag rendering in [[\yii\helpers\Html::tag]]
      *
      *              ~~~
-     *               \renschs\yii2\swiper\Swiper::widget([
+     *               \ItSolutionsSG\yii2\swiper\Swiper::widget([
      *                  'items'             => ['slide01', 'slide02'],
      *                  'nextButtonOptions' => [
      *                      'class' => 'my-custom-prev-button-class',
@@ -335,30 +315,27 @@ class Swiper extends Widget
      *               ]);
      *              ~~~
      *
-     * @see \renschs\yii2\swiper\Swiper::$nextButtonOptions
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$nextButtonOptions
      */
     public $prevButtonOptions = [];
 
-
     /**
-     * Named alias for [[\renschs\yii2\swiper\Swiper::$behaviours]] rtl item
+     * Named alias for [[\ItSolutionsSG\yii2\swiper\Swiper::$behaviours]] rtl item.
      *
-     * @see \renschs\yii2\swiper\Swiper::$behaviours
-     *
-     * @see \renschs\yii2\swiper\Swiper::setBehaviourRtl
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$behaviours
+     * @see Swiper::setBehaviourRtl
      */
-    const BEHAVIOUR_RTL = 'rtl';
-
+    public const BEHAVIOUR_RTL = 'rtl';
 
     /**
-     * This function is batch-wrapper of \renschs\yii2\swiper\Swiper::addItem
+     * This function is batch-wrapper of \ItSolutionsSG\yii2\swiper\Swiper::addItem.
      *
      * @param string[]|mixed[][]|Slide[] $items batch of items
      *                                          to be added into slider
      *
-     * @see \renschs\yii2\swiper\Swiper::addItem
-     * @see \renschs\yii2\swiper\Swiper::$items
-     * @see \renschs\yii2\swiper\Slide
+     * @see Swiper::addItem
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$items
+     * @see Slide
      *
      * @return Swiper
      */
@@ -376,14 +353,14 @@ class Swiper extends Widget
      * you should use this instead of direct items pushing to collection,
      * because it supports configuring slides from strings and arrays.
      *
-     * Also it merges [[\renschs\yii2\swiper\Swiper::$itemOptions]]
+     * Also it merges [[\ItSolutionsSG\yii2\swiper\Swiper::$itemOptions]]
      * with concrete item options.
      *
-     * @param string|mixed[]|Slide $item The content, or configuration,
-     *                                   or [[\renschs\yii2\swiper\Slide]] itself.
+     * @param string|mixed[]|Slide $item the content, or configuration,
+     *                                   or [[\ItSolutionsSG\yii2\swiper\Slide]] itself
      *
-     * @see \renschs\yii2\swiper\Swiper::$items
-     * @see \renschs\yii2\swiper\Slide
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$items
+     * @see Slide
      *
      * @return Swiper
      */
@@ -394,9 +371,6 @@ class Swiper extends Widget
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function run()
     {
         $contentPieces = [
@@ -413,8 +387,8 @@ class Swiper extends Widget
 
         $this->registerClientScript();
 
-        $containerOptions  = $this->containerOptions;
-        $containerTag      = ArrayHelper::remove($containerOptions, 'tag', 'div');
+        $containerOptions = $this->containerOptions;
+        $containerTag = ArrayHelper::remove($containerOptions, 'tag', 'div');
         $renderedContainer = Html::tag($containerTag, implode(PHP_EOL, $contentPieces), $containerOptions);
 
         return $renderedContainer;
@@ -422,12 +396,11 @@ class Swiper extends Widget
 
     /**
      * This function check if there is wrong behaviours
-     * and call normalizing of items and every options
+     * and call normalizing of items and every options.
      *
-     * @see \renschs\yii2\swiper\Swiper::checkBehaviours
-     *
-     * @see \renschs\yii2\swiper\Swiper::normalizeOptions
-     * @see \renschs\yii2\swiper\Swiper::normalizeItems
+     * @see Swiper::checkBehaviours
+     * @see Swiper::normalizeOptions
+     * @see Swiper::normalizeItems
      */
     public function init()
     {
@@ -439,75 +412,73 @@ class Swiper extends Widget
 
     /**
      * This function sets default values to options of widget
-     * such as [[id]] and [[class]]
+     * such as [[id]] and [[class]].
      *
-     * @see \renschs\yii2\swiper\Swiper::$containerOptions
-     * @see \renschs\yii2\swiper\Swiper::$wrapperOptions
-     * @see \renschs\yii2\swiper\Swiper::$paginationOptions
-     * @see \renschs\yii2\swiper\Swiper::$scrollbarOptions
-     * @see \renschs\yii2\swiper\Swiper::$nextButtonOptions
-     * @see \renschs\yii2\swiper\Swiper::$prevButtonOptions
-     * @see \renschs\yii2\swiper\Swiper::$parallaxOptions
-     * @see \renschs\yii2\swiper\Swiper::$itemOptions
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$containerOptions
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$wrapperOptions
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$paginationOptions
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$scrollbarOptions
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$nextButtonOptions
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$prevButtonOptions
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$parallaxOptions
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$itemOptions
      */
     protected function normalizeOptions()
     {
         $id = ArrayHelper::getValue($this->containerOptions, 'id', $this->getId());
 
-        //@formatter:off
+        // @formatter:off
 
-        $this->itemOptions['options']          = ArrayHelper::getValue($this->itemOptions,                  'options', []);
-        $this->itemOptions['options']['data']  = ArrayHelper::getValue($this->itemOptions['options'],       'data', []);
-        $this->itemOptions['options']['class'] = trim(ArrayHelper::getValue($this->itemOptions['options'],  'class', '') . ' swiper-slide', ' ');
+        $this->itemOptions['options'] = ArrayHelper::getValue($this->itemOptions, 'options', []);
+        $this->itemOptions['options']['data'] = ArrayHelper::getValue($this->itemOptions['options'], 'data', []);
+        $this->itemOptions['options']['class'] = trim(ArrayHelper::getValue($this->itemOptions['options'], 'class', '').' swiper-slide', ' ');
 
-        $this->containerOptions['id']     = $id;
-        $this->containerOptions['class']  = trim(ArrayHelper::getValue($this->containerOptions,  'class', '') . ' swiper-container', ' ');
+        $this->containerOptions['id'] = $id;
+        $this->containerOptions['class'] = trim(ArrayHelper::getValue($this->containerOptions, 'class', '').' swiper-container', ' ');
 
-        $this->wrapperOptions['id']       = ArrayHelper::getValue($this->wrapperOptions,    'id', "{$id}-wrapper");
-        $this->wrapperOptions['class']    = trim(ArrayHelper::getValue($this->wrapperOptions,    'class', '') . ' swiper-wrapper', ' ');
+        $this->wrapperOptions['id'] = ArrayHelper::getValue($this->wrapperOptions, 'id', "{$id}-wrapper");
+        $this->wrapperOptions['class'] = trim(ArrayHelper::getValue($this->wrapperOptions, 'class', '').' swiper-wrapper', ' ');
 
-        $this->paginationOptions['id']    = ArrayHelper::getValue($this->paginationOptions, 'id', "{$id}-pagination");
-        $this->paginationOptions['class'] = trim(ArrayHelper::getValue($this->paginationOptions, 'class', '') . ' swiper-pagination', ' ');
+        $this->paginationOptions['id'] = ArrayHelper::getValue($this->paginationOptions, 'id', "{$id}-pagination");
+        $this->paginationOptions['class'] = trim(ArrayHelper::getValue($this->paginationOptions, 'class', '').' swiper-pagination', ' ');
 
-        $this->scrollbarOptions['id']     = ArrayHelper::getValue($this->scrollbarOptions,  'id', "{$id}-scrollbar");
-        $this->scrollbarOptions['class']  = trim(ArrayHelper::getValue($this->scrollbarOptions,  'class', '') . ' swiper-scrollbar', ' ');
+        $this->scrollbarOptions['id'] = ArrayHelper::getValue($this->scrollbarOptions, 'id', "{$id}-scrollbar");
+        $this->scrollbarOptions['class'] = trim(ArrayHelper::getValue($this->scrollbarOptions, 'class', '').' swiper-scrollbar', ' ');
 
-        $this->nextButtonOptions['id']    = ArrayHelper::getValue($this->nextButtonOptions, 'id', "{$id}-swiper-button-next");
-        $this->nextButtonOptions['class'] = trim(ArrayHelper::getValue($this->nextButtonOptions, 'class', '') . ' swiper-button-next', ' ');
+        $this->nextButtonOptions['id'] = ArrayHelper::getValue($this->nextButtonOptions, 'id', "{$id}-swiper-button-next");
+        $this->nextButtonOptions['class'] = trim(ArrayHelper::getValue($this->nextButtonOptions, 'class', '').' swiper-button-next', ' ');
 
-        $this->prevButtonOptions['id']    = ArrayHelper::getValue($this->prevButtonOptions, 'id', "{$id}-swiper-button-prev");
-        $this->prevButtonOptions['class'] = trim(ArrayHelper::getValue($this->prevButtonOptions, 'class', '') . ' swiper-button-prev', ' ');
+        $this->prevButtonOptions['id'] = ArrayHelper::getValue($this->prevButtonOptions, 'id', "{$id}-swiper-button-prev");
+        $this->prevButtonOptions['class'] = trim(ArrayHelper::getValue($this->prevButtonOptions, 'class', '').' swiper-button-prev', ' ');
 
-        $this->parallaxOptions['id']      = ArrayHelper::getValue($this->parallaxOptions,   'id', "{$id}-parallax");
-        $this->parallaxOptions['class']   = trim(ArrayHelper::getValue($this->parallaxOptions,   'class', '') . ' parallax-bg', ' ');
-        $this->parallaxOptions['data']    = ArrayHelper::getValue($this->parallaxOptions,   'data', []);
+        $this->parallaxOptions['id'] = ArrayHelper::getValue($this->parallaxOptions, 'id', "{$id}-parallax");
+        $this->parallaxOptions['class'] = trim(ArrayHelper::getValue($this->parallaxOptions, 'class', '').' parallax-bg', ' ');
+        $this->parallaxOptions['data'] = ArrayHelper::getValue($this->parallaxOptions, 'data', []);
 
-        /**
+        /*
          * Parallax options, specified via shorthands, have more priority
          * than directly specified options
          */
-        $this->parallaxOptions['data']['swiper-parallax']          = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_TRANSITION,   ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax',          null));
-        $this->parallaxOptions['data']['swiper-parallax-x']        = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_TRANSITION_X, ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax-x',        null));
-        $this->parallaxOptions['data']['swiper-parallax-y']        = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_TRANSITION_Y, ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax-y',        null));
-        $this->parallaxOptions['data']['swiper-parallax-duration'] = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_DURATION,     ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax-duration', null));
+        $this->parallaxOptions['data']['swiper-parallax'] = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_TRANSITION, ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax', null));
+        $this->parallaxOptions['data']['swiper-parallax-x'] = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_TRANSITION_X, ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax-x', null));
+        $this->parallaxOptions['data']['swiper-parallax-y'] = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_TRANSITION_Y, ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax-y', null));
+        $this->parallaxOptions['data']['swiper-parallax-duration'] = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_DURATION, ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax-duration', null));
 
-        $this->parallaxOptions[self::PARALLAX_TRANSITION]          = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_TRANSITION,   ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax',          null));
-        $this->parallaxOptions[self::PARALLAX_TRANSITION_X]        = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_TRANSITION_X, ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax-x',        null));
-        $this->parallaxOptions[self::PARALLAX_TRANSITION_Y]        = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_TRANSITION_Y, ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax-y',        null));
-        $this->parallaxOptions[self::PARALLAX_DURATION]            = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_DURATION,     ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax-duration', null));
+        $this->parallaxOptions[self::PARALLAX_TRANSITION] = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_TRANSITION, ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax', null));
+        $this->parallaxOptions[self::PARALLAX_TRANSITION_X] = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_TRANSITION_X, ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax-x', null));
+        $this->parallaxOptions[self::PARALLAX_TRANSITION_Y] = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_TRANSITION_Y, ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax-y', null));
+        $this->parallaxOptions[self::PARALLAX_DURATION] = ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_DURATION, ArrayHelper::getValue($this->parallaxOptions['data'], 'swiper-parallax-duration', null));
 
         $this->parallaxOptions['data'] = array_filter($this->parallaxOptions['data']);
 
-        //@formatter:on
+        // @formatter:on
 
         if (ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_BACKGROUND)) {
-
             $this->parallaxOptions['style'] = SwiperCssHelper::mergeStyleAndBackground(
                 ArrayHelper::getValue($this->parallaxOptions, self::PARALLAX_BACKGROUND, ''),
                 ArrayHelper::getValue($this->parallaxOptions, 'style', '')
             );
         } elseif (ArrayHelper::getValue($this->parallaxOptions, 'style')) {
-
             $this->parallaxOptions[self::PARALLAX_BACKGROUND] = SwiperCssHelper::getBackgroundUrl(
                 $this->parallaxOptions['style']
             );
@@ -515,12 +486,11 @@ class Swiper extends Widget
     }
 
     /**
-     * This function converts non-[[\renschs\yii2\swiper\Slide]] items
-     * to [[\renschs\yii2\swiper\Slide]] respectively
+     * This function converts non-[[\ItSolutionsSG\yii2\swiper\Slide]] items
+     * to [[\ItSolutionsSG\yii2\swiper\Slide]] respectively.
      *
-     * Then it merges [[\renschs\yii2\swiper\Swiper::$itemOptions]] with
+     * Then it merges [[\ItSolutionsSG\yii2\swiper\Swiper::$itemOptions]] with
      * concrete item options
-     *
      */
     protected function normalizeItems()
     {
@@ -530,8 +500,8 @@ class Swiper extends Widget
     }
 
     /**
-     * This function converts non-[[\renschs\yii2\swiper\Slide]] item
-     * to [[\renschs\yii2\swiper\Slide]], merging batch options,
+     * This function converts non-[[\ItSolutionsSG\yii2\swiper\Slide]] item
+     * to [[\ItSolutionsSG\yii2\swiper\Slide]], merging batch options,
      * automatically sets id and class and so on...
      *
      * @param string|mixed[]|Slide $item
@@ -541,8 +511,8 @@ class Swiper extends Widget
      */
     protected function normalizeItem($item, $index)
     {
-        /**
-         * If concrete \renschs\yii2\swiper\Slide given
+        /*
+         * If concrete \ItSolutionsSG\yii2\swiper\Slide given
          * then it is meant to be fully custom-configured
          * and it will not be managed there.
          */
@@ -556,11 +526,11 @@ class Swiper extends Widget
 
         $itemOptions = $this->itemOptions;
 
-        /**
+        /*
          * Id must be unique and batch value cannot be applied
          */
         ArrayHelper::remove($itemOptions['options'], 'id');
-        /**
+        /*
          * Hash must be unique too
          */
         ArrayHelper::remove($itemOptions, 'hash');
@@ -568,10 +538,9 @@ class Swiper extends Widget
 
         $item['options'] = ArrayHelper::getValue($item, 'options', []);
 
-        $itemClass                = ArrayHelper::getValue($item['options'], 'class', '');
-        $item['options']['id']    = ArrayHelper::getValue($item['options'], 'id', "{$this->containerOptions['id']}-slide-{$index}");
-        $item['options']['class'] = trim(ArrayHelper::getValue($itemOptions['options'], 'class', '') . " {$itemClass}", ' ');
-
+        $itemClass = ArrayHelper::getValue($item['options'], 'class', '');
+        $item['options']['id'] = ArrayHelper::getValue($item['options'], 'id', "{$this->containerOptions['id']}-slide-{$index}");
+        $item['options']['class'] = trim(ArrayHelper::getValue($itemOptions['options'], 'class', '')." {$itemClass}", ' ');
 
         $item = array_replace_recursive($itemOptions, $item);
 
@@ -580,7 +549,7 @@ class Swiper extends Widget
 
     /**
      * Checks if there is invalid behaviour given.
-     * If given, then throws exception
+     * If given, then throws exception.
      *
      * @throws \InvalidArgumentException
      */
@@ -594,22 +563,20 @@ class Swiper extends Widget
     }
 
     /**
-     * This function renders parallax part of widget
+     * This function renders parallax part of widget.
      *
      * More information about parallax you can find
      * in official site of plugin - http://www.idangero.us/swiper/api/
      *
      * Also you can find some examples in [[~/yii2-swiper/demos]] folder
      *
-     * @link http://www.idangero.us/swiper/api/ - Parallax section at the bottom
-     *
-     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_BACKGROUND
-     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_TRANSITION
-     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_TRANSITION_X
-     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_TRANSITION_Y
-     * @see  \renschs\yii2\swiper\Swiper::PARALLAX_DURATION
-     *
-     * @see  \renschs\yii2\swiper\Swiper::$parallaxOptions
+     * @see http://www.idangero.us/swiper/api/ - Parallax section at the bottom
+     * @see  Swiper::PARALLAX_BACKGROUND
+     * @see  Swiper::PARALLAX_TRANSITION
+     * @see  Swiper::PARALLAX_TRANSITION_X
+     * @see  Swiper::PARALLAX_TRANSITION_Y
+     * @see  Swiper::PARALLAX_DURATION
+     * @see  \ItSolutionsSG\yii2\swiper\Swiper::$parallaxOptions
      *
      * @return string
      */
@@ -620,7 +587,7 @@ class Swiper extends Widget
         }
 
         $parallaxOptions = $this->parallaxOptions;
-        $parallaxTag     = ArrayHelper::remove($parallaxOptions, 'tag', 'div');
+        $parallaxTag = ArrayHelper::remove($parallaxOptions, 'tag', 'div');
 
         ArrayHelper::remove($parallaxOptions, self::PARALLAX_BACKGROUND);
         ArrayHelper::remove($parallaxOptions, self::PARALLAX_TRANSITION);
@@ -632,17 +599,16 @@ class Swiper extends Widget
     }
 
     /**
-     * This function renders pagination part of widget
+     * This function renders pagination part of widget.
      *
      * More information about pagination you can find
      * in official site of plugin - http://www.idangero.us/swiper/api/
      *
      * Also you can find some examples in [[~/yii2-swiper/demos]] folder
      *
-     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_PAGINATION
-     * @see \renschs\yii2\swiper\Swiper::$paginationOptions
-     *
-     * @see \renschs\yii2\swiper\Swiper::renderBehaviourScrollbar
+     * @see Swiper::BEHAVIOUR_PAGINATION
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$paginationOptions
+     * @see Swiper::renderBehaviourScrollbar
      *
      * @return string
      */
@@ -650,24 +616,22 @@ class Swiper extends Widget
     {
         if (in_array(self::BEHAVIOUR_PAGINATION, $this->behaviours)) {
             $paginationOptions = $this->paginationOptions;
-            $paginationTag     = ArrayHelper::remove($paginationOptions, 'tag', 'div');
+            $paginationTag = ArrayHelper::remove($paginationOptions, 'tag', 'div');
 
             if (!isset($this->pluginOptions[self::OPTION_PAGINATION]['id'])) {
-                $this->pluginOptions[self::OPTION_PAGINATION]["el"] = "#" . $paginationOptions["id"];
+                $this->pluginOptions[self::OPTION_PAGINATION]['el'] = '#'.$paginationOptions['id'];
             }
 
             if (!isset($this->pluginOptions[self::OPTION_PAGINATION][self::OPTION_PAGINATION_CLICKABLE])) {
-                $this->pluginOptions[self::OPTION_PAGINATION]["clickable"] = false;
+                $this->pluginOptions[self::OPTION_PAGINATION]['clickable'] = false;
             } else {
-
-                if(!is_bool($this->pluginOptions[self::OPTION_PAGINATION][self::OPTION_PAGINATION_CLICKABLE])){
-                    throw new Exception('Pagination clickable option must be boolean');
+                if (!is_bool($this->pluginOptions[self::OPTION_PAGINATION][self::OPTION_PAGINATION_CLICKABLE])) {
+                    throw new \Exception('Pagination clickable option must be boolean');
                 }
 
-                $this->pluginOptions[self::OPTION_PAGINATION]["clickable"] = $this->pluginOptions[self::OPTION_PAGINATION][self::OPTION_PAGINATION_CLICKABLE];
+                $this->pluginOptions[self::OPTION_PAGINATION]['clickable'] = $this->pluginOptions[self::OPTION_PAGINATION][self::OPTION_PAGINATION_CLICKABLE];
                 unset($this->pluginOptions[self::OPTION_PAGINATION][self::OPTION_PAGINATION_CLICKABLE]);
             }
-
 
             // print_r($this->pluginOptions);
             // die();
@@ -679,17 +643,16 @@ class Swiper extends Widget
     }
 
     /**
-     * This function renders navigation part of widget
+     * This function renders navigation part of widget.
      *
      * More information about navigation you can find
      * in official site of plugin - http://www.idangero.us/swiper/api/
      *
      * Also you can find some examples in [[~/yii2-swiper/demos]] folder
      *
-     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_PAGINATION
-     * @see \renschs\yii2\swiper\Swiper::$prevButtonOptions
-     *
-     * @see \renschs\yii2\swiper\Swiper::renderBehaviourScrollbar
+     * @see Swiper::BEHAVIOUR_PAGINATION
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$prevButtonOptions
+     * @see Swiper::renderBehaviourScrollbar
      *
      * @return string
      */
@@ -697,12 +660,12 @@ class Swiper extends Widget
     {
         if (in_array(self::BEHAVIOUR_NAVIGATION, $this->behaviours)) {
             $navigationOptions = $this->navigationOptions;
-            $navigationTag     = ArrayHelper::remove($navigationOptions, 'tag', 'div');
+            $navigationTag = ArrayHelper::remove($navigationOptions, 'tag', 'div');
 
             if (!isset($this->pluginOptions[self::OPTION_NAVIGATION])) {
                 $this->pluginOptions[self::OPTION_NAVIGATION] = [
-                    self::OPTION_NEXT_BUTTON => $this->nextButtonOptions["id"],
-                    self::OPTION_PREV_BUTTON => $this->prevButtonOptions["id"],
+                    self::OPTION_NEXT_BUTTON => $this->nextButtonOptions['id'],
+                    self::OPTION_PREV_BUTTON => $this->prevButtonOptions['id'],
                 ];
             }
 
@@ -712,31 +675,28 @@ class Swiper extends Widget
         return '';
     }
 
-
     /**
-     * This function renders scrollbar part of widget
+     * This function renders scrollbar part of widget.
      *
      * More information about scrollbar you can find
      * in official site of plugin - http://www.idangero.us/swiper/api/
      *
      * Also you can find some examples in [[~/yii2-swiper/demos]] folder
      *
-     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_SCROLLBAR
-     * @see \renschs\yii2\swiper\Swiper::$scrollbarOptions
-     *
-     * @see \renschs\yii2\swiper\Swiper::renderBehaviourPagination
+     * @see Swiper::BEHAVIOUR_SCROLLBAR
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$scrollbarOptions
+     * @see Swiper::renderBehaviourPagination
      *
      * @return string
      */
     protected function renderBehaviourScrollbar()
     {
-
         if (in_array(self::BEHAVIOUR_SCROLLBAR, $this->behaviours)) {
             $scrollbarOptions = $this->scrollbarOptions;
-            $scrollbarTag     = ArrayHelper::remove($scrollbarOptions, 'tag', 'div');
+            $scrollbarTag = ArrayHelper::remove($scrollbarOptions, 'tag', 'div');
 
             if (!isset($this->pluginOptions[self::OPTION_SCROLLBAR])) {
-                $this->pluginOptions[self::OPTION_SCROLLBAR] = "#" . $scrollbarOptions["id"];
+                $this->pluginOptions[self::OPTION_SCROLLBAR] = '#'.$scrollbarOptions['id'];
             }
 
             return Html::tag($scrollbarTag, '', $scrollbarOptions);
@@ -746,29 +706,27 @@ class Swiper extends Widget
     }
 
     /**
-     * This function renders nextButton part of widget
+     * This function renders nextButton part of widget.
      *
      * More information about nextButton you can find
      * in official site of plugin - http://www.idangero.us/swiper/api/
      *
      * Also you can find some examples in [[~/yii2-swiper/demos]] folder
      *
-     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_NEXT_BUTTON
-     * @see \renschs\yii2\swiper\Swiper::$nextButtonOptions
-     *
-     * @see \renschs\yii2\swiper\Swiper::renderBehaviourPrevButton
+     * @see Swiper::BEHAVIOUR_NEXT_BUTTON
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$nextButtonOptions
+     * @see Swiper::renderBehaviourPrevButton
      *
      * @return string
      */
     protected function renderBehaviourNextButton()
     {
-
         if (in_array(self::BEHAVIOUR_NAVIGATION, $this->behaviours) && in_array(self::BEHAVIOUR_NEXT_BUTTON, $this->behaviours)) {
             $nextButtonOptions = $this->nextButtonOptions;
-            $nextButtonTag     = ArrayHelper::remove($nextButtonOptions, 'tag', 'div');
+            $nextButtonTag = ArrayHelper::remove($nextButtonOptions, 'tag', 'div');
 
             if (!isset($this->pluginOptions[self::OPTION_NEXT_BUTTON])) {
-                $this->pluginOptions[self::OPTION_NAVIGATION][self::OPTION_NEXT_BUTTON] = "#" . $nextButtonOptions["id"];
+                $this->pluginOptions[self::OPTION_NAVIGATION][self::OPTION_NEXT_BUTTON] = '#'.$nextButtonOptions['id'];
             }
 
             return Html::tag($nextButtonTag, '', $nextButtonOptions);
@@ -778,29 +736,27 @@ class Swiper extends Widget
     }
 
     /**
-     * This function renders prevButton part of widget
+     * This function renders prevButton part of widget.
      *
      * More information about prevButton you can find
      * in official site of plugin - http://www.idangero.us/swiper/api/
      *
      * Also you can find some examples in [[~/yii2-swiper/demos]] folder
      *
-     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_PREV_BUTTON
-     * @see \renschs\yii2\swiper\Swiper::$prevButtonOptions
-     *
-     * @see \renschs\yii2\swiper\Swiper::renderBehaviourNextButton
+     * @see Swiper::BEHAVIOUR_PREV_BUTTON
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$prevButtonOptions
+     * @see Swiper::renderBehaviourNextButton
      *
      * @return string
      */
     protected function renderBehaviourPrevButton()
     {
-
         if (in_array(self::BEHAVIOUR_NAVIGATION, $this->behaviours) && in_array(self::BEHAVIOUR_PREV_BUTTON, $this->behaviours)) {
             $prevButtonOptions = $this->prevButtonOptions;
-            $prevButtonTag     = ArrayHelper::remove($prevButtonOptions, 'tag', 'div');
+            $prevButtonTag = ArrayHelper::remove($prevButtonOptions, 'tag', 'div');
 
             if (!isset($this->pluginOptions[self::OPTION_PREV_BUTTON])) {
-                $this->pluginOptions[self::OPTION_NAVIGATION][self::OPTION_PREV_BUTTON] = "#" . $prevButtonOptions["id"];
+                $this->pluginOptions[self::OPTION_NAVIGATION][self::OPTION_PREV_BUTTON] = '#'.$prevButtonOptions['id'];
             }
 
             return Html::tag($prevButtonTag, '', $prevButtonOptions);
@@ -810,21 +766,21 @@ class Swiper extends Widget
     }
 
     /**
-     * This function adds [[dir=rtl]] tag option to [[\renschs\yii2\swiper\Swiper::$containerOptions]]
+     * This function adds [[dir=rtl]] tag option to [[\ItSolutionsSG\yii2\swiper\Swiper::$containerOptions]].
      *
      * More information about rtl you can find
      * in official site of plugin - http://www.idangero.us/swiper/api/
      *
      * Also you can find some examples in [[~/yii2-swiper/demos]] folder
      *
-     * @see \renschs\yii2\swiper\Swiper::BEHAVIOUR_RTL
+     * @see Swiper::BEHAVIOUR_RTL
      *
      * @return Swiper
      */
     protected function setBehaviourRtl()
     {
         if (in_array(self::BEHAVIOUR_RTL, $this->behaviours)) {
-            $this->containerOptions["dir"] = 'rtl';
+            $this->containerOptions['dir'] = 'rtl';
         }
 
         return $this;
@@ -832,10 +788,10 @@ class Swiper extends Widget
 
     /**
      * This function renders the wrapper tag of swiper,
-     * which contains slides
+     * which contains slides.
      *
-     * @see \renschs\yii2\swiper\Swiper::$wrapperOptions
-     * @see \renschs\yii2\swiper\Swiper::renderItems
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$wrapperOptions
+     * @see Swiper::renderItems
      *
      * @return string
      */
@@ -843,17 +799,17 @@ class Swiper extends Widget
     {
         $renderedItems = $this->renderItems($this->items);
 
-        $wrapperOptions  = $this->wrapperOptions;
-        $wrapperTag      = ArrayHelper::remove($wrapperOptions, 'tag', 'div');
-        $renderedWrapper = Html::tag($wrapperTag, PHP_EOL . $renderedItems . PHP_EOL, $wrapperOptions);
+        $wrapperOptions = $this->wrapperOptions;
+        $wrapperTag = ArrayHelper::remove($wrapperOptions, 'tag', 'div');
+        $renderedWrapper = Html::tag($wrapperTag, PHP_EOL.$renderedItems.PHP_EOL, $wrapperOptions);
 
-        return PHP_EOL . $renderedWrapper . PHP_EOL;
+        return PHP_EOL.$renderedWrapper.PHP_EOL;
     }
 
     /**
-     * This function just calls [[\renschs\yii2\swiper\Swiper::renderItem]]
-     * for each [[\renschs\yii2\swiper\Swiper::$items]] and returns
-     * formatter result
+     * This function just calls [[\ItSolutionsSG\yii2\swiper\Swiper::renderItem]]
+     * for each [[\ItSolutionsSG\yii2\swiper\Swiper::$items]] and returns
+     * formatter result.
      *
      * @param Slide[] $items
      *
@@ -870,25 +826,24 @@ class Swiper extends Widget
     }
 
     /**
-     * @param Slide $slide
-     *
-     * @see \renschs\yii2\swiper\Swiper::$items
-     * @see \renschs\yii2\swiper\Swiper::$itemOptions
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$items
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$itemOptions
      *
      * @return string
      */
     protected function renderItem(Slide $slide)
     {
         $options = $slide->options;
-        $tag     = ArrayHelper::remove($options, 'tag', 'div');
+        $tag = ArrayHelper::remove($options, 'tag', 'div');
 
         return Html::tag($tag, $slide->content, $options);
     }
 
     /**
-     * Registers the initializer of Swiper plugin
+     * Registers the initializer of Swiper plugin.
      *
-     * @see \renschs\yii2\swiper\Swiper::$pluginOptions
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions
+     *
      * @return Swiper
      */
     protected function registerClientScript()
@@ -896,9 +851,9 @@ class Swiper extends Widget
         $view = $this->getView();
         SwiperAsset::register($view);
 
-        $id            = $this->containerOptions['id'];
+        $id = $this->containerOptions['id'];
         $pluginOptions = Json::encode($this->pluginOptions);
-        $variableName  = 'swiper' . Inflector::id2camel($this->containerOptions['id']);
+        $variableName = 'swiper'.Inflector::id2camel($this->containerOptions['id']);
 
         $view->registerJs(
             new JsExpression(
@@ -912,206 +867,204 @@ JS
         return $this;
     }
 
-    //<editor-fold desc="Named constants for Swiper options">
+    // <editor-fold desc="Named constants for Swiper options">
 
-    const OPTION_INITIAL_SLIDE                    = 'initialSlide';
-    const OPTION_DIRECTION                        = 'direction';
-    const OPTION_SPEED                            = 'speed';
-    const OPTION_SET_WRAPPER_SIZE                 = 'setWrapperSize';
-    const OPTION_VIRTUAL_TRANSLATE                = 'virtualTranslate';
-    const OPTION_WIDTH                            = 'width';
-    const OPTION_HEIGHT                           = 'height';
-    const OPTION_AUTOPLAY                         = 'autoplay';
-    const OPTION_AUTOPLAY_DISABLE_ON_INTERACTION  = 'autoplayDisableOnInteraction';
-    const OPTION_WATCH_SLIDES_PROGRESS            = 'watchSlidesProgress';
-    const OPTION_WATCH_SLIDES_VISIBILITY          = 'watchSlidesVisibility';
-    const OPTION_FREE_MODE                        = 'freeMode';
-    const OPTION_FREE_MODE_MOMENTUM               = 'freeModeMomentum';
-    const OPTION_FREE_MODE_MOMENTUM_RATIO         = 'freeModeMomentumRatio';
-    const OPTION_FREE_MODE_MOMENTUM_BOUNCE        = 'freeModeMomentumBounce';
-    const OPTION_FREE_MODE_MOMENTUM_BOUNCE_RATIO  = 'freeModeMomentumBounceRatio';
-    const OPTION_FREE_MODE_STICKY                 = 'freeModeSticky';
-    const OPTION_EFFECT                           = 'effect';
-    const OPTION_FADE                             = 'fade';
-    const OPTION_FADE_CROSS_FADE                  = 'crossFade';
-    const OPTION_CUBE                             = 'cube';
-    const OPTION_CUBE_SLIDE_SHADOWS               = 'slideShadows';
-    const OPTION_CUBE_SHADOW                      = 'shadow';
-    const OPTION_CUBE_SHADOW_OFFSET               = 'shadowOffset';
-    const OPTION_CUBE_SHADOW_SCALE                = 'shadowScale';
-    const OPTION_COVERFLOW                        = 'coverflow';
-    const OPTION_COVERFLOW_ROTATE                 = 'rotate';
-    const OPTION_COVERFLOW_STRETCH                = 'stretch';
-    const OPTION_COVERFLOW_DEPTH                  = 'depth';
-    const OPTION_COVERFLOW_MODIFIER               = 'modifier';
-    const OPTION_COVERFLOW_SLIDE_SHADOWS          = 'slideShadows';
-    const OPTION_PARALLAX                         = 'parallax';
-    const OPTION_SPACE_BETWEEN                    = 'spaceBetween';
-    const OPTION_SLIDES_PER_VIEW                  = 'slidesPerView';
-    const OPTION_SLIDES_PER_COLUMN                = 'slidesPerColumn';
-    const OPTION_SLIDES_PER_COLUMN_FILL           = 'slidesPerColumnFill';
-    const OPTION_SLIDES_PER_GROUP                 = 'slidesPerGroup';
-    const OPTION_CENTERED_SLIDES                  = 'centeredSlides';
-    const OPTION_GRAB_CURSOR                      = 'grabCursor';
-    const OPTION_TOUCH_RATIO                      = 'touchRatio';
-    const OPTION_TOUCH_ANGLE                      = 'touchAngle';
-    const OPTION_SIMULATE_TOUCH                   = 'simulateTouch';
-    const OPTION_SHORT_SWIPES                     = 'shortSwipes';
-    const OPTION_LONG_SWIPES                      = 'longSwipes';
-    const OPTION_LONGS_WIPES_RATIO                = 'longSwipesRatio';
-    const OPTION_LONG_SWIPES_MS                   = 'longSwipesMs';
-    const OPTION_FOLLOW_FINGER                    = 'followFinger';
-    const OPTION_ONLY_EXTERNAL                    = 'onlyExternal';
-    const OPTION_THRESHOLD                        = 'threshold';
-    const OPTION_TOUCH_MOVE_STOP_PROPAGATION      = 'touchMoveStopPropagation';
-    const OPTION_RESISTANCE                       = 'resistance';
-    const OPTION_RESISTANCE_RATIO                 = 'resistanceRatio';
-    const OPTION_PREVENT_CLICKS                   = 'preventClicks';
-    const OPTION_PREVENT_CLICKS_PROPAGATION       = 'preventClicksPropagation';
-    const OPTION_SLIDE_TO_CLICKED_SLIDE           = 'slideToClickedSlide';
-    const OPTION_ALLOW_SWIPE_TO_PREV              = 'allowSwipeToPrev';
-    const OPTION_ALLOW_SWIPE_TO_NEXT              = 'allowSwipeToNext';
-    const OPTION_NO_SWIPING                       = 'noSwiping';
-    const OPTION_NO_SWIPING_CLASS                 = 'noSwipingClass';
-    const OPTION_SWIPE_HANDLER                    = 'swipeHandler';
-    const OPTION_PAGINATION                       = 'pagination';
-    const OPTION_PAGINATION_HIDE                  = 'paginationHide';
-    const OPTION_PAGINATION_CLICKABLE             = 'paginationClickable';
-    const OPTION_PAGINATION_BULLET_RENDER         = 'paginationBulletRender';
-    const OPTION_NAVIGATION                       = 'navigation';
-    const OPTION_NEXT_BUTTON                      = 'nextEl';
-    const OPTION_PREV_BUTTON                      = 'prevEl';
-    const OPTION_A11Y                             = 'a11y';
-    const OPTION_PREV_SLIDE_MESSAGE               = 'prevSlideMessage';
-    const OPTION_NEXT_SLIDE_MESSAGE               = 'nextSlideMessage';
-    const OPTION_FIRST_SLIDE_MESSAGE              = 'firstSlideMessage';
-    const OPTION_LAST_SLIDE_MESSAGE               = 'lastSlideMessage';
-    const OPTION_SCROLLBAR                        = 'scrollbar';
-    const OPTION_SCROLLBAR_HIDE                   = 'scrollbarHide';
-    const OPTION_KEYBOARD_CONTROL                 = 'keyboardControl';
-    const OPTION_MOUSEWHEEL_CONTROL               = 'mousewheelControl';
-    const OPTION_MOUSEWHEEL_FORCE_TO_AXIS         = 'mousewheelForceToAxis';
-    const OPTION_MOUSEWHEEL_RELEASE_ON_EDGES      = 'mousewheelReleaseOnEdges';
-    const OPTION_MOUSEWHEEL_INVERT                = 'mousewheelInvert';
-    const OPTION_HASHNAV                          = 'hashnav';
-    const OPTION_PRELOAD_IMAGES                   = 'preloadImages';
-    const OPTION_UPDATE_ON_IMAGES_READY           = 'updateOnImagesReady';
-    const OPTION_LAZY_LOADING                     = 'lazyLoading';
-    const OPTION_LAZY_LOADING_IN_PREV_NEXT        = 'lazyLoadingInPrevNext';
-    const OPTION_LAZY_LOADING_ON_TRANSITION_START = 'lazyLoadingOnTransitionStart';
-    const OPTION_LOOP                             = 'loop';
-    const OPTION_LOOP_ADDITIONAL_SLIDES           = 'loopAdditionalSlides';
-    const OPTION_LOOPED_SLIDES                    = 'loopedSlides';
-    const OPTION_CONTROL                          = 'control';
-    const OPTION_CONTROL_INVERSE                  = 'controlInverse';
-    const OPTION_OBSERVER                         = 'observer';
-    const OPTION_OBSERVE_PARENTS                  = 'observeParents';
-    const OPTION_RUN_CALLBACKS_ON_INIT            = 'runCallbacksOnInit';
-    const OPTION_ON_INIT                          = 'onInit';
-    const OPTION_ON_SLIDE_CHANGE_START            = 'onSlideChangeStart';
-    const OPTION_ON_SLIDE_CHANGE_END              = 'onSlideChangeEnd';
-    const OPTION_ON_TRANSITION_START              = 'onTransitionStart';
-    const OPTION_ON_TRANSITION_END                = 'onTransitionEnd';
-    const OPTION_ON_TOUCH_START                   = 'onTouchStart';
-    const OPTION_ON_TOUCH_MOVE                    = 'onTouchMove';
-    const OPTION_ON_TOUCH_MOVE_OPPOSITE           = 'onTouchMoveOpposite';
-    const OPTION_ON_SLIDER_MOVE                   = 'onSliderMove';
-    const OPTION_ON_TOUCH_END                     = 'onTouchEnd';
-    const OPTION_ON_CLICK                         = 'onClick';
-    const OPTION_ON_TAP                           = 'onTap';
-    const OPTION_ON_DOUBLE_TAP                    = 'onDoubleTap';
-    const OPTION_ON_IMAGES_READY                  = 'onImagesReady';
-    const OPTION_ON_PROGRESS                      = 'onProgress';
-    const OPTION_ON_REACH_BEGINNING               = 'onReachBeginning';
-    const OPTION_ON_REACH_END                     = 'onReachEnd';
-    const OPTION_ON_DESTROY                       = 'onDestroy';
-    const OPTION_ON_SET_TRANSLATE                 = 'onSetTranslate';
-    const OPTION_ON_SET_TRANSITION                = 'onSetTransition';
-    const OPTION_ON_AUTOPLAY_START                = 'onAutoplayStart';
-    const OPTION_ON_AUTOPLAY_STOP                 = 'onAutoplayStop';
-    const OPTION_ON_LAZY_IMAGE_LOAD               = 'onLazyImageLoad';
-    const OPTION_ON_LAZY_IMAGE_READY              = 'onLazyImageReady';
-    const OPTION_SLIDE_CLASS                      = 'slideClass';
-    const OPTION_SLIDE_ACTIVE_CLASS               = 'slideActiveClass';
-    const OPTION_SLIDE_VISIBLE_CLASS              = 'slideVisibleClass';
-    const OPTION_SLIDE_DUPLICATE_CLASS            = 'slideDuplicateClass';
-    const OPTION_SLIDE_NEXT_CLASS                 = 'slideNextClass';
-    const OPTION_SLIDE_PREV_CLASS                 = 'slidePrevClass';
-    const OPTION_WRAPPER_CLASS                    = 'wrapperClass';
-    const OPTION_BULLET_CLASS                     = 'bulletClass';
-    const OPTION_BULLET_ACTIVE_CLASS              = 'bulletActiveClass';
-    const OPTION_PAGINATION_HIDDEN_CLASS          = 'paginationHiddenClass';
-    const OPTION_BUTTON_DISABLED_CLASS            = 'buttonDisabledClass';
-
+    public const OPTION_INITIAL_SLIDE = 'initialSlide';
+    public const OPTION_DIRECTION = 'direction';
+    public const OPTION_SPEED = 'speed';
+    public const OPTION_SET_WRAPPER_SIZE = 'setWrapperSize';
+    public const OPTION_VIRTUAL_TRANSLATE = 'virtualTranslate';
+    public const OPTION_WIDTH = 'width';
+    public const OPTION_HEIGHT = 'height';
+    public const OPTION_AUTOPLAY = 'autoplay';
+    public const OPTION_AUTOPLAY_DISABLE_ON_INTERACTION = 'autoplayDisableOnInteraction';
+    public const OPTION_WATCH_SLIDES_PROGRESS = 'watchSlidesProgress';
+    public const OPTION_WATCH_SLIDES_VISIBILITY = 'watchSlidesVisibility';
+    public const OPTION_FREE_MODE = 'freeMode';
+    public const OPTION_FREE_MODE_MOMENTUM = 'freeModeMomentum';
+    public const OPTION_FREE_MODE_MOMENTUM_RATIO = 'freeModeMomentumRatio';
+    public const OPTION_FREE_MODE_MOMENTUM_BOUNCE = 'freeModeMomentumBounce';
+    public const OPTION_FREE_MODE_MOMENTUM_BOUNCE_RATIO = 'freeModeMomentumBounceRatio';
+    public const OPTION_FREE_MODE_STICKY = 'freeModeSticky';
+    public const OPTION_EFFECT = 'effect';
+    public const OPTION_FADE = 'fade';
+    public const OPTION_FADE_CROSS_FADE = 'crossFade';
+    public const OPTION_CUBE = 'cube';
+    public const OPTION_CUBE_SLIDE_SHADOWS = 'slideShadows';
+    public const OPTION_CUBE_SHADOW = 'shadow';
+    public const OPTION_CUBE_SHADOW_OFFSET = 'shadowOffset';
+    public const OPTION_CUBE_SHADOW_SCALE = 'shadowScale';
+    public const OPTION_COVERFLOW = 'coverflow';
+    public const OPTION_COVERFLOW_ROTATE = 'rotate';
+    public const OPTION_COVERFLOW_STRETCH = 'stretch';
+    public const OPTION_COVERFLOW_DEPTH = 'depth';
+    public const OPTION_COVERFLOW_MODIFIER = 'modifier';
+    public const OPTION_COVERFLOW_SLIDE_SHADOWS = 'slideShadows';
+    public const OPTION_PARALLAX = 'parallax';
+    public const OPTION_SPACE_BETWEEN = 'spaceBetween';
+    public const OPTION_SLIDES_PER_VIEW = 'slidesPerView';
+    public const OPTION_SLIDES_PER_COLUMN = 'slidesPerColumn';
+    public const OPTION_SLIDES_PER_COLUMN_FILL = 'slidesPerColumnFill';
+    public const OPTION_SLIDES_PER_GROUP = 'slidesPerGroup';
+    public const OPTION_CENTERED_SLIDES = 'centeredSlides';
+    public const OPTION_GRAB_CURSOR = 'grabCursor';
+    public const OPTION_TOUCH_RATIO = 'touchRatio';
+    public const OPTION_TOUCH_ANGLE = 'touchAngle';
+    public const OPTION_SIMULATE_TOUCH = 'simulateTouch';
+    public const OPTION_SHORT_SWIPES = 'shortSwipes';
+    public const OPTION_LONG_SWIPES = 'longSwipes';
+    public const OPTION_LONGS_WIPES_RATIO = 'longSwipesRatio';
+    public const OPTION_LONG_SWIPES_MS = 'longSwipesMs';
+    public const OPTION_FOLLOW_FINGER = 'followFinger';
+    public const OPTION_ONLY_EXTERNAL = 'onlyExternal';
+    public const OPTION_THRESHOLD = 'threshold';
+    public const OPTION_TOUCH_MOVE_STOP_PROPAGATION = 'touchMoveStopPropagation';
+    public const OPTION_RESISTANCE = 'resistance';
+    public const OPTION_RESISTANCE_RATIO = 'resistanceRatio';
+    public const OPTION_PREVENT_CLICKS = 'preventClicks';
+    public const OPTION_PREVENT_CLICKS_PROPAGATION = 'preventClicksPropagation';
+    public const OPTION_SLIDE_TO_CLICKED_SLIDE = 'slideToClickedSlide';
+    public const OPTION_ALLOW_SWIPE_TO_PREV = 'allowSwipeToPrev';
+    public const OPTION_ALLOW_SWIPE_TO_NEXT = 'allowSwipeToNext';
+    public const OPTION_NO_SWIPING = 'noSwiping';
+    public const OPTION_NO_SWIPING_CLASS = 'noSwipingClass';
+    public const OPTION_SWIPE_HANDLER = 'swipeHandler';
+    public const OPTION_PAGINATION = 'pagination';
+    public const OPTION_PAGINATION_HIDE = 'paginationHide';
+    public const OPTION_PAGINATION_CLICKABLE = 'paginationClickable';
+    public const OPTION_PAGINATION_BULLET_RENDER = 'paginationBulletRender';
+    public const OPTION_NAVIGATION = 'navigation';
+    public const OPTION_NEXT_BUTTON = 'nextEl';
+    public const OPTION_PREV_BUTTON = 'prevEl';
+    public const OPTION_A11Y = 'a11y';
+    public const OPTION_PREV_SLIDE_MESSAGE = 'prevSlideMessage';
+    public const OPTION_NEXT_SLIDE_MESSAGE = 'nextSlideMessage';
+    public const OPTION_FIRST_SLIDE_MESSAGE = 'firstSlideMessage';
+    public const OPTION_LAST_SLIDE_MESSAGE = 'lastSlideMessage';
+    public const OPTION_SCROLLBAR = 'scrollbar';
+    public const OPTION_SCROLLBAR_HIDE = 'scrollbarHide';
+    public const OPTION_KEYBOARD_CONTROL = 'keyboardControl';
+    public const OPTION_MOUSEWHEEL_CONTROL = 'mousewheelControl';
+    public const OPTION_MOUSEWHEEL_FORCE_TO_AXIS = 'mousewheelForceToAxis';
+    public const OPTION_MOUSEWHEEL_RELEASE_ON_EDGES = 'mousewheelReleaseOnEdges';
+    public const OPTION_MOUSEWHEEL_INVERT = 'mousewheelInvert';
+    public const OPTION_HASHNAV = 'hashnav';
+    public const OPTION_PRELOAD_IMAGES = 'preloadImages';
+    public const OPTION_UPDATE_ON_IMAGES_READY = 'updateOnImagesReady';
+    public const OPTION_LAZY_LOADING = 'lazyLoading';
+    public const OPTION_LAZY_LOADING_IN_PREV_NEXT = 'lazyLoadingInPrevNext';
+    public const OPTION_LAZY_LOADING_ON_TRANSITION_START = 'lazyLoadingOnTransitionStart';
+    public const OPTION_LOOP = 'loop';
+    public const OPTION_LOOP_ADDITIONAL_SLIDES = 'loopAdditionalSlides';
+    public const OPTION_LOOPED_SLIDES = 'loopedSlides';
+    public const OPTION_CONTROL = 'control';
+    public const OPTION_CONTROL_INVERSE = 'controlInverse';
+    public const OPTION_OBSERVER = 'observer';
+    public const OPTION_OBSERVE_PARENTS = 'observeParents';
+    public const OPTION_RUN_CALLBACKS_ON_INIT = 'runCallbacksOnInit';
+    public const OPTION_ON_INIT = 'onInit';
+    public const OPTION_ON_SLIDE_CHANGE_START = 'onSlideChangeStart';
+    public const OPTION_ON_SLIDE_CHANGE_END = 'onSlideChangeEnd';
+    public const OPTION_ON_TRANSITION_START = 'onTransitionStart';
+    public const OPTION_ON_TRANSITION_END = 'onTransitionEnd';
+    public const OPTION_ON_TOUCH_START = 'onTouchStart';
+    public const OPTION_ON_TOUCH_MOVE = 'onTouchMove';
+    public const OPTION_ON_TOUCH_MOVE_OPPOSITE = 'onTouchMoveOpposite';
+    public const OPTION_ON_SLIDER_MOVE = 'onSliderMove';
+    public const OPTION_ON_TOUCH_END = 'onTouchEnd';
+    public const OPTION_ON_CLICK = 'onClick';
+    public const OPTION_ON_TAP = 'onTap';
+    public const OPTION_ON_DOUBLE_TAP = 'onDoubleTap';
+    public const OPTION_ON_IMAGES_READY = 'onImagesReady';
+    public const OPTION_ON_PROGRESS = 'onProgress';
+    public const OPTION_ON_REACH_BEGINNING = 'onReachBeginning';
+    public const OPTION_ON_REACH_END = 'onReachEnd';
+    public const OPTION_ON_DESTROY = 'onDestroy';
+    public const OPTION_ON_SET_TRANSLATE = 'onSetTranslate';
+    public const OPTION_ON_SET_TRANSITION = 'onSetTransition';
+    public const OPTION_ON_AUTOPLAY_START = 'onAutoplayStart';
+    public const OPTION_ON_AUTOPLAY_STOP = 'onAutoplayStop';
+    public const OPTION_ON_LAZY_IMAGE_LOAD = 'onLazyImageLoad';
+    public const OPTION_ON_LAZY_IMAGE_READY = 'onLazyImageReady';
+    public const OPTION_SLIDE_CLASS = 'slideClass';
+    public const OPTION_SLIDE_ACTIVE_CLASS = 'slideActiveClass';
+    public const OPTION_SLIDE_VISIBLE_CLASS = 'slideVisibleClass';
+    public const OPTION_SLIDE_DUPLICATE_CLASS = 'slideDuplicateClass';
+    public const OPTION_SLIDE_NEXT_CLASS = 'slideNextClass';
+    public const OPTION_SLIDE_PREV_CLASS = 'slidePrevClass';
+    public const OPTION_WRAPPER_CLASS = 'wrapperClass';
+    public const OPTION_BULLET_CLASS = 'bulletClass';
+    public const OPTION_BULLET_ACTIVE_CLASS = 'bulletActiveClass';
+    public const OPTION_PAGINATION_HIDDEN_CLASS = 'paginationHiddenClass';
+    public const OPTION_BUTTON_DISABLED_CLASS = 'buttonDisabledClass';
 
     /**
      * Named alias for [[direction]] option
-     * in [[\renschs\yii2\swiper\Swiper::$pluginOptions]]
+     * in [[\ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions]].
      *
-     * @see \renschs\yii2\swiper\Swiper::OPTION_DIRECTION
-     * @see \renschs\yii2\swiper\Swiper::$pluginOptions
+     * @see Swiper::OPTION_DIRECTION
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions
      */
-    const DIRECTION_HORIZONTAL = 'horizontal';
+    public const DIRECTION_HORIZONTAL = 'horizontal';
     /**
      * Named alias for [[direction]] option
-     * in [[\renschs\yii2\swiper\Swiper::$pluginOptions]]
+     * in [[\ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions]].
      *
-     * @see \renschs\yii2\swiper\Swiper::OPTION_DIRECTION
-     * @see \renschs\yii2\swiper\Swiper::$pluginOptions
+     * @see Swiper::OPTION_DIRECTION
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions
      */
-    const DIRECTION_VERTICAL = 'vertical';
+    public const DIRECTION_VERTICAL = 'vertical';
 
     /**
      * Named alias for [[effect]] option
-     * in [[\renschs\yii2\swiper\Swiper::$pluginOptions]]
+     * in [[\ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions]].
      *
-     * @see \renschs\yii2\swiper\Swiper::OPTION_EFFECT
-     * @see \renschs\yii2\swiper\Swiper::$pluginOptions
+     * @see Swiper::OPTION_EFFECT
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions
      */
-    const EFFECT_FADE = 'fade';
+    public const EFFECT_FADE = 'fade';
     /**
      * Named alias for [[effect]] option
-     * in [[\renschs\yii2\swiper\Swiper::$pluginOptions]]
+     * in [[\ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions]].
      *
-     * @see \renschs\yii2\swiper\Swiper::OPTION_EFFECT
-     * @see \renschs\yii2\swiper\Swiper::$pluginOptions
+     * @see Swiper::OPTION_EFFECT
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions
      */
-    const EFFECT_CUBE = 'cube';
+    public const EFFECT_CUBE = 'cube';
     /**
      * Named alias for [[effect]] option
-     * in [[\renschs\yii2\swiper\Swiper::$pluginOptions]]
+     * in [[\ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions]].
      *
-     * @see \renschs\yii2\swiper\Swiper::OPTION_EFFECT
-     * @see \renschs\yii2\swiper\Swiper::$pluginOptions
+     * @see Swiper::OPTION_EFFECT
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions
      */
-    const EFFECT_COVERFLOW = 'coverflow';
+    public const EFFECT_COVERFLOW = 'coverflow';
 
     /**
      * Named alias for [[slidesPerView]] option
-     * in [[\renschs\yii2\swiper\Swiper::$pluginOptions]]
+     * in [[\ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions]].
      *
-     * @see \renschs\yii2\swiper\Swiper::OPTION_SLIDES_PER_VIEW
-     * @see \renschs\yii2\swiper\Swiper::$pluginOptions
+     * @see Swiper::OPTION_SLIDES_PER_VIEW
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions
      */
-    const SLIDES_PER_VIEW_AUTO = 'auto';
+    public const SLIDES_PER_VIEW_AUTO = 'auto';
 
     /**
      * Named alias for [[slidesPerColumnFill]] option
-     * in [[\renschs\yii2\swiper\Swiper::$pluginOptions]]
+     * in [[\ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions]].
      *
-     * @see \renschs\yii2\swiper\Swiper::OPTION_SLIDES_PER_COLUMN_FILL
-     * @see \renschs\yii2\swiper\Swiper::$pluginOptions
+     * @see Swiper::OPTION_SLIDES_PER_COLUMN_FILL
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions
      */
-    const SLIDES_PER_COLUMN_FILL_COLUMN = 'column';
+    public const SLIDES_PER_COLUMN_FILL_COLUMN = 'column';
     /**
      * Named alias for [[slidesPerColumnFill]] option
-     * in [[\renschs\yii2\swiper\Swiper::$pluginOptions]]
+     * in [[\ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions]].
      *
-     * @see \renschs\yii2\swiper\Swiper::OPTION_SLIDES_PER_COLUMN_FILL
-     * @see \renschs\yii2\swiper\Swiper::$pluginOptions
+     * @see Swiper::OPTION_SLIDES_PER_COLUMN_FILL
+     * @see \ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions
      */
-    const SLIDES_PER_COLUMN_FILL_ROW = 'row';
+    public const SLIDES_PER_COLUMN_FILL_ROW = 'row';
 
-    //</editor-fold>
-
+    // </editor-fold>
 }

@@ -12,7 +12,7 @@ Example:
 
 ```PHP
 <?php
-use renschs\yii2\swiper\Swiper;
+use ItSolutionsSG\yii2\swiper\Swiper;
 use yii\helpers\Html;
 
 Swiper::widget( [

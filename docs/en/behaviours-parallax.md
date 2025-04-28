@@ -16,10 +16,10 @@ Therefore, slides and content need to be configured through the options, for exa
 
 ## Configuring parallax
 
-You can configure parallax through the field `\renschs\yii2\swiper\Swiper::$parallaxOptions`, similar to `\yii\helpers\BaseHtml::tag`
+You can configure parallax through the field `\ItSolutionsSG\yii2\swiper\Swiper::$parallaxOptions`, similar to `\yii\helpers\BaseHtml::tag`
 
 > Pay attention: to parallax get worked, 
-  you should declare option `parallax = true` in field `\renschs\yii2\swiper\Swiper::$pluginOptions`
+  you should declare option `parallax = true` in field `\ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions`
 
 Also, to simplify work with widget the following constants were introduced:
 
@@ -36,7 +36,7 @@ Example:
 
 ```PHP
 <?php
-use renschs\yii2\swiper\Swiper;
+use ItSolutionsSG\yii2\swiper\Swiper;
 use yii\helpers\Html;
 
 echo Swiper::widget( [

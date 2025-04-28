@@ -1,7 +1,7 @@
 # Display from right to left
 
 To display the content from right to left, you must declare
-behavior `rtl` in field `renschs\yii2\swiper\Swiper::$behaviours`, 
+behavior `rtl` in field `ItSolutionsSG\yii2\swiper\Swiper::$behaviours`, 
 otherwise behaviour will not be applied.
 
 This behavior only adds an option `'dir' = 'rtl'` to the container-tag of widget.
@@ -12,7 +12,7 @@ Example:
 
 ```PHP
 <?php
-use renschs\yii2\swiper\Swiper;
+use ItSolutionsSG\yii2\swiper\Swiper;
 
 echo Swiper::widget( [
   'items' => [

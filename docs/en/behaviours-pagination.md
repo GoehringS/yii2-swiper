@@ -1,16 +1,16 @@
 # Pagination
 
-To connect these buttons you must declare behaviour `pagination` in field `\renschs\yii2\swiper\Swiper::$behaviours`, 
+To connect these buttons you must declare behaviour `pagination` in field `\ItSolutionsSG\yii2\swiper\Swiper::$behaviours`, 
 otherwise pagination will not be rendered.
 
 > Note: to pagination was clickable, you must specify `paginationClickable = true` 
-  in field `\renschs\yii2\swiper\Swiper::$pluginOptions`
+  in field `\ItSolutionsSG\yii2\swiper\Swiper::$pluginOptions`
 
 Example:
 
 ```PHP
 <?php
-use renschs\yii2\swiper\Swiper;
+use ItSolutionsSG\yii2\swiper\Swiper;
 
 echo Swiper::widget( [
   'items'         => [
@@ -44,14 +44,14 @@ echo Swiper::widget( [
 
 ## Setting pagination
 
-You can configure pagination through the field `\renschs\yii2\swiper\Swiper::$paginationOptions`. 
+You can configure pagination through the field `\ItSolutionsSG\yii2\swiper\Swiper::$paginationOptions`. 
 Configuring is similar to `\yii\helpers\BaseHtml::tag`
 
 Example:
 
 ```PHP
 <?php
-use renschs\yii2\swiper\Swiper;
+use ItSolutionsSG\yii2\swiper\Swiper;
 
 echo Swiper::widget( [
   'items'         => [

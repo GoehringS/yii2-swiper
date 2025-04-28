@@ -1,14 +1,12 @@
 <?php
 
-namespace renschs\yii2\swiper\tests\unit\swiper;
+namespace ItSolutionsSG\yii2\swiper\tests\unit\swiper;
 
-
-use renschs\yii2\swiper\Slide;
-use renschs\yii2\swiper\tests\unit\BaseTestCase;
+use ItSolutionsSG\yii2\swiper\Slide;
+use ItSolutionsSG\yii2\swiper\tests\unit\BaseTestCase;
 
 class SlideTest extends BaseTestCase
 {
-
     public function testConstructionFromString()
     {
         $slide = new Slide('string content');
@@ -29,8 +27,8 @@ class SlideTest extends BaseTestCase
             'content' => [
                 'content 1, ',
                 'content 2, ',
-                'content 3'
-            ]
+                'content 3',
+            ],
         ]);
 
         $this->assertEquals('content 1, content 2, content 3', $slide->content);
@@ -57,9 +55,9 @@ class SlideTest extends BaseTestCase
     public function testConstructionWithShorthands()
     {
         $slide = new Slide([
-            'content'    => 'slide content',
+            'content' => 'slide content',
             'background' => 'http://lorempixel.com/900/600/nightlife/2/',
-            'hash'       => 'slide00'
+            'hash' => 'slide00',
         ]);
 
         $this->assertEquals('http://lorempixel.com/900/600/nightlife/2/', $slide->background);
@@ -75,9 +73,9 @@ class SlideTest extends BaseTestCase
             'content' => 'slide content',
             'options' => [
                 'style' => 'background-image:url(http://lorempixel.com/900/600/nightlife/2/)',
-                'data'  => [
-                    'hash' => 'slide00'
-                ]
+                'data' => [
+                    'hash' => 'slide00',
+                ],
             ],
         ]);
 
@@ -91,15 +89,15 @@ class SlideTest extends BaseTestCase
     public function testOptionsSpecifiedViaShorthandsHaveMorePriorityThanDirectlySpecified()
     {
         $slide = new Slide([
-            'content'    => 'slide content',
-            'options'    => [
+            'content' => 'slide content',
+            'options' => [
                 'style' => 'background-image:url(http://placehold.it/800x600)',
-                'data'  => [
-                    'hash' => 'slide00'
-                ]
+                'data' => [
+                    'hash' => 'slide00',
+                ],
             ],
             'background' => 'http://placehold.it/1920x1080',
-            'hash'       => 'slide11'
+            'hash' => 'slide11',
         ]);
 
         $this->assertEquals('http://placehold.it/1920x1080', $slide->background);
@@ -111,12 +109,11 @@ class SlideTest extends BaseTestCase
 
     public function testParsingBackground()
     {
-
         $slide = new Slide([
             'content' => 'slide content',
             'options' => [
                 'style' => 'background-image:url(http://placehold.it/800x600)',
-            ]
+            ],
         ]);
 
         $this->assertEquals('http://placehold.it/800x600', $slide->background);
@@ -125,7 +122,7 @@ class SlideTest extends BaseTestCase
             'content' => 'slide content',
             'options' => [
                 'style' => '  background :   url( http://placehold.it/800x600 ); ',
-            ]
+            ],
         ]);
 
         $this->assertEquals('http://placehold.it/800x600', $slide->background);
@@ -134,15 +131,15 @@ class SlideTest extends BaseTestCase
     public function testComplex()
     {
         $slide = new Slide([
-            'content'    => 'slide 1',
-            'hash'       => 'slide01',
+            'content' => 'slide 1',
+            'hash' => 'slide01',
             'background' => 'http://lorempixel.com/900/600/nightlife/1/',
-            'options'    => [
+            'options' => [
                 'style' => 'color: #FFFFFF',
-                'data'  => [
-                    'id' => 'test-id'
-                ]
-            ]
+                'data' => [
+                    'id' => 'test-id',
+                ],
+            ],
         ]);
 
         $this->assertEquals('slide 1', $slide->content);
