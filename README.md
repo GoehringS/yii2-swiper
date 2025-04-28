@@ -13,13 +13,13 @@ You can get this extension through [Composer](https://getcomposer.org/download/)
 Either run in terminal
  
 ```Shell
-$ php composer.phar require "renschs/yii2-swiper" "*"
+$ php composer.phar require "itsolutionssg/yii2-swiper" "*"
 ```
  
 or add
  
 ```JSON
-"renschs/yii2-swiper" : "*"
+"itsolutionssg/yii2-swiper" : "*"
 ```
  
 to the *require* section of your application's ```composer.json``` file.
@@ -82,6 +82,6 @@ To https://github.com/romka-chev for given me the opportunity to fork his projec
 
 ## Issues
 
-If some problems occurred, you can create [issue](https://github.com/renschs/yii2-swiper/issues).
+If some problems occurred, you can create [issue](https://github.com/goehrings/yii2-swiper/issues).
 
 Thank you for attention.
